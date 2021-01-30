@@ -2,29 +2,25 @@
 #define __COIN_H__
 
 #include "MovingObject.h"
-
+#include "Vector2D.h"
 class Coin : public MovingObject {
-  double coin_start_x;
-  double coin_start_y;
-  double release_speed;
-  double release_angle_deg;
-  double coin_ax;
-  double coin_ay;
+  Vector2D startPosition;
+  Vector2D startVelocity;
+  Vector2D acceleration;
 
   // Moving parts
   Circle coin_circle;
 
  public:
- Coin(double speed, double angle_deg, double argax, double argay, bool argpaused, bool rtheta) : MovingObject(speed, angle_deg, argax, argay, argpaused, rtheta) {
-    release_speed = speed;
-    release_angle_deg = angle_deg;
-    coin_ax = argax;
-    coin_ay = argay;
-    initCoin();
+ Coin(const Vector2D &_position,const Vector2D &_velocity={0,0}, const Vector2D &_acceleration={0,0}, bool isPaused=true) : MovingObject(_position,_velocity,_acceleration,isPaused) {
+    startPosition = _position;
+    startVelocity = _velocity;
+    acceleration = _acceleration;
+    init();
   }
 
-  void initCoin();
-  void resetCoin();
+  void init();
+  void reset();
 
 }; // End class Coin
 
