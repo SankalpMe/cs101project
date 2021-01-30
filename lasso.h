@@ -70,7 +70,7 @@ class Lasso : public MovingObject {
   void init();
  public:
   
-  Coin *the_coin;
+  vector<Coin *> coins;
   Lasso(double speed, double angle_deg,Vector2D _acceleration, bool isPaused) : MovingObject({0,0},{0,0},{0,0}, isPaused) {
     release_speed = speed;
     release_angle_deg = angle_deg;

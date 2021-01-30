@@ -29,7 +29,7 @@ void Lasso::init() {
   
   addPart(&lasso_loop);
   lasso_looped = false;
-  the_coin = NULL;
+  coins.clear();
   num_coins = 0;
 
   lasso_line.reset(startPosition.x, startPosition.y,startPosition.x, startPosition.y);
@@ -47,10 +47,12 @@ void Lasso::yank() {
   lasso_loop.setFill(true);
   lasso_looped = false;
   
-  if(the_coin != NULL  ) {
-    num_coins++;
-    the_coin->reset();
-    the_coin = NULL;
+  if(coins.size() > 0  ) {
+    num_coins+= coins.size();
+    for(auto coin : coins){
+      coin->reset();
+    }
+    coins.clear();
   }
 } // End Lasso::yank()
 
@@ -90,8 +92,8 @@ void Lasso::nextStep(double stepTime) {
 void Lasso::check_for_coin(Coin *coinPtr) {
   double distance = (getPosition() - coinPtr->getPosition()).magnitude();
   if(distance <= LASSO_RADIUS) {
-    the_coin = coinPtr;
-    the_coin->getAttachedTo(this);
+    coins.push_back(coinPtr);
+    coinPtr->getAttachedTo(this);
   }
 } // End Lasso::check_for_coin()
 bool Lasso::isLassoLoped(){

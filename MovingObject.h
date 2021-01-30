@@ -34,10 +34,10 @@ class MovingObject : public Sprite {
     
   }
   public:
-  MovingObject(const Vector2D &position,const Vector2D &velocity,const Vector2D &acceleration,bool isPaused): Sprite() {
+  MovingObject(const Vector2D &position,const Vector2D &velocity,const Vector2D &acceleration,bool isPaused=true): Sprite() {
     init(position,velocity,acceleration, isPaused);
   }
-  MovingObject(double speed, double angle, Vector2D &acceleration, bool isPaused) : Sprite() {
+  MovingObject(double speed, double angle, Vector2D &acceleration, bool isPaused=true) : Sprite() {
     double angle_rad = angle*PI/180.0;
     Vector2D velocity = fromPolar(speed,angle_rad);
     init(position,velocity, acceleration, isPaused);

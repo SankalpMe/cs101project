@@ -32,11 +32,13 @@ void MovingObject::nextStep(double t) {
 } // End MovingObject::nextStep()
 
 void MovingObject::reset(const Vector2D &_position,const Vector2D &_velocity, const Vector2D &_acceleration, bool isPaused){
-	for(size_t i=0; i<parts.size(); i++){
-    Vector2D fp = _position + parts[i].offset;
-    parts[i].sprite->moveTo(fp.x, fp.y);
-  }
   init(_position,_velocity,_acceleration,isPaused);
+  
+	for(size_t i=0; i<parts.size(); i++){
+    Vector2D target = position + parts[i].offset;
+    parts[i].sprite->moveTo(target.x, target.y);
+  }
+  
 } // End MovingObject::reset()
 
 
@@ -44,5 +46,5 @@ void MovingObject::getAttachedTo(MovingObject *m,Vector2D offset){
   paused = m->isPaused();
   parent = m;
   parentOffset = offset;
-
+  
 }
