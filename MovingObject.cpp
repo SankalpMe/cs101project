@@ -5,7 +5,22 @@ using namespace simplecpp;
 
 void MovingObject::nextStep(double t) {
   
+  
+  
+  if(parent != nullptr){
+    position = parent->getPosition() + parentOffset;
+    velocity = parent->getVelocity();
+    acceleration = parent->getAcceleration();
+    
+    for(size_t i=0; i<parts.size(); i++) {
+      Vector2D target = position + parts[i].offset;
+      parts[i].sprite->moveTo(target.x, target.y);
+    }
+    return;
+  }
+  
   if(paused) { return; }
+  
   position = position + velocity*t;
   for(size_t i=0; i<parts.size(); i++){
     Vector2D target = position + parts[i].offset;
@@ -24,6 +39,8 @@ void MovingObject::reset(const Vector2D &_position,const Vector2D &_velocity, co
 } // End MovingObject::reset()
 
 
-void MovingObject::getAttachedTo(MovingObject *m) {
-  reset(m->getPosition(),m->getVelocity(),m->getAcceleration(),m->isPaused());
+void MovingObject::getAttachedTo(MovingObject *m,Vector2D offset){
+  parent = m;
+  parentOffset = offset;
+  reset(m->getPosition() + offset,m->getVelocity(),m->getAcceleration(),m->isPaused());
 }

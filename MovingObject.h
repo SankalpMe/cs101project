@@ -18,7 +18,8 @@ class MovingObject : public Sprite {
   Vector2D velocity;
   Vector2D acceleration;
   Vector2D position;
-  
+  Vector2D parentOffset;
+  MovingObject *parent;
 
   
   
@@ -29,7 +30,7 @@ class MovingObject : public Sprite {
     velocity = _velocity;
     acceleration = _acceleration;
     paused=isPaused;
-    
+    parent = nullptr;
     
   }
   public:
@@ -52,20 +53,20 @@ class MovingObject : public Sprite {
   void setYVelocity(double y) { velocity.y = y; }
   
   // Acceleration Helper Functions
-  Vector2D getAcceleration(){
+  Vector2D getAcceleration() {
       return acceleration;
   }
-  void setAcceleration(const Vector2D &_acceleration){
+  void setAcceleration(const Vector2D &_acceleration) {
     acceleration = _acceleration;
   }
   void setXAcceleration(double x) { acceleration.x = x; }
   void setYAcceleration(double y) { acceleration.y = y; }
   
   // Position Helper Functions
-  Vector2D getPosition(){ return position; }
-  double getXPosition(){ return position.x; }
-  double getYPosition(){ return position.y; }
-  void setPosition(const Vector2D &_position){ position = _position; }
+  Vector2D getPosition() { return position; }
+  double getXPosition() { return position.x; }
+  double getYPosition() { return position.y; }
+  void setPosition(const Vector2D &_position) { position = _position; }
 
 	void reset(const Vector2D &_position,const Vector2D &_velocity, const Vector2D &_acceleration, bool isPaused=true);
   
@@ -77,7 +78,8 @@ class MovingObject : public Sprite {
     parts.push_back({p,offset});
   }
   void nextStep(double t);
-  void getAttachedTo(MovingObject *m);
+  void getAttachedTo(MovingObject *m,Vector2D offset={0,0});
+  void getDettached(){  parent = nullptr; }
 };
 
 #endif
