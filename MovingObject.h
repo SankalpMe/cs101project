@@ -19,12 +19,18 @@ class MovingObject : public Sprite {
   Vector2D acceleration;
   Vector2D position;
   
+
+  
+  
+  
   bool paused;
-  void init(const Vector2D &_position,const Vector2D &_velocity,const Vector2D &_acceleration,bool isPaused=true) {
+  void init(Vector2D _position,Vector2D _velocity,Vector2D _acceleration,bool isPaused=true) {
     position = _position;
     velocity = _velocity;
     acceleration = _acceleration;
     paused=isPaused;
+    
+    
   }
   public:
   MovingObject(const Vector2D &position,const Vector2D &velocity,const Vector2D &acceleration,bool isPaused): Sprite() {

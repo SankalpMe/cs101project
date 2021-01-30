@@ -4,12 +4,13 @@
 using namespace simplecpp;
 
 void MovingObject::nextStep(double t) {
-  if(paused) { return; }
-
-  for(size_t i=0; i<parts.size(); i++){
-    parts[i].sprite->move(velocity.x*t, velocity.y*t);
-  }
   
+  if(paused) { return; }
+  position = position + velocity*t;
+  for(size_t i=0; i<parts.size(); i++){
+    Vector2D target = position + parts[i].offset;
+    parts[i].sprite->moveTo(target.x, target.y);
+  }
   velocity =velocity +  acceleration * t;
   
 } // End MovingObject::nextStep()

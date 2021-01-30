@@ -3,6 +3,7 @@
 
 #include "MovingObject.h"
 #include "coin.h"
+#include "Vector2D.h"
 
 //#define WINDOW_X 1200
 //#define WINDOW_Y 960
@@ -41,15 +42,17 @@
 
 #define LASSO_SIZE 10
 #define LASSO_RADIUS 50
+
 #define COIN_SIZE 5
 
 class Lasso : public MovingObject {
-  double lasso_start_x;
-  double lasso_start_y;
+  Vector2D startPosition;
+  
   double release_speed;
   double release_angle_deg;
-  double lasso_ax;
-  double lasso_ay;
+  Vector2D releaseVelocity;
+  
+  Vector2D acceleration;
 
   // Moving parts
   Circle lasso_circle;
@@ -64,16 +67,17 @@ class Lasso : public MovingObject {
  
   int num_coins;
 
-  void initLasso();
+  void init();
  public:
   
   Coin *the_coin;
- Lasso(double speed, double angle_deg, double argax, double argay, bool argpaused, bool rtheta) : MovingObject(speed, angle_deg, argax, argay, argpaused, rtheta) {
+  Lasso(double speed, double angle_deg,Vector2D _acceleration, bool isPaused) : MovingObject({0,0},{0,0},{0,0}, isPaused) {
     release_speed = speed;
     release_angle_deg = angle_deg;
-    lasso_ax = argax;
-    lasso_ay = argay;
-    initLasso();
+    releaseVelocity = fromPolar(speed,angle_deg*PI/180.0);
+    
+    acceleration = _acceleration;
+    Lasso::init();
   }
 
   void draw_lasso_band();

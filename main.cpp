@@ -17,11 +17,9 @@ main_program {
   // Draw lasso at start position
   double release_speed = INIT_RELEASE_SPEED; // m/s
   double release_angle_deg = INIT_RELEASE_ANGLE_DEG; // degrees
-  double lasso_ax = 0;
-  double lasso_ay = LASSO_G;
-  bool paused = true;
-  bool rtheta = true;
-  Lasso lasso(release_speed, release_angle_deg, lasso_ax, lasso_ay, paused, rtheta);
+
+
+  Lasso lasso(release_speed, release_angle_deg,{0,LASSO_G}, true);
 
   Line b1(0, PLAY_Y_HEIGHT, WINDOW_X, PLAY_Y_HEIGHT);
   b1.setColor(COLOR("blue"));
@@ -34,13 +32,20 @@ main_program {
   sprintf(coinScoreStr, "Coins: %d", lasso.getNumCoins());
   Text coinScore(PLAY_X_START+50, PLAY_Y_HEIGHT+50, coinScoreStr);
 
-  paused = true; rtheta = true;
+ 
   double coin_speed = COIN_SPEED;
   double coin_angle_deg = COIN_ANGLE_DEG;
   double coin_ax = 0;
   double coin_ay = COIN_G;
-  Coin coin(coin_speed, coin_angle_deg, coin_ax, coin_ay, paused, rtheta);
-
+  cout << WINDOW_X << "," << WINDOW_Y << endl;
+  
+ 
+  
+  Vector2D startPosition = {400,300};
+  Vector2D startCoinVelocity = {20,-100};
+  Vector2D startCoinAcceleration = {coin_ax,coin_ay};
+  Coin coin(startPosition,startCoinVelocity, startCoinAcceleration, false);
+  coin.init();
   // After every COIN_GAP sec, make the coin jump
   double last_coin_jump_end = 0;
 
@@ -104,8 +109,8 @@ main_program {
       }
     }
 
-    if(coin.getYPos() > PLAY_Y_HEIGHT) {
-      coin.resetCoin();
+    if(coin.getYPosition() > PLAY_Y_HEIGHT) {
+      coin.reset();
       last_coin_jump_end = currTime;
     }
 

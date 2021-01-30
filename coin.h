@@ -14,9 +14,18 @@ class Coin : public MovingObject {
  public:
  Coin(const Vector2D &_position,const Vector2D &_velocity={0,0}, const Vector2D &_acceleration={0,0}, bool isPaused=true) : MovingObject(_position,_velocity,_acceleration,isPaused) {
     startPosition = _position;
+    cout << startPosition.x << "," << startPosition.y << endl;
+    
+    
+
     startVelocity = _velocity;
     acceleration = _acceleration;
-    init();
+    if(isPaused){
+      pause();
+    }else{
+      unpause();
+    }
+    Coin::init();
   }
 
   void init();
