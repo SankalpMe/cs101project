@@ -3,10 +3,11 @@
 
 using namespace simplecpp;
 
+
 void MovingObject::nextStep(double t) {
-  
-  
-  
+
+ 
+
   if(parent != nullptr){
     position = parent->getPosition() + parentOffset;
     velocity = parent->getVelocity();
@@ -40,7 +41,8 @@ void MovingObject::reset(const Vector2D &_position,const Vector2D &_velocity, co
 
 
 void MovingObject::getAttachedTo(MovingObject *m,Vector2D offset){
+  paused = m->isPaused();
   parent = m;
   parentOffset = offset;
-  reset(m->getPosition() + offset,m->getVelocity(),m->getAcceleration(),m->isPaused());
+
 }
