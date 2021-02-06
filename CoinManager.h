@@ -8,7 +8,7 @@
 #include "coin.h"
 #include "lasso.h"
 #include <vector>
-//class to manage multiple coins
+//class to manage multiple bombs
 
 struct CoinInfo {
     Coin *coin;
@@ -43,7 +43,7 @@ public:
         }
     }
 
-    //Handle game event steps for all coins.
+    //Handle game event steps for all bombs.
     void stepCoins(float timeStep, double currentTime) {
         for (auto &coin: coins) {
             coin.coin->nextStep(timeStep);

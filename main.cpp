@@ -5,6 +5,7 @@
 #include "coin.h"
 #include "CoinManager.h"
 #include "bomb.h"
+#include "BombManager.h"
 using namespace simplecpp;
 
 main_program {
@@ -33,32 +34,29 @@ main_program {
     sprintf(coinScoreStr, "Coins: %d", lasso.getNumCoins());
     Text coinScore(PLAY_X_START + 50, PLAY_Y_HEIGHT + 50, coinScoreStr);
 
-    //Utility to handle multiple coins.
+    //Utility to handle multiple bombs.
     CoinManager coinManager;
+    BombManager bombManager;
 
     Vector2D startPosition = {400, 300};
 
     coinManager.addCoin(startPosition, {20, -100});
     coinManager.addCoin({500, PLAY_Y_HEIGHT}, {-20, -120});
     coinManager.addCoin({500, PLAY_Y_HEIGHT}, {20, -120});
+    bombManager.addBomb({400,PLAY_Y_HEIGHT},{30,-100});
 
-    Bomb bb({200,200},{10,20},{0,10});
-    bb.init();
-    bb.unpause();
-    // After every COIN_GAP sec, make the coin jump
+
+    // After every COIN_GAP sec, make the bomb jump
 
 
     // When t is pressed, throw lasso
-    // If lasso within range, make coin stick
+    // If lasso within range, make bomb stick
     // When y is pressed, yank lasso
     // When l is pressed, loop lasso
     // When q is pressed, quit
 
     while (true) {
-        bb.nextStep(stepTime);
-        if(bb.getYPosition() > PLAY_Y_HEIGHT){
-            bb.reset();
-        }
+
 
         if ((runTime > 0) && (currTime > runTime)) { break; }
 
@@ -83,7 +81,10 @@ main_program {
                 case 'l':
                     if (!lasso.isLassoLoped() && !lasso.isPaused()) {
                         lasso.loopit();
+
                         coinManager.checkForLasso(lasso);
+                        bombManager.checkForLasso(lasso);
+
                         wait(STEP_TIME * 5);
                     }
                     break;
@@ -109,6 +110,7 @@ main_program {
         lasso.nextStep(stepTime);
 
         coinManager.stepCoins(stepTime, currTime);
+        bombManager.stepBombs(stepTime,currTime);
 
         sprintf(coinScoreStr, "Coins: %d", lasso.getNumCoins());
         coinScore.setMessage(coinScoreStr);

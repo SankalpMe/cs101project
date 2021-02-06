@@ -30,6 +30,8 @@ void Lasso::init() {
     addPart(&lasso_loop);
     lasso_looped = false;
     coins.clear();
+    bombs.clear();
+
     num_coins = 0;
 
     lasso_line.reset(startPosition.x, startPosition.y, startPosition.x, startPosition.y);
@@ -47,12 +49,22 @@ void Lasso::yank() {
     lasso_loop.setFill(true);
     lasso_looped = false;
 
-    if (coins.size() > 0) {
+    if (!coins.empty()) {
         num_coins += coins.size();
         for (auto coin : coins) {
             coin->reset();
         }
         coins.clear();
+    }
+
+    if (!bombs.empty()) {
+
+        for (auto &bomb : bombs) {
+            bomb->reset();
+
+        }
+        cout << "Dam it's a bomb AND BOOM" << endl;
+        bombs.clear();
     }
 } // End Lasso::yank()
 
@@ -96,6 +108,16 @@ void Lasso::check_for_coin(Coin *coinPtr) {
         coinPtr->getAttachedTo(this);
     }
 } // End Lasso::check_for_coin()
+
+void Lasso::check_for_bomb(Bomb *bombPtr) {
+    double distance = (getPosition() - bombPtr->getPosition()).magnitude();
+    if (distance <= LASSO_RADIUS) {
+
+        bombPtr->getAttachedTo(this);
+        bombs.push_back(bombPtr);
+    }
+}
+
 bool Lasso::isLassoLoped() {
     return lasso_looped;
 }

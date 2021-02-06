@@ -7,7 +7,7 @@
 
 #include "coin.h"
 
-//inherits coin class
+//inherits bomb class
 class Bomb: public Coin {
     Line bomb_fuse;
     Circle bomb_circle;

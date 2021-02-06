@@ -4,6 +4,7 @@
 #include "MovingObject.h"
 #include "coin.h"
 #include "Vector2D.h"
+#include "bomb.h"
 
 //#define WINDOW_X 1200
 //#define WINDOW_Y 960
@@ -72,6 +73,7 @@ class Lasso : public MovingObject {
 public:
 
     vector<Coin *> coins;
+    vector<Bomb *> bombs;
 
     Lasso(double speed, double angle_deg, Vector2D _acceleration, bool isPaused) : MovingObject({0, 0}, {0, 0}, {0, 0},
                                                                                                 isPaused) {
@@ -96,6 +98,7 @@ public:
     void nextStep(double t);
 
     void check_for_coin(Coin *coin);
+    void check_for_bomb(Bomb *bomb);
 
     bool isLassoLoped();
 
