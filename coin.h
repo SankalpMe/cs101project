@@ -3,6 +3,7 @@
 
 #include "MovingObject.h"
 #include "Vector2D.h"
+#include "GameConstants.h"
 
 class Coin : public MovingObject {
 

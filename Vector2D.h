@@ -4,7 +4,7 @@
 #define _VECTOR2D_INCLUDED_
 
 #include <simplecpp>
-
+#include "GameConstants.h"
 struct Vector2D {
     double x;
     double y;

@@ -8,6 +8,7 @@
 #include "coin.h"
 #include "lasso.h"
 #include <vector>
+#include "GameConstants.h"
 
 //class to manage multiple bombs
 
@@ -17,11 +18,13 @@ struct CoinInfo {
 };
 
 class CoinManager {
-    vector<CoinInfo> coins;
+
 
 public:
-    CoinManager() {
-
+    vector<CoinInfo> coins; //for magnet class.
+    bool allowCoinRespawn;
+    CoinManager(bool respawnPerm=true) {
+        allowCoinRespawn = respawnPerm;
     }
 
     //Add Coin To Game
@@ -47,17 +50,19 @@ public:
     //Handle game event steps for all bombs.
 
     void stepCoins(float timeStep, double currentTime) {
-        vector<CoinInfo> newcoins;
-        for(auto &coin: coins){
-            if(!coin.coin->destroyed){
-                newcoins.push_back(coin);
-            }else{
-                delete coin.coin;
+        if(!allowCoinRespawn){
+            vector<CoinInfo> newcoins;
+            for(auto &coin: coins){
+                if(!coin.coin->destroyed){
+                    newcoins.push_back(coin);
+                }else{
+                    delete coin.coin;
+                }
+
             }
 
+            coins = newcoins;
         }
-
-        coins = newcoins;
 
         for (auto &coin: coins) {
             coin.coin->nextStep(timeStep);
@@ -83,7 +88,6 @@ public:
     void checkForLasso(Lasso &lasso) {
         for (auto &coin: coins) {
             lasso.check_for_coin(coin.coin);
-
         }
     }
 

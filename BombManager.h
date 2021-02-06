@@ -8,6 +8,7 @@
 #include "bomb.h"
 #include "lasso.h"
 #include <vector>
+#include "GameConstants.h"
 //class to manage multiple bombs
 
 struct BombInfo {

@@ -6,6 +6,7 @@
 #include <composite.h>
 #include <sprite.h>
 #include "Vector2D.h"
+#include "GameConstants.h"
 
 using namespace simplecpp;
 
@@ -98,7 +99,7 @@ public:
 
     void getAttachedTo(MovingObject *m, Vector2D offset = {0, 0});
 
-    void getDettached() { parent = nullptr; }
+    void getDetached() { parent = nullptr; }
 };
 
 #endif

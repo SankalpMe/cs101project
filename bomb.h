@@ -6,6 +6,7 @@
 #define LASSOPROJECT_BOMB_H
 
 #include "coin.h"
+#include "GameConstants.h"
 
 //inherits bomb class
 class Bomb: public Coin {

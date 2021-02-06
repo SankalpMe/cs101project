@@ -1,8 +1,4 @@
-#include <simplecpp>
-#include <string>
-#include "MovingObject.h"
 #include "lasso.h"
-#include "coin.h"
 
 using namespace simplecpp;
 
@@ -16,9 +12,8 @@ void Lasso::draw_lasso_band() {
 } // End Lasso::draw_lasso_band()
 
 void Lasso::init() {
-    is_boomed = false;
-    startPosition.x = (PLAY_X_START + LASSO_X_OFFSET);
-    startPosition.y = (PLAY_Y_HEIGHT - LASSO_Y_HEIGHT);
+
+
     lasso_circle.reset(startPosition.x, startPosition.y, LASSO_SIZE);
     lasso_circle.setColor(COLOR("red"));
     lasso_circle.setFill(true);
@@ -28,11 +23,10 @@ void Lasso::init() {
     addPart(&lasso_circle);
 
     addPart(&lasso_loop);
-    lasso_looped = false;
+
     coins.clear();
     bombs.clear();
 
-    num_coins = 0;
 
     lasso_line.reset(startPosition.x, startPosition.y, startPosition.x, startPosition.y);
     lasso_line.setColor(COLOR("brown"));
@@ -50,23 +44,30 @@ void Lasso::yank() {
     lasso_looped = false;
 
     if (!coins.empty()) {
-        num_coins += coins.size();
+
+        state->score.GoldCoin += coins.size(); //tally score to the main scoreboard
+
         for (auto coin : coins) {
             coin->hide();
             coin->reset();
+            coin->pause();
             coin->destroyed = true;
         }
         coins.clear();
     }
+
+    state->bombingInfo.bombNo = bombs.size();
 
     if (!bombs.empty()) {
 
         for (auto &bomb : bombs) {
             bomb->reset();
             bomb->hide();
+            bomb->pause();
             bomb->destroyed = true;
         }
-        is_boomed = true;
+
+
 
         cout << "It's a BOMB AND BOOM" << endl;
         bombs.clear();
