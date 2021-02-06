@@ -8,6 +8,27 @@
 #include "BombManager.h"
 using namespace simplecpp;
 
+//simple functions to show alerts
+void showAlert(string text,Color col=COLOR("red") ,int delay=5){
+
+    Rectangle box(WINDOW_X/2,WINDOW_Y/2,textWidth(text)*2,textHeight()*2);
+    box.setFill(true);
+    box.setColor(COLOR("yellow"));
+
+    Text t;
+    t.reset(WINDOW_X/2,WINDOW_Y/2,text);
+    t.setColor(COLOR("red"));
+    t.setScale(3);
+
+    repeat(delay){
+        box.setScale(1.3);
+        wait(0.2);
+        box.setScale(1);
+        wait(0.2);
+    }
+
+
+}//end : showAlert
 main_program {
 
     initCanvas("Lasso", WINDOW_X, WINDOW_Y);
@@ -43,7 +64,7 @@ main_program {
     coinManager.addCoin(startPosition, {20, -100});
     coinManager.addCoin({500, PLAY_Y_HEIGHT}, {-20, -120});
     coinManager.addCoin({500, PLAY_Y_HEIGHT}, {20, -120});
-    bombManager.addBomb({400,PLAY_Y_HEIGHT},{30,-100});
+    bombManager.addBomb({400,PLAY_Y_HEIGHT},{30,-120});
 
 
     // After every COIN_GAP sec, make the bomb jump
@@ -59,7 +80,10 @@ main_program {
 
 
         if ((runTime > 0) && (currTime > runTime)) { break; }
-
+        if(lasso.is_boomed){
+            cout << "Gameover" << endl;
+            break;
+        }
         XEvent e;
         bool pendingEv = checkEvent(e);
         if (pendingEv) {
@@ -119,6 +143,6 @@ main_program {
         currTime += stepTime;
         wait(stepTime);
     } // End for(;;)
+    showAlert("GAME OVER !");
 
-    wait(3);
 } // End main_program

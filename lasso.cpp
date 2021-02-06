@@ -16,6 +16,7 @@ void Lasso::draw_lasso_band() {
 } // End Lasso::draw_lasso_band()
 
 void Lasso::init() {
+    is_boomed = false;
     startPosition.x = (PLAY_X_START + LASSO_X_OFFSET);
     startPosition.y = (PLAY_Y_HEIGHT - LASSO_Y_HEIGHT);
     lasso_circle.reset(startPosition.x, startPosition.y, LASSO_SIZE);
@@ -25,7 +26,6 @@ void Lasso::init() {
     lasso_loop.setColor(COLOR("brown"));
     lasso_loop.setFill(true);
     addPart(&lasso_circle);
-
 
     addPart(&lasso_loop);
     lasso_looped = false;
@@ -66,8 +66,9 @@ void Lasso::yank() {
             bomb->hide();
             bomb->destroyed = true;
         }
+        is_boomed = true;
 
-        cout << "Dam it's a bomb AND BOOM" << endl;
+        cout << "It's a BOMB AND BOOM" << endl;
         bombs.clear();
     }
 } // End Lasso::yank()

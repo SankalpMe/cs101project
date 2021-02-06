@@ -66,6 +66,7 @@ class Lasso : public MovingObject {
     // State info
     bool lasso_looped;
 
+
     int num_coins;
 
     void init();
@@ -74,6 +75,7 @@ public:
 
     vector<Coin *> coins;
     vector<Bomb *> bombs;
+    bool is_boomed;
 
     Lasso(double speed, double angle_deg, Vector2D _acceleration, bool isPaused) : MovingObject({0, 0}, {0, 0}, {0, 0},
                                                                                                 isPaused) {
