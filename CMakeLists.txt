@@ -26,6 +26,6 @@ add_executable(lassoProject
         MovingObject.cpp
         MovingObject.h
         Vector2D.cpp
-        Vector2D.h CoinManager.cpp CoinManager.h)
+        Vector2D.h CoinManager.cpp CoinManager.h bomb.cpp bomb.h)
 
 target_link_libraries(lassoProject sprite X11 )

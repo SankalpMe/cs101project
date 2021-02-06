@@ -4,7 +4,7 @@
 #include "lasso.h"
 #include "coin.h"
 #include "CoinManager.h"
-
+#include "bomb.h"
 using namespace simplecpp;
 
 main_program {
@@ -41,6 +41,10 @@ main_program {
     coinManager.addCoin(startPosition, {20, -100});
     coinManager.addCoin({500, PLAY_Y_HEIGHT}, {-20, -120});
     coinManager.addCoin({500, PLAY_Y_HEIGHT}, {20, -120});
+
+    Bomb bb({200,200},{10,20},{0,10});
+    bb.init();
+    bb.unpause();
     // After every COIN_GAP sec, make the coin jump
 
 
@@ -51,6 +55,11 @@ main_program {
     // When q is pressed, quit
 
     while (true) {
+        bb.nextStep(stepTime);
+        if(bb.getYPosition() > PLAY_Y_HEIGHT){
+            bb.reset();
+        }
+
         if ((runTime > 0) && (currTime > runTime)) { break; }
 
         XEvent e;
