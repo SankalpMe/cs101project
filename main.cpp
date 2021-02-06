@@ -32,7 +32,7 @@ main_program {
   sprintf(coinScoreStr, "Coins: %d", lasso.getNumCoins());
   Text coinScore(PLAY_X_START+50, PLAY_Y_HEIGHT+50, coinScoreStr);
 
- 
+
   double coin_speed = COIN_SPEED;
   double coin_angle_deg = COIN_ANGLE_DEG;
   double coin_ax = 0;
