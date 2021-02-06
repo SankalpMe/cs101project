@@ -45,12 +45,27 @@ public:
 
     //Handle game event steps for all bombs.
     void stepBombs(float timeStep, double currentTime) {
+        vector<BombInfo> newbombs;
+        for(auto &bomb: bombs){
+            if(!bomb.bomb->destroyed){
+                newbombs.push_back(bomb);
+            }else{
+                delete bomb.bomb;
+            }
+        }
+
+        bombs = newbombs;
+
+
         for (auto &bomb: bombs) {
             bomb.bomb->nextStep(timeStep);
 
             if (bomb.bomb->getYPosition() > PLAY_Y_HEIGHT) {
                 bomb.bomb->reset();
+                bomb.bomb->destroyed = true;
+                bomb.bomb->hide();
                 bomb.endTime = currentTime;
+
             }
 
             if (bomb.bomb->isPaused()) {

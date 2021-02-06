@@ -8,6 +8,7 @@
 #include "coin.h"
 #include "lasso.h"
 #include <vector>
+
 //class to manage multiple bombs
 
 struct CoinInfo {
@@ -44,17 +45,33 @@ public:
     }
 
     //Handle game event steps for all bombs.
+
     void stepCoins(float timeStep, double currentTime) {
+        vector<CoinInfo> newcoins;
+        for(auto &coin: coins){
+            if(!coin.coin->destroyed){
+                newcoins.push_back(coin);
+            }else{
+                delete coin.coin;
+            }
+
+        }
+
+        coins = newcoins;
+
         for (auto &coin: coins) {
             coin.coin->nextStep(timeStep);
 
             if (coin.coin->getYPosition() > PLAY_Y_HEIGHT) {
+                coin.coin->hide();
                 coin.coin->reset();
+                coin.coin->pause();
                 coin.endTime = currentTime;
             }
 
             if (coin.coin->isPaused()) {
                 if ((currentTime - coin.endTime) >= COIN_GAP) {
+                    coin.coin->show();
                     coin.coin->unpause();
                 }
             }
@@ -66,6 +83,7 @@ public:
     void checkForLasso(Lasso &lasso) {
         for (auto &coin: coins) {
             lasso.check_for_coin(coin.coin);
+
         }
     }
 

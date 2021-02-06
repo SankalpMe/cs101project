@@ -52,7 +52,9 @@ void Lasso::yank() {
     if (!coins.empty()) {
         num_coins += coins.size();
         for (auto coin : coins) {
+            coin->hide();
             coin->reset();
+            coin->destroyed = true;
         }
         coins.clear();
     }
@@ -61,8 +63,10 @@ void Lasso::yank() {
 
         for (auto &bomb : bombs) {
             bomb->reset();
-
+            bomb->hide();
+            bomb->destroyed = true;
         }
+
         cout << "Dam it's a bomb AND BOOM" << endl;
         bombs.clear();
     }
@@ -116,7 +120,7 @@ void Lasso::check_for_bomb(Bomb *bombPtr) {
         bombPtr->getAttachedTo(this);
         bombs.push_back(bombPtr);
     }
-}
+} // End Lasso::check_for_bomb()
 
 bool Lasso::isLassoLoped() {
     return lasso_looped;

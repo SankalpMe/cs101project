@@ -28,6 +28,14 @@ public:
         addPart(&bomb_circle);
         addPart(&bomb_fuse,{0,-10});
     }
+    void hide(){
+        bomb_circle.hide();
+        bomb_fuse.hide();
+    }
+    void show(){
+        bomb_fuse.show();
+        bomb_circle.show();
+    }
 };
 
 
