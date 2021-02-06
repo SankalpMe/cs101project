@@ -3,7 +3,7 @@
 #include "MovingObject.h"
 #include "lasso.h"
 #include "coin.h"
-
+#include "CoinManager.h"
 using namespace simplecpp;
 
 main_program {
@@ -38,14 +38,14 @@ main_program {
   double coin_ax = 0;
   double coin_ay = COIN_G;
   cout << WINDOW_X << "," << WINDOW_Y << endl;
-  
- 
+
+  CoinManager coinManager;
   
   Vector2D startPosition = {400,300};
-  Vector2D startCoinVelocity = {20,-100};
-  Vector2D startCoinAcceleration = {coin_ax,coin_ay};
-  Coin coin(startPosition,startCoinVelocity, startCoinAcceleration, false);
-  coin.init();
+
+  coinManager.addCoin(startPosition,{20,-100});
+  coinManager.addCoin({500,200},{-20,-120});
+
   // After every COIN_GAP sec, make the coin jump
   double last_coin_jump_end = 0;
 
@@ -77,7 +77,7 @@ main_program {
       case 'l':
 				if(!lasso.isLassoLoped() && !lasso.isPaused()){
 					lasso.loopit();
-					lasso.check_for_coin(&coin);
+					coinManager.checkForLasso(lasso);
 					wait(STEP_TIME*5);
 				}
 				break;
@@ -102,17 +102,7 @@ main_program {
 
     lasso.nextStep(stepTime);
 
-    coin.nextStep(stepTime);
-    if(coin.isPaused()) {
-      if((currTime-last_coin_jump_end) >= COIN_GAP) {
-	coin.unpause();
-      }
-    }
-
-    if(coin.getYPosition() > PLAY_Y_HEIGHT) {
-      coin.reset();
-      last_coin_jump_end = currTime;
-    }
+    coinManager.stepCoins(stepTime,currTime);
 
     sprintf(coinScoreStr, "Coins: %d", lasso.getNumCoins());
     coinScore.setMessage(coinScoreStr);
