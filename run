@@ -1,3 +1,0 @@
-#!/bin/bash
-s++ main.cpp MovingObject.cpp lasso.cpp coin.cpp Vector2D.cpp -o main
-./main

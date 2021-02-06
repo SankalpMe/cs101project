@@ -46,50 +46,60 @@
 #define COIN_SIZE 5
 
 class Lasso : public MovingObject {
-  Vector2D startPosition;
-  
-  double release_speed;
-  double release_angle_deg;
-  Vector2D releaseVelocity;
-  
-  Vector2D acceleration;
+    Vector2D startPosition;
 
-  // Moving parts
-  Circle lasso_circle;
-  Circle lasso_loop;
+    double release_speed;
+    double release_angle_deg;
+    Vector2D releaseVelocity;
 
-  // Non-moving parts
-  Line lasso_line;
-  Line lasso_band;
+    Vector2D acceleration;
 
-  // State info
-	bool lasso_looped;
- 
-  int num_coins;
+    // Moving parts
+    Circle lasso_circle;
+    Circle lasso_loop;
 
-  void init();
- public:
-  
-  vector<Coin *> coins;
-  Lasso(double speed, double angle_deg,Vector2D _acceleration, bool isPaused) : MovingObject({0,0},{0,0},{0,0}, isPaused) {
-    release_speed = speed;
-    release_angle_deg = angle_deg;
-    releaseVelocity = fromPolar(speed,angle_deg*PI/180.0);
-    
-    acceleration = _acceleration;
-    Lasso::init();
-  }
+    // Non-moving parts
+    Line lasso_line;
+    Line lasso_band;
 
-  void draw_lasso_band();
-  void yank();
-  void loopit();
-  void addAngle(double angle_deg);
-  void addSpeed(double speed);
+    // State info
+    bool lasso_looped;
 
-  void nextStep(double t);
-  void check_for_coin(Coin *coin);
-  bool isLassoLoped();
-  int getNumCoins() { return num_coins; }
+    int num_coins;
+
+    void init();
+
+public:
+
+    vector<Coin *> coins;
+
+    Lasso(double speed, double angle_deg, Vector2D _acceleration, bool isPaused) : MovingObject({0, 0}, {0, 0}, {0, 0},
+                                                                                                isPaused) {
+        release_speed = speed;
+        release_angle_deg = angle_deg;
+        releaseVelocity = fromPolar(speed, angle_deg * PI / 180.0);
+
+        acceleration = _acceleration;
+        Lasso::init();
+    }
+
+    void draw_lasso_band();
+
+    void yank();
+
+    void loopit();
+
+    void addAngle(double angle_deg);
+
+    void addSpeed(double speed);
+
+    void nextStep(double t);
+
+    void check_for_coin(Coin *coin);
+
+    bool isLassoLoped();
+
+    int getNumCoins() { return num_coins; }
 
 }; // End class Lasso
 
