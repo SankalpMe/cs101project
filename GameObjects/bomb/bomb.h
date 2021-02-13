@@ -5,8 +5,8 @@
 #ifndef LASSOPROJECT_BOMB_H
 #define LASSOPROJECT_BOMB_H
 
-#include "coin.h"
-#include "GameConstants.h"
+#include "GameObjects/coin/coin.h"
+#include "Misc/GameConstants.h"
 
 //inherits bomb class
 class Bomb: public Coin {

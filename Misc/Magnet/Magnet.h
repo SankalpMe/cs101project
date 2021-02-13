@@ -4,7 +4,7 @@
 
 #ifndef LASSOPROJECT_MAGNET_H
 #define LASSOPROJECT_MAGNET_H
-#include "CoinManager.h"
+#include "Manager/CoinManager.h"
 
 class Magnet {
 public:

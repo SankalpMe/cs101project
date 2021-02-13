@@ -7,7 +7,7 @@
 
 
 #include <simplecpp>
-#include "GameConstants.h"
+#include "Misc/GameConstants.h"
 void showBombBoom(string msg);
 
 void showStartMessage(string msg);

@@ -5,8 +5,8 @@
 #include <vector>
 #include <composite.h>
 #include <sprite.h>
-#include "Vector2D.h"
-#include "GameConstants.h"
+#include "Misc/Vector2D/Vector2D.h"
+#include "Misc/GameConstants.h"
 
 using namespace simplecpp;
 

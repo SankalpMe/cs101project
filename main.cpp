@@ -1,7 +1,7 @@
 #include <simplecpp>
 
-#include "GameConstants.h"
-#include "GameEngine.h"
+#include "Misc/GameConstants.h"
+#include "GameHandlers/Engine/GameEngine.h"
 using namespace simplecpp;
 
 

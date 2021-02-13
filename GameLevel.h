@@ -5,7 +5,7 @@
 #ifndef LASSOPROJECT_GAMELEVEL_H
 #define LASSOPROJECT_GAMELEVEL_H
 
-#include "GameConstants.h"
+#include "Misc/GameConstants.h"
 
 class GameLevel {
 

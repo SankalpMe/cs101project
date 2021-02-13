@@ -5,10 +5,10 @@
 #ifndef LASSOPROJECT_BOMBMANAGER_H
 #define LASSOPROJECT_BOMBMANAGER_H
 
-#include "bomb.h"
-#include "lasso.h"
+#include "GameObjects/bomb/bomb.h"
+#include "GameObjects/lasso/lasso.h"
 #include <vector>
-#include "GameConstants.h"
+#include "Misc/GameConstants.h"
 //class to manage multiple bombs
 
 struct BombInfo {

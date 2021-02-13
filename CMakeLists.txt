@@ -18,14 +18,14 @@ link_directories(/home/sankalp/simplecpp/lib)
 
 
 add_executable(lassoProject
-        coin.cpp
-        coin.h
-        lasso.cpp
-        lasso.h
+        GameObjects/coin/coin.cpp
+        GameObjects/coin/coin.h
+        GameObjects/lasso/lasso.cpp
+        GameObjects/lasso/lasso.h
         main.cpp
-        MovingObject.cpp
-        MovingObject.h
-        Vector2D.cpp
-        Vector2D.h CoinManager.cpp CoinManager.h bomb.cpp bomb.h BombManager.cpp BombManager.h GameEngine.cpp GameEngine.h GameLevel.cpp GameLevel.h GameConstants.h GameState.cpp GameState.h PrelimLevelRender.cpp PrelimLevelRender.h UIUtil.cpp UIUtil.h HeartUI.cpp HeartUI.h Magnet.cpp Magnet.h)
+        GameObjects/MO/MovingObject.cpp
+        GameObjects/MO/MovingObject.h
+        Misc/Vector2D/Vector2D.cpp
+        Misc/Vector2D/Vector2D.h Manager/CoinManager.cpp Manager/CoinManager.h GameObjects/bomb/bomb.cpp GameObjects/bomb/bomb.h Manager/BombManager.cpp Manager/BombManager.h GameHandlers/Engine/GameEngine.cpp GameHandlers/Engine/GameEngine.h GameLevel.cpp GameLevel.h Misc/GameConstants.h GameHandlers/State/GameState.cpp GameHandlers/State/GameState.h UI/PrelimRenderer/PrelimLevelRender.cpp UI/PrelimRenderer/PrelimLevelRender.h UI/Util/UIUtil.cpp UI/Util/UIUtil.h UI/Heart/HeartUI.cpp UI/Heart/HeartUI.h Misc/Magnet/Magnet.cpp Misc/Magnet/Magnet.h)
 
 target_link_libraries(lassoProject sprite X11 )

@@ -5,14 +5,14 @@
 #ifndef LASSOPROJECT_GAMEENGINE_H
 #define LASSOPROJECT_GAMEENGINE_H
 
-#include "lasso.h"
-#include "GameConstants.h"
-#include "GameState.h"
-#include "PrelimLevelRender.h"
-#include "BombManager.h"
-#include "CoinManager.h"
-#include "UIUtil.h"
-#include "Magnet.h"
+#include "GameObjects/lasso/lasso.h"
+#include "Misc/GameConstants.h"
+#include "GameHandlers/State/GameState.h"
+#include "UI/PrelimRenderer/PrelimLevelRender.h"
+#include "Manager/BombManager.h"
+#include "Manager/CoinManager.h"
+#include "UI/Util/UIUtil.h"
+#include "Misc/Magnet/Magnet.h"
 class GameEngine {
 public:
     bool isRunning;
@@ -112,8 +112,8 @@ public:
         coinManager->stepCoins(step.time,currentTime);
 
         bombManager->stepBombs(step.time,currentTime);
-
-        magnet->attract(lassoPtr,step.time);
+        if(!lassoPtr->isPaused())
+            magnet->attract(lassoPtr,step.time);
         plr.step();
     }  // end of : handleStepUpdates()
 

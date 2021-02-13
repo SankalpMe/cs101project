@@ -5,10 +5,10 @@
 #ifndef LASSOPROJECT_COINMANAGER_H
 #define LASSOPROJECT_COINMANAGER_H
 
-#include "coin.h"
-#include "lasso.h"
+#include "GameObjects/coin/coin.h"
+#include "GameObjects/lasso/lasso.h"
 #include <vector>
-#include "GameConstants.h"
+#include "Misc/GameConstants.h"
 
 //class to manage multiple bombs
 

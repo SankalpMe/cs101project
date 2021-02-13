@@ -6,9 +6,9 @@
 #define LASSOPROJECT_PRELIMLEVELRENDER_H
 
 #include <simplecpp>
-#include "GameConstants.h"
-#include "GameState.h"
-#include "HeartUI.h"
+#include "Misc/GameConstants.h"
+#include "GameHandlers/State/GameState.h"
+#include "UI/Heart/HeartUI.h"
 class PrelimLevelRender {
     Rectangle ybar;
     Rectangle xbar;

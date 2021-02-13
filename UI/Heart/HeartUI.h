@@ -6,8 +6,8 @@
 #define LASSOPROJECT_HEARTUI_H
 
 #include <simplecpp>
-#include "GameConstants.h"
-#include "Vector2D.h"
+#include "Misc/GameConstants.h"
+#include "Misc/Vector2D/Vector2D.h"
 
 
 class HeartICON: public Polygon{

@@ -1,9 +1,9 @@
 #ifndef __COIN_H__
 #define __COIN_H__
 
-#include "MovingObject.h"
-#include "Vector2D.h"
-#include "GameConstants.h"
+#include "GameObjects/MO/MovingObject.h"
+#include "Misc/Vector2D/Vector2D.h"
+#include "Misc/GameConstants.h"
 
 class Coin : public MovingObject {
 

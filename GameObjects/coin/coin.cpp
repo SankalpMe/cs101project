@@ -1,5 +1,5 @@
 #include "coin.h"
-#include "lasso.h"
+#include "GameObjects/lasso/lasso.h"
 
 void Coin::init() {
     buildObject();

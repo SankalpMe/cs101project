@@ -5,7 +5,7 @@
 #ifndef LASSOPROJECT_GAMESTATE_H
 #define LASSOPROJECT_GAMESTATE_H
 
-#include "bomb.h"
+#include "GameObjects/bomb/bomb.h"
 #include <vector>
 class GameState {
 public:

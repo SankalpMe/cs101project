@@ -1,14 +1,14 @@
 #ifndef __LASSO_H__
 #define __LASSO_H__
 
-#include "MovingObject.h"
-#include "coin.h"
-#include "Vector2D.h"
-#include "bomb.h"
-#include "GameState.h"
+#include "GameObjects/MO/MovingObject.h"
+#include "GameObjects/coin/coin.h"
+#include "Misc/Vector2D/Vector2D.h"
+#include "GameObjects/bomb/bomb.h"
+#include "GameHandlers/State/GameState.h"
 //#define WINDOW_X 1200
 //#define WINDOW_Y 960
-#include "GameConstants.h"
+#include "Misc/GameConstants.h"
 
 class Lasso : public MovingObject {
     Vector2D startPosition;
