@@ -48,7 +48,7 @@ void showStartMessage(string msg){
     t.setColor(COLOR("black"));
 
     int i = 0;
-
+    wait(1);
     repeat(100){
         t.move(0,-WINDOW_Y/100);
         box.move(0,-WINDOW_Y/100);

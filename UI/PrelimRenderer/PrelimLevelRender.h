@@ -10,19 +10,19 @@
 #include "GameHandlers/State/GameState.h"
 #include "UI/Heart/HeartUI.h"
 #include "UI/Coin/CoinUI.h"
-
+#include "UI/Key/KeyUI.h"
 class PrelimLevelRender {
     Rectangle ybar;
     Rectangle xbar;
 
-    Text charInput;
-    Text coinScore;
+
 
     GameState *state;
     HeartUI heartUI;
     CoinUI coinUI;
+    KeyUI keyUI;
 public:
-    PrelimLevelRender(): heartUI(), coinUI() {
+    PrelimLevelRender(): heartUI(), coinUI(), keyUI() {
 
     }
     void init(){
@@ -31,27 +31,23 @@ public:
         xbar.setFill(true);
         xbar.setColor(COLOR("brown"));
 
-        charInput.reset(PLAY_X_START + 50, PLAY_Y_HEIGHT + 20, "In: _");
-        coinScore.reset(PLAY_X_START + 50, PLAY_Y_HEIGHT + 50, "Coins: 0");
+    } // end : init()
 
-    }
     //bind game state
     void bindState(GameState *_state){
         state = _state;
         heartUI.setMaxHearts(state->health.maxHearts);
-    }
+    } //end : bindState(GameState *_state)
     void step(){
         heartUI.render(state->health.heartLeft);
-        string coinMsg = "Coins: ";
-        coinMsg += to_string(state->score.GoldCoin );
-        coinScore.setMessage(coinMsg);
-        string charMsg = "In: ";
-        charMsg += state->charInput;
-        charInput.setMessage(charMsg);
+
 
         coinUI.setCoins(state->score.GoldCoin);
 
         coinUI.step();
+
+        keyUI.setKey(state->charInput);
+        keyUI.step();
     }
 };
 
