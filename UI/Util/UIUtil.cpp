@@ -6,7 +6,7 @@
 
 //simple functions to show alerts
 void showBombBoom(string msg){
-
+    endFrame();
     Rectangle box(WINDOW_X/2,WINDOW_Y/2, textWidth(msg) + 200, textHeight() + 100);
     box.setFill(true);
     box.setColor(COLOR("red"));
@@ -16,16 +16,14 @@ void showBombBoom(string msg){
     t.setColor(COLOR("black"));
 
     int i = 0;
-//    int x[] = {-80,5,20,-90,50};
-//    int y[] = {-40,150,100,20,-60};
+
     repeat(26){
         i++;
         if(i%2 ){
             box.setColor(COLOR("yellow"));
-//            t.move(x[i%5],y[i%5]);
         }else{
             box.setColor(COLOR("red"));
-//            t.move(x[i%5],y[i%5]);
+
         }
         box.scale(1.2);
         box.rotate(0.1);
@@ -33,15 +31,15 @@ void showBombBoom(string msg){
 
 
     }
-//    box.setColor(COLOR("red"));
+
     wait(1.5);
 
 }//end : show BombBoom
 
 
 void showStartMessage(string msg){
-
-    Rectangle box(WINDOW_X/2,WINDOW_Y/2, WINDOW_X, WINDOW_Y);
+    Rectangle box;
+    box.reset(WINDOW_X/2,WINDOW_Y/2, WINDOW_X, WINDOW_Y);
     box.setFill(true);
     box.setColor(COLOR("yellow"));
 
@@ -57,6 +55,7 @@ void showStartMessage(string msg){
         box.scale(0.99);
         wait(STEP_TIME*0.1);
     }
+
     wait(0.5);
 
 }

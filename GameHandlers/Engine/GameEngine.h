@@ -85,6 +85,7 @@ public:
     }// end of : init()
     void loop(){
         while (true){
+            beginFrame();
             if(!isRunning){
                 break;
             }
@@ -93,6 +94,7 @@ public:
             handleStepUpdates();
             wait((float)step.time);
             currentTime += step.time;
+            endFrame();
         }
 
     } // end of : loop()

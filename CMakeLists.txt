@@ -30,4 +30,4 @@ add_executable(lassoProject
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
-target_link_libraries(lassoProject sprite X11 )
+target_link_libraries(lassoProject sprite X11)
