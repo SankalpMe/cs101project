@@ -13,5 +13,7 @@ int main() {
     engine.init(); // engine startup
     showStartMessage("Brace Your Self!");
     engine.loop(); // main game loop
+
+    cout << "Graceful End" << endl;
     return 0;
 } // End main_program

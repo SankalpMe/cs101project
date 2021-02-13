@@ -61,6 +61,9 @@ public:
         lassoPtr = nullptr;
         coinManager = nullptr;
         bombManager = nullptr;
+        eventThread->join();
+
+        delete eventThread;
     }
     //init all engine objects
     void init(){
