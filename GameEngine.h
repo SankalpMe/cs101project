@@ -74,7 +74,7 @@ public:
 
         plr.bindState(&state);
         plr.init();
-    }
+    }// end of : init()
     void loop(){
         while (true){
             if(!isRunning){
@@ -87,7 +87,7 @@ public:
             currentTime += step.time;
         }
 
-    }
+    } // end of : loop()
     //handle game events bombing etc...
     void handleGameEvent() {
         if(state.bombingInfo.bombNo > 0){
@@ -104,7 +104,7 @@ public:
             cout << "Died" << endl;
             isRunning = false;
         }
-    }
+    } // end of : handleGameEvent()
     void handleStepUpdates() {
 
         lassoPtr->nextStep(step.time);
@@ -115,7 +115,7 @@ public:
 
         magnet->attract(lassoPtr,step.time);
         plr.step();
-    }
+    }  // end of : handleStepUpdates()
 
     void handleEvent();
 
