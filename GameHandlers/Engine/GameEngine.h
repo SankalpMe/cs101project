@@ -27,7 +27,7 @@ public:
     Magnet *magnet;
     thread *eventThread;
     queue<XEvent> eventQueue;
-
+    bool engineCleaned;
 
     struct  {
         int count;
@@ -50,21 +50,13 @@ public:
         coinManager = nullptr;
         bombManager = nullptr;
         magnet = new Magnet();
+        engineCleaned = false;
     }
     //Cleaning up...
     ~GameEngine() {
-        delete lassoPtr;
-        delete coinManager;
-        delete bombManager;
-        delete magnet;
-        magnet = nullptr;
-        lassoPtr = nullptr;
-        coinManager = nullptr;
-        bombManager = nullptr;
-        eventThread->join();
-
-        delete eventThread;
+        cleanup();
     }
+    void cleanup();
     //init all engine objects
     void init(){
 

@@ -72,3 +72,23 @@ void GameEngine::handleEvent(){
         }
     }
 }
+
+void GameEngine::cleanup() {
+    if(engineCleaned){
+        return;
+    }
+    isRunning = false;
+    delete lassoPtr;
+    delete coinManager;
+    delete bombManager;
+    delete magnet;
+    magnet = nullptr;
+    lassoPtr = nullptr;
+    coinManager = nullptr;
+    bombManager = nullptr;
+    eventThread->join();
+
+    delete eventThread;
+    endFrame();
+    engineCleaned = true;
+}
