@@ -33,7 +33,7 @@ public:
     double currentTime;
 
 
-    GameEngine(): state(){
+    GameEngine(): state() {
         height = WINDOW_Y;
         width = WINDOW_X;
         step.count = 0;
@@ -44,10 +44,9 @@ public:
         coinManager = nullptr;
         bombManager = nullptr;
         magnet = new Magnet();
-
     }
     //Cleaning up...
-    ~GameEngine(){
+    ~GameEngine() {
         delete lassoPtr;
         delete coinManager;
         delete bombManager;
@@ -56,8 +55,6 @@ public:
         lassoPtr = nullptr;
         coinManager = nullptr;
         bombManager = nullptr;
-
-
     }
     //init all engine objects
     void init(){
@@ -92,7 +89,7 @@ public:
 
     }
     //handle game events bombing etc...
-    void handleGameEvent(){
+    void handleGameEvent() {
         if(state.bombingInfo.bombNo > 0){
             state.health.heartLeft -= state.bombingInfo.bombNo;
             state.bombingInfo.bombNo = 0;
@@ -108,7 +105,7 @@ public:
             isRunning = false;
         }
     }
-    void handleStepUpdates(){
+    void handleStepUpdates() {
 
         lassoPtr->nextStep(step.time);
 
