@@ -50,28 +50,12 @@ public:
         heartsLeft = maxHearts;
     }
     //Code For Rendering The Hearts
-    void render(int _heartsLeft){
-        heartsLeft = _heartsLeft;
-        int i ;
-        for( i = 0 ; i < heartsLeft;i++){
-            hearts[i].isFilled = true;
-            hearts[i].offset.x = 20 + 2*hearts[i].sq2l + 5 + i * (hearts[i].sq2l*4 + 5);
-            hearts[i].offset.y = 20 + 5 +hearts[i].sq2l;
-            hearts[i].render();
-        }
-        for(i; i  < maxHearts;i++){
-            hearts[i].isFilled = false;
-            hearts[i].offset.x = 20 + 2*hearts[i].sq2l + 5 + i * (hearts[i].sq2l*4 + 5);
-            hearts[i].offset.y = 20 + 5 +hearts[i].sq2l;
-            hearts[i].render();
-        }
-    }
+    void render(int _heartsLeft);
     //changes maxHearts.
     void setMaxHearts(int _maxHearts){
         maxHearts = _maxHearts;
         backDrop.reset(20+ 3*sqrt(2)*2*maxHearts + 2.5*maxHearts + 2.5,30 ,3*sqrt(2)*4*maxHearts + 5*maxHearts + 5,20);
         hearts.resize(_maxHearts);
-
     }
 };
 

@@ -13,6 +13,7 @@
 #include "Manager/CoinManager.h"
 #include "UI/Util/UIUtil.h"
 #include "Misc/Magnet/Magnet.h"
+
 class GameEngine {
 public:
     bool isRunning;

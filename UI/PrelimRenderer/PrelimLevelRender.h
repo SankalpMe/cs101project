@@ -9,6 +9,8 @@
 #include "Misc/GameConstants.h"
 #include "GameHandlers/State/GameState.h"
 #include "UI/Heart/HeartUI.h"
+#include "UI/Coin/CoinUI.h"
+
 class PrelimLevelRender {
     Rectangle ybar;
     Rectangle xbar;
@@ -17,10 +19,10 @@ class PrelimLevelRender {
     Text coinScore;
 
     GameState *state;
-    HeartUI heartUi;
-
+    HeartUI heartUI;
+    CoinUI coinUI;
 public:
-    PrelimLevelRender(): heartUi(){
+    PrelimLevelRender(): heartUI(), coinUI() {
 
     }
     void init(){
@@ -36,16 +38,20 @@ public:
     //bind game state
     void bindState(GameState *_state){
         state = _state;
-        heartUi.setMaxHearts(state->health.maxHearts);
+        heartUI.setMaxHearts(state->health.maxHearts);
     }
     void step(){
-        heartUi.render(state->health.heartLeft);
+        heartUI.render(state->health.heartLeft);
         string coinMsg = "Coins: ";
         coinMsg += to_string(state->score.GoldCoin );
         coinScore.setMessage(coinMsg);
         string charMsg = "In: ";
         charMsg += state->charInput;
         charInput.setMessage(charMsg);
+
+        coinUI.setCoins(state->score.GoldCoin);
+
+        coinUI.step();
     }
 };
 
