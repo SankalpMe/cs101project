@@ -6,8 +6,14 @@
 #define LASSOPROJECT_GAMELEVEL_H
 
 #include "Misc/GameConstants.h"
+#include "GameHandlers/Engine/GameEngine.h"
 
 class GameLevel {
+    GameEngine *engine;
+
+    void init(){
+        engine = new GameEngine();
+    }
 
 };
 

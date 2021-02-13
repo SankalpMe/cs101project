@@ -15,6 +15,7 @@
 #include "Misc/Magnet/Magnet.h"
 #include <thread>
 #include <queue>
+
 class GameEngine {
 public:
     bool isRunning;
