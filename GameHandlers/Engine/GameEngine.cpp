@@ -10,21 +10,26 @@ void pumpEvents(GameEngine *engine){
         XEvent e;
         bool pendingEv = checkEvent(e);
 
-
+        if(pendingEv){
+            engine->eventQueue.push(e);
+        }
         sleep(0.4);
     }
 }
 void GameEngine::startPumping() {
 
-    eventThread = new thread(&GameEngine::loop, this);
-    pumpEvents(this);
+    eventThread = new thread(pumpEvents, this);
 }
 void GameEngine::handleEvent(){
+    char c = '_';
+    state.charInput = c;
     while (!eventQueue.empty()){
-        char c = ' ';
+        c = ' ';
+
 
         XEvent e = eventQueue.front();
         eventQueue.pop();
+        cout << eventQueue.size() << endl;
         if (keyPressEvent(e)) {
             c = charFromEvent(e);
             c = tolower(c);
