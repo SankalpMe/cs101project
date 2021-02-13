@@ -9,9 +9,10 @@ class Coin : public MovingObject {
 
 
     // Moving parts
-    Circle coin_circle;
+
 
 public:
+    Circle coin_circle;
     Vector2D startPosition;
     Vector2D startVelocity;
     Vector2D acceleration;

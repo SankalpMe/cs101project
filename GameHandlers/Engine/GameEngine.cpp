@@ -79,13 +79,13 @@ void GameEngine::cleanup() {
     }
     isRunning = false;
     delete lassoPtr;
-    delete coinManager;
-    delete bombManager;
+//    delete coinManager;
+//    delete bombManager;
     delete magnet;
     magnet = nullptr;
     lassoPtr = nullptr;
-    coinManager = nullptr;
-    bombManager = nullptr;
+//    coinManager = nullptr;
+//    bombManager = nullptr;
     eventThread->join();
 
     delete eventThread;

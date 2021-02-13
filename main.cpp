@@ -1,20 +1,24 @@
 #include <simplecpp>
 
 #include "Misc/GameConstants.h"
-#include "GameHandlers/Engine/GameEngine.h"
+#include "GameHandlers/Levels//GameLevel.h"
 
 using namespace simplecpp;
 
-
-int main() {
+void initRoot(){
     XInitThreads(); // multi thread support
     initCanvas("Loop 'n Loops", WINDOW_X, WINDOW_Y); //this line cant be avoided.
+}
+int main() {
 
-    GameEngine engine; // the oil and gas for the game
-    engine.init(); // engine ignition
-    showStartMessage("Level 1");
-    engine.loop(); // engine run
-    engine.cleanup();
+    initRoot();
+//    GameEngine engine; // the oil and gas for the game
+//    engine.init(); // engine ignition
+//    showStartMessage("Level 1");
+//    engine.loop(); // engine run
+//    engine.cleanup();
+    GameLevel gl;
+    gl.run();
 
 
 

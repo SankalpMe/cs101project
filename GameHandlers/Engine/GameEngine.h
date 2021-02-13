@@ -48,10 +48,17 @@ public:
         currentTime = 0;
         isRunning = true;
         lassoPtr = nullptr;
+
         coinManager = nullptr;
         bombManager = nullptr;
+
         magnet = new Magnet();
         engineCleaned = false;
+    }
+
+    void bindManagers(CoinManager *coinManager1,BombManager *bombManager1){
+        coinManager = coinManager1;
+        bombManager = bombManager1;
     }
     //Cleaning up...
     ~GameEngine() {
@@ -64,14 +71,16 @@ public:
         lassoPtr = new Lasso();
         lassoPtr->bindState(&state);
 
-        coinManager = new CoinManager();
-        bombManager = new BombManager();
+//        coinManager = new CoinManager();
+//        bombManager = new BombManager();
 
-        coinManager->addCoin({50,PLAY_Y_HEIGHT},{30,-120});
-        coinManager->addCoin({200,PLAY_Y_HEIGHT},{60,-70});
-        coinManager->addCoin({100,PLAY_Y_HEIGHT},{-45,-100});
-        bombManager->addBomb({50,PLAY_Y_HEIGHT},{50,-80});
-        magnet->bindCoinManager(coinManager);
+//        coinManager->addCoin({50,PLAY_Y_HEIGHT},{30,-120});
+//        coinManager->addCoin({200,PLAY_Y_HEIGHT},{60,-70});
+//        coinManager->addCoin({100,PLAY_Y_HEIGHT},{-45,-100});
+//        bombManager->addBomb({50,PLAY_Y_HEIGHT},{50,-80});
+
+
+       magnet->bindCoinManager(coinManager);
 
 
         plr.bindState(&state);

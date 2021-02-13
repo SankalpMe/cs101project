@@ -19,6 +19,7 @@ public:
     }
     //New object rendering for bomb.
     void buildObject(){
+        coin_circle.hide();
         bomb_circle.reset(0, 0, 10);
         bomb_circle.setColor(COLOR("black"));
 
