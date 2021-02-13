@@ -11,6 +11,7 @@
 #include "Manager/CoinManager.h"
 
 
+
 struct ObjectManagers {
     CoinManager *coinManager;
     BombManager *bombManager;
