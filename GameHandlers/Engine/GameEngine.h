@@ -13,7 +13,8 @@
 #include "Manager/CoinManager.h"
 #include "UI/Util/UIUtil.h"
 #include "Misc/Magnet/Magnet.h"
-
+#include <thread>
+#include <queue>
 class GameEngine {
 public:
     bool isRunning;
@@ -24,6 +25,10 @@ public:
     CoinManager *coinManager;
     BombManager *bombManager;
     Magnet *magnet;
+    thread *eventThread;
+    queue<XEvent> eventQueue;
+
+
     struct  {
         int count;
         double time;
@@ -75,6 +80,8 @@ public:
 
         plr.bindState(&state);
         plr.init();
+        startPumping();
+
     }// end of : init()
     void loop(){
         while (true){
@@ -119,9 +126,11 @@ public:
     }  // end of : handleStepUpdates()
 
     void handleEvent();
-
+    void startPumping();
 
 };
 
 
+
+void pumpEvents(GameEngine *engine);
 #endif //LASSOPROJECT_GAMEENGINE_H

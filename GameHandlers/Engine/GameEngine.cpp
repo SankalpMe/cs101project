@@ -3,13 +3,28 @@
 //
 
 #include "GameEngine.h"
-void GameEngine::handleEvent(){
-    XEvent e;
-    bool pendingEv = checkEvent(e);
 
-    if (pendingEv) {
+void pumpEvents(GameEngine *engine){
+    XInitThreads();
+    while (engine->isRunning){
+        XEvent e;
+        bool pendingEv = checkEvent(e);
+
+
+        sleep(0.4);
+    }
+}
+void GameEngine::startPumping() {
+
+    eventThread = new thread(&GameEngine::loop, this);
+    pumpEvents(this);
+}
+void GameEngine::handleEvent(){
+    while (!eventQueue.empty()){
         char c = ' ';
 
+        XEvent e = eventQueue.front();
+        eventQueue.pop();
         if (keyPressEvent(e)) {
             c = charFromEvent(e);
             c = tolower(c);
@@ -27,7 +42,6 @@ void GameEngine::handleEvent(){
             case 'l':
                 if (!lassoPtr->isLassoLoped() && !lassoPtr->isPaused()) {
                     lassoPtr->loopit();
-//
                     coinManager->checkForLasso(*lassoPtr);
                     bombManager->checkForLasso(*lassoPtr);
 

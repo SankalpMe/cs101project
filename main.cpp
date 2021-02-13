@@ -6,6 +6,7 @@ using namespace simplecpp;
 
 
 int main() {
+    XInitThreads();
     initCanvas("Loop 'n Loops", WINDOW_X, WINDOW_Y); //this line cant be avoided.
 
     GameEngine engine;
