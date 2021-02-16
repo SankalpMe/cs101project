@@ -40,6 +40,9 @@ void GameEngine::handleEvent(){
         state.charInput = c;
 
         switch (c) {
+            case 'c':
+                showControls();
+                break;
             case 'k':
                 lassoPtr->unpause();
                 break;

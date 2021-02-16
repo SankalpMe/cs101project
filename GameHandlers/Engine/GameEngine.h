@@ -64,6 +64,7 @@ public:
         magnetGiver = nullptr;
         state.stepRemaining = 0;
         targetCoins = -1;
+        magLastTime = 0;
     }
 
     void bindManagers(CoinManager *coinManager1,BombManager *bombManager1){
@@ -84,7 +85,7 @@ public:
        magnet->bindCoinManager(coinManager);
        magnetGiver = new MagnetGiver();
 
-
+        magnetGiver->disable();
         plr.bindState(&state);
         plr.init();
         startPumping();

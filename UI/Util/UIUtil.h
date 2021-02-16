@@ -13,4 +13,5 @@ void showBombBoom(string msg);
 void showStartMessage(string msg);
 void showAlert(string msg);
 void showSmartAlert(string msg);
+void showControls();
 #endif //LASSOPROJECT_UIUTIL_H
