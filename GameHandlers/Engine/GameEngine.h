@@ -34,6 +34,7 @@ public:
     bool spawnMagnets;
 
     MagnetGiver *magnetGiver;
+    bool quitKey;
     int targetCoins;
 
 
@@ -48,6 +49,7 @@ public:
     double magLastTime = 0;
 
     GameEngine(): state() {
+        quitKey = false;
         height = WINDOW_Y;
         width = WINDOW_X;
         step.count = 0;

@@ -72,6 +72,7 @@ void GameEngine::handleEvent(){
                 break;
             case 'q':
                 isRunning = false;
+                quitKey = true;
             default:
                 break;
         }

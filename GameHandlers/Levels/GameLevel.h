@@ -39,6 +39,8 @@ protected:
     int coinTarget;
     int levelTime;
     bool enableMagnets;
+    Text ctext;
+    Text qtext;
 public:
     bool levelCompleted;
     GameLevel(): obmgs(){
@@ -77,12 +79,12 @@ public:
         engine->state.stepRemaining = levelTime;
         engine->spawnMagnets = enableMagnets;
     }
-    void restart() {
+    bool restart() {
 
         delete engine;
         obmgs.reset();
         engine = new GameEngine();
-        run();
+        return run();
     }
     virtual void sceneSettings(CoinManager *cmg,BombManager *bmg){
 
@@ -92,27 +94,35 @@ public:
         bmg->addBomb({70,PLAY_Y_HEIGHT},{0,-140});
 
     }
-    void run(){
+    bool run(){
         init();
         engine->loop();
-        handleCompletion();
+        return handleCompletion();
     }
 
-    virtual void handleCompletion(){
+    virtual bool handleCompletion(){
        int gc =  engine->state.score.GoldCoin;
+       if(engine->quitKey){
+            showSmartAlert("LEVEL QUIT \n- SUBMITTING FINAL SCORE -");
+            return false;
 
+       }
        if(gc < coinTarget){
            showAlert("FAILED TO COMPLETE LEVEL - STARTING LEVEL AGAIN!");
            restart();
-           return;
+           return true;
        }
        levelCompleted = true;
        showAlert("LEVEL COMPLETED");
-       return;
+       return true;
     }
     void cleanup(){
         delete engine;
         engine = nullptr;
+    }
+    void beginnerPrompt(){
+        ctext.reset(WINDOW_X/2,30,"PRESS [C] IF YOU FORGOT THE CONTROLS");
+        qtext.reset(WINDOW_X/2,35+textHeight(),"PRESS [Q] TO QUIT - ONCE YOU QUIT YOUR PROGRESS WILL RESET.");
     }
     ~GameLevel(){
         delete engine;
