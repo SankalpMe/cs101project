@@ -9,43 +9,47 @@
 #include "GameObjects/MO/MovingObject.h"
 #include "Misc/Vector2D/Vector2D.h"
 #include "Misc/GameConstants.h"
+#include "Misc/Magnet/Sprite/MagnetSprite.h"
+#include "GameHandlers/State/GameState.h"
+#include "GameObjects/lasso/lasso.h"
 
-
-
-class MagnetGiver : public MovingObject {
+class MagnetGiver {
 
 
 public:
-    Circle coin_circle;
-    Vector2D startPosition;
-    Vector2D startVelocity;
-    Vector2D acceleration;
-    bool destroyed;
-    MagnetGiver(const Vector2D &_position, const Vector2D &_velocity = {0, 0}, const Vector2D &_acceleration = {0, 0},
-         bool isPaused = true) : MovingObject(_position, _velocity, _acceleration, isPaused) {
-        startPosition = _position;
-        startVelocity = _velocity;
-        acceleration = _acceleration;
-        if (isPaused) {
-            pause();
-        } else {
-            unpause();
-        }
-        destroyed = false;
-        MagnetGiver::init();
+    MagnetSprite *magnetSprite;
+    bool disabled;
+    MagnetGiver() {
+        magnetSprite = new MagnetSprite({300,300});
+        magnetSprite->init();
+        magnetSprite->nextStep(0);
+        disabled = false;
+    }
+    void setPosition(Vector2D pos){
+        magnetSprite->setPosition(pos);
+    }
+    bool step(Lasso *lasso,GameState *state){
+        magnetSprite->nextStep(0);
+            if( !disabled && (lasso->getPosition() - magnetSprite->getPosition()).magnitude() <= LASSO_RADIUS  ){
+                state->isMagnetized = true;
+                state->magnetStepRemaining = MAGNET_DURATION*10;
+                return true;
+            }else{
+                return false;
+            }
     }
 
-    virtual void init();
-
-    virtual void buildObject();
-
-    void reset();
-    virtual void hide(){
-        coin_circle.hide();
+    void disable() {
+        disabled =true;
+        magnetSprite->hide();
     }
-    virtual void show(){
-        coin_circle.show();
+
+    void enable(Vector2D position={300,300}){
+        magnetSprite->setPosition(position);
+        disabled = false;
+        magnetSprite->show();
     }
+
 }; // End class Coin
 
 

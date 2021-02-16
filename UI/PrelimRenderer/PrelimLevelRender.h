@@ -11,6 +11,7 @@
 #include "UI/Heart/HeartUI.h"
 #include "UI/Coin/CoinUI.h"
 #include "UI/Key/KeyUI.h"
+#include "UI/TimeLeft/TimeUI.h"
 class PrelimLevelRender {
     Rectangle ybar;
     Rectangle xbar;
@@ -21,8 +22,11 @@ class PrelimLevelRender {
     HeartUI heartUI;
     CoinUI coinUI;
     KeyUI keyUI;
+    Text MagText;
+    string MagString;
+    TimeUI timeUI;
 public:
-    PrelimLevelRender(): heartUI(), coinUI(), keyUI() {
+    PrelimLevelRender(): heartUI(), coinUI(), keyUI(),timeUI() {
 
     }
     void init(){
@@ -31,6 +35,11 @@ public:
         xbar.setFill(true);
         xbar.setColor(COLOR("brown"));
 
+        MagText.hide();
+        MagString = "Magtime: 0";
+        MagText.reset(20+(textWidth(MagString))/2,50+10,MagString);
+        MagText.setColor(COLOR("red"));
+
     } // end : init()
 
     //bind game state
@@ -38,17 +47,7 @@ public:
         state = _state;
         heartUI.setMaxHearts(state->health.maxHearts);
     } //end : bindState(GameState *_state)
-    void step(){
-        heartUI.render(state->health.heartLeft);
-
-
-        coinUI.setCoins(state->score.GoldCoin);
-
-        coinUI.step();
-
-        keyUI.setKey(state->charInput);
-        keyUI.step();
-    }
+    void step();
 };
 
 

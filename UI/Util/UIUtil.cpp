@@ -38,6 +38,7 @@ void showBombBoom(string msg){
 
 
 void showStartMessage(string msg){
+    endFrame();
     Rectangle box;
     box.reset(WINDOW_X/2,WINDOW_Y/2, WINDOW_X, WINDOW_Y);
     box.setFill(true);
@@ -58,4 +59,45 @@ void showStartMessage(string msg){
 
     wait(0.5);
 
+}
+void showAlert(string msg){
+    endFrame();
+    Rectangle box;
+    box.reset(WINDOW_X/2,WINDOW_Y/2, WINDOW_X, WINDOW_Y);
+    box.setFill(true);
+    box.setColor(COLOR("yellow"));
+
+    Text t;
+    t.reset(WINDOW_X/2,WINDOW_Y/2, msg);
+
+    Text clco(WINDOW_X/2,WINDOW_Y/2+30, "CLICK TO CONTINUE");
+    t.setColor(COLOR("black"));
+    box.show();
+    t.show();
+
+    getClick();
+}
+
+void showSmartAlert(string msg){
+    endFrame();
+    Rectangle box;
+    box.reset(WINDOW_X/2,WINDOW_Y/2, WINDOW_X, WINDOW_Y);
+    box.setFill(true);
+    box.setColor(COLOR("yellow"));
+    box.show();
+    msg+= "\n\nClick To Continue\n";
+    int start = 0;
+    vector<Text> rows;
+    int rowi = 0;
+    for(int i= 0 ; i < msg.length();i++){
+        if(msg[i] == '\n'){
+            Text t;
+            t.reset(WINDOW_X/2,WINDOW_Y/2 + rowi * textHeight(),msg.substr(start,i-start));
+            rows.push_back(t);
+            rowi++;
+            start = i +1;
+        }
+    }
+
+   getClick();
 }

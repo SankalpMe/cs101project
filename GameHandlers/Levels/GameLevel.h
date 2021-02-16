@@ -20,23 +20,41 @@ struct ObjectManagers {
         coinManager = new CoinManager();
         bombManager = new BombManager();
     }
-
+    void reset(){
+        delete coinManager;
+        delete bombManager;
+        coinManager = new CoinManager();
+        bombManager = new BombManager();
+    }
     ~ObjectManagers(){
         delete coinManager;
         delete bombManager;
     }
 };
 class GameLevel {
+    int coinTarget;
     GameEngine *engine;
     ObjectManagers obmgs;
 public:
-    GameLevel(){
+    GameLevel(): obmgs(){
+        coinTarget = 1;
         engine = new GameEngine();
     }
     void init(){
         engine->bindManagers(obmgs.coinManager,obmgs.bombManager);
         engine->init();
         sceneSettings(obmgs.coinManager,obmgs.bombManager);
+
+        engine->spawnMagnets = true;
+        engine->state.stepRemaining = 100;
+        engine->targetCoins = coinTarget;
+    }
+    void restart() {
+
+        delete engine;
+        obmgs.reset();
+        engine = new GameEngine();
+        run();
     }
     void sceneSettings(CoinManager *cmg,BombManager *bmg){
 
@@ -48,6 +66,19 @@ public:
     void run(){
         init();
         engine->loop();
+        handleCompletion();
+    }
+
+    void handleCompletion(){
+       int gc =  engine->state.score.GoldCoin;
+
+       if(gc < coinTarget){
+           showAlert("FAILED TO COMPLETE LEVEL - STARTING LEVEL AGAIN!");
+           restart();
+           return;
+       }
+       showAlert("LEVEL COMPLETED");
+       return;
     }
 
 };

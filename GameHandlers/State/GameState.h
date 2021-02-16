@@ -19,8 +19,9 @@ public:
         int heartLeft;
         int maxHearts;
     } health;
-
-
+    bool isMagnetized;
+    int magnetStepRemaining;
+    int stepRemaining;
     struct BombingInfo{
        int bombNo;
     } bombingInfo;
@@ -29,6 +30,9 @@ public:
         charInput='_';
         health = {3,3};
         bombingInfo = {0};
+        isMagnetized = false;
+        magnetStepRemaining = 0;
+        stepRemaining = 0;
     }
 };
 

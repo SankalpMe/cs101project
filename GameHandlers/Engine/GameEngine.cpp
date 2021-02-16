@@ -4,6 +4,7 @@
 
 #include "GameEngine.h"
 
+//code to improve event cluttering
 void pumpEvents(GameEngine *engine){
     XInitThreads();
     while (engine->isRunning){
@@ -15,14 +16,15 @@ void pumpEvents(GameEngine *engine){
         }
         sleep(0.4);
     }
-}
+} // end of pumpEvents()
 void GameEngine::startPumping() {
-
+    // multi threaded solution for event cluttering
     eventThread = new thread(pumpEvents, this);
-}
+} // end of start pumping
 void GameEngine::handleEvent(){
     char c = '_';
     state.charInput = c;
+    // helps save from cluttering events.
     while (!eventQueue.empty()){
         c = ' ';
 
@@ -71,7 +73,7 @@ void GameEngine::handleEvent(){
                 break;
         }
     }
-}
+} // end of handleEvent
 
 void GameEngine::cleanup() {
     if(engineCleaned){
@@ -79,16 +81,14 @@ void GameEngine::cleanup() {
     }
     isRunning = false;
     delete lassoPtr;
-//    delete coinManager;
-//    delete bombManager;
+
     delete magnet;
     magnet = nullptr;
     lassoPtr = nullptr;
-//    coinManager = nullptr;
-//    bombManager = nullptr;
+
     eventThread->join();
 
     delete eventThread;
     endFrame();
     engineCleaned = true;
-}
+} // end of cleanUp()

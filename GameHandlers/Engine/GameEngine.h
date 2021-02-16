@@ -15,7 +15,7 @@
 #include "Misc/Magnet/Magnet.h"
 #include <thread>
 #include <queue>
-#include "Misc/Magnet/Sprite/MagnetSprite.h"
+#include "GameObjects/MagnetGiver/MagnetGiver.h"
 
 
 class GameEngine {
@@ -31,9 +31,11 @@ public:
     thread *eventThread;
     queue<XEvent> eventQueue;
     bool engineCleaned;
+    bool spawnMagnets;
 
+    MagnetGiver *magnetGiver;
+    int targetCoins;
 
-    MagnetSprite *mp;
 
     struct  {
         int count;
@@ -43,7 +45,7 @@ public:
 
 
     double currentTime;
-
+    double magLastTime = 0;
 
     GameEngine(): state() {
         height = WINDOW_Y;
@@ -59,6 +61,9 @@ public:
 
         magnet = new Magnet();
         engineCleaned = false;
+        magnetGiver = nullptr;
+        state.stepRemaining = 0;
+        targetCoins = -1;
     }
 
     void bindManagers(CoinManager *coinManager1,BombManager *bombManager1){
@@ -75,18 +80,9 @@ public:
 
         lassoPtr = new Lasso();
         lassoPtr->bindState(&state);
-        mp = new MagnetSprite();
-        mp->init();
-//        coinManager = new CoinManager();
-//        bombManager = new BombManager();
-
-//        coinManager->addCoin({50,PLAY_Y_HEIGHT},{30,-120});
-//        coinManager->addCoin({200,PLAY_Y_HEIGHT},{60,-70});
-//        coinManager->addCoin({100,PLAY_Y_HEIGHT},{-45,-100});
-//        bombManager->addBomb({50,PLAY_Y_HEIGHT},{50,-80});
-
 
        magnet->bindCoinManager(coinManager);
+       magnetGiver = new MagnetGiver();
 
 
         plr.bindState(&state);
@@ -107,7 +103,7 @@ public:
             wait((float)step.time);
             currentTime += step.time;
 
-            mp->nextStep(step.time);
+
             endFrame();
         }
 
@@ -124,7 +120,7 @@ public:
 
         }
 
-        if(state.health.heartLeft < 0){
+        if(state.health.heartLeft < 0) {
             cout << "Died" << endl;
             isRunning = false;
         }
@@ -135,10 +131,52 @@ public:
 
         coinManager->stepCoins(step.time,currentTime);
 
+        bool caughtMagnet = magnetGiver->step(lassoPtr,&state);
+        if(caughtMagnet){
+            magnetGiver->disable();
+            magLastTime = currentTime;
+        };
+
+        if(magnetGiver->disabled){
+            if( (currentTime-magLastTime) > MAGNET_GAP ){
+                double x = 0 + rand() % WINDOW_X;
+                double y = 0 + rand() % PLAY_Y_HEIGHT;
+                magnetGiver->enable({x,y});
+            }
+        }
+
         bombManager->stepBombs(step.time,currentTime);
-        if(!lassoPtr->isPaused())
-            magnet->attract(lassoPtr,step.time);
+        if(!lassoPtr->isPaused()){
+            if(state.isMagnetized && state.magnetStepRemaining > 0){
+                magnet->attract(lassoPtr,step.time);
+            }
+        }
+
         plr.step();
+
+        if(state.magnetStepRemaining > 0){
+            state.magnetStepRemaining--;
+        }else{
+            state.isMagnetized = false;
+        }
+
+
+        if(state.stepRemaining != -10){
+            if(state.stepRemaining < 0){
+                isRunning = false;
+                cleanup();
+            }
+            state.stepRemaining--;
+        }
+
+
+        if(targetCoins != -1){
+            if(targetCoins <= state.score.GoldCoin){
+                cerr << "Target Complete" << endl;
+                isRunning = false;
+                cleanup();
+            }
+        }
     }  // end of : handleStepUpdates()
 
     void handleEvent();

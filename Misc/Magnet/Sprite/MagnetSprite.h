@@ -9,19 +9,24 @@
 
 
 class MagnetSprite: public MovingObject {
-    Rectangle br,lr,rr,tlr,trr;
+    Text t;
 public:
     void init(){
-        br.reset(0,0,20,5);
-        br.setColor(COLOR("red"));
-        br.setFill(true);
-        addPart(&br);
+        t.reset(0,0,"M");
+        t.setColor(COLOR("red"));
+        addPart(&t);
 
         unpause();
     }
 
     MagnetSprite(Vector2D position = {100,100}): MovingObject(position,{0,0},{0,0}) {
 
+    }
+    void hide(){
+        t.hide();
+    }
+    void show(){
+        t.show();
     }
 };
 
