@@ -15,6 +15,8 @@
 #include "Misc/Magnet/Magnet.h"
 #include <thread>
 #include <queue>
+#include "Misc/Magnet/Sprite/MagnetSprite.h"
+
 
 class GameEngine {
 public:
@@ -29,6 +31,9 @@ public:
     thread *eventThread;
     queue<XEvent> eventQueue;
     bool engineCleaned;
+
+
+    MagnetSprite *mp;
 
     struct  {
         int count;
@@ -70,7 +75,8 @@ public:
 
         lassoPtr = new Lasso();
         lassoPtr->bindState(&state);
-
+        mp = new MagnetSprite();
+        mp->init();
 //        coinManager = new CoinManager();
 //        bombManager = new BombManager();
 
@@ -90,6 +96,7 @@ public:
     }// end of : init()
     void loop(){
         while (true){
+
             beginFrame();
             if(!isRunning){
                 break;
@@ -99,6 +106,8 @@ public:
             handleStepUpdates();
             wait((float)step.time);
             currentTime += step.time;
+
+            mp->nextStep(step.time);
             endFrame();
         }
 

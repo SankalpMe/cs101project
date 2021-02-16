@@ -29,7 +29,7 @@ void GameEngine::handleEvent(){
 
         XEvent e = eventQueue.front();
         eventQueue.pop();
-        cout << eventQueue.size() << endl;
+
         if (keyPressEvent(e)) {
             c = charFromEvent(e);
             c = tolower(c);
