@@ -3,6 +3,8 @@
 #include "Misc/GameConstants.h"
 #include "GameHandlers/Levels//GameLevel.h"
 #include "GameHandlers/LevelClass/Level1/Level1.h"
+#include "GameHandlers/LevelClass/Level2/Level2.h"
+
 #include <time.h>
 using namespace simplecpp;
 
@@ -31,7 +33,12 @@ int main() {
     initRoot();
     //runIntro();
     Level1 *a = new Level1;
+    Level2 *b =  new Level2;
     bool conti = a->run();
+    cout << conti << endl;
+    delete a;
+
+    conti = b->run();
     cout << conti << endl;
     return 0;
 } // End main_program
