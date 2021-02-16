@@ -29,7 +29,8 @@ void runIntro(){
 }
 int main() {
     initRoot();
-    runIntro();
-
+    //runIntro();
+    Level1 *a = new Level1;
+    a->run();
     return 0;
 } // End main_program
