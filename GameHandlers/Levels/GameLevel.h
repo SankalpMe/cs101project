@@ -42,13 +42,16 @@ protected:
 public:
     bool levelCompleted;
     GameLevel(): obmgs(){
+
+    }
+    void init(){
+
         levelCompleted = false;
         coinTarget = 1;
         engine = new GameEngine();
         levelTime = -10;
         enableMagnets = false;
-    }
-    void init(){
+
         engine->bindManagers(obmgs.coinManager,obmgs.bombManager);
         engine->init();
         sceneSettings(obmgs.coinManager,obmgs.bombManager);
@@ -107,8 +110,16 @@ public:
        showAlert("LEVEL COMPLETED");
        return;
     }
-
+    void cleanup(){
+        delete engine;
+        engine = nullptr;
+    }
+    ~GameLevel(){
+        delete engine;
+    }
 };
+
+
 
 
 #endif //LASSOPROJECT_GAMELEVEL_H
