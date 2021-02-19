@@ -83,7 +83,7 @@ public:
 
         delete engine;
         obmgs.reset();
-        engine = new GameEngine();
+
         return run();
     }
     virtual void sceneSettings(CoinManager *cmg,BombManager *bmg){
