@@ -52,30 +52,10 @@ public:
 
     }
 
-    void init() {
+    void init();
 
-        levelCompleted = false;
-        coinTarget = 1;
-        engine = new GameEngine();
-        levelTime = -10;
-        enableMagnets = false;
-        maxHearts = 3;
-        engine->bindManagers(obmgs.coinManager, obmgs.bombManager);
-        engine->init();
-        sceneSettings(obmgs.coinManager, obmgs.bombManager);
-
-
-        _init();
-        postinit();
-    }
-
-    void addRandomCoins() {
-        double xpos = PLAY_X_START + rand() % (WINDOW_X - 100 - PLAY_X_START);
-
-        double xvel = -50.0 + rand() % 100;
-        double yvel = -70.0 - rand() % 80;
-        obmgs.coinManager->addCoin({xpos, PLAY_Y_HEIGHT}, {xvel, yvel});
-    }
+    void addRandomCoins(int coins=1);
+    void addRandomBombs(int bombs=1);
 
     virtual void _init() {
 
@@ -111,32 +91,22 @@ public:
         return handleCompletion();
     }
 
-    virtual bool handleCompletion() {
-        int gc = engine->state.score.GoldCoin;
-        if (engine->quitKey) {
-            showSmartAlert("LEVEL QUIT \n- SUBMITTING FINAL SCORE -");
-            return false;
+    virtual bool handleCompletion();
 
-        }
-        if (gc < coinTarget) {
-            showAlert("FAILED TO COMPLETE LEVEL - STARTING LEVEL AGAIN!");
-            restart();
-            return true;
-        }
-        levelCompleted = true;
-        showAlert("LEVEL COMPLETED");
-        return true;
+    // handle state after level quit call
+    virtual void levelQuit(){
+        showSmartAlert("LEVEL QUIT \n- SUBMITTING FINAL SCORE -");
     }
-
+    virtual  bool checkAchievements() {
+        return coinTarget <= engine->state.score.GoldCoin;
+    };
     void cleanup() {
         delete engine;
         engine = nullptr;
     }
 
-    void beginnerPrompt() {
-        ctext.reset(WINDOW_X / 2, 30, "PRESS [C] IF YOU FORGOT THE CONTROLS");
-        qtext.reset(WINDOW_X / 2, 35 + textHeight(), "PRESS [Q] TO QUIT - ONCE YOU QUIT YOUR PROGRESS WILL RESET.");
-    }
+    void beginnerPrompt();
+
 
     ~GameLevel() {
         delete engine;

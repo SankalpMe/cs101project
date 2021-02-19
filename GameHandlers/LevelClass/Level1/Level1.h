@@ -21,7 +21,7 @@ class Level1 : public GameLevel {
     void _init() {
         beginnerPrompt();
         coinTarget = 3;
-        levelTime = -10;
+        levelTime = 300;
         enableMagnets = false;
         maxHearts = 3;
         levelInstructions();
