@@ -26,10 +26,12 @@ public:
     }
 
     //adds bomb to the game
-    void addBomb(Vector2D position, Vector2D velocity = {0, -10}) {
+    void addBomb(Vector2D position, Vector2D velocity = {0, -10},double startTime=0) {
         Bomb *bomb = new Bomb(position, velocity, {0, COIN_G}); // similar physics as COIN
         bomb->init(); // initialize  bomb ( Rendering and Constants ).
-        bombs.push_back({bomb, 0});
+        bombs.push_back({bomb, startTime});
+        bomb->pause();
+        bomb->hide();
     } // end of addBomb(...)
 
     // pauses all bombs in game
@@ -79,6 +81,7 @@ public:
             if (bomb.bomb->isPaused()) {
                 if ((currentTime - bomb.endTime) >= COIN_GAP) {
                     bomb.bomb->unpause();
+                    bomb.bomb->show();
                 }
             }
         }
@@ -87,7 +90,8 @@ public:
 
         if(deadlyMode){
             for(int i = 0 ; i < bombsLost;i++){
-                addBomb({0.0+rand() % WINDOW_X, PLAY_Y_HEIGHT},{0.0 + rand() % 50,-50.0- (rand()%100)}); // spawns a new bomb at different location
+                // spawns a new bomb at different location
+                addBomb({0.0+rand() % WINDOW_X, PLAY_Y_HEIGHT},{0.0 + rand() % 50,-50.0- (rand()%100)}, currentTime);
             }
         }
 
