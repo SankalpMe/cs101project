@@ -92,6 +92,7 @@ public:
         plr.init();
         startPumping();
 
+
     }// end of : init()
     void loop(){
         while (true){
@@ -116,7 +117,7 @@ public:
             endFrame(); // resume rendering
 
         }
-
+        cleanup();
     } // end of : loop()
     //handle game events bombing etc...
     void handleGameEvent() {
