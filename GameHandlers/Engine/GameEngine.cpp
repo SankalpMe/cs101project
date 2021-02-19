@@ -18,8 +18,7 @@ void pumpEvents(GameEngine *engine){
     }
 } // end of pumpEvents()
 void GameEngine::startPumping() {
-    // multi threaded solution for event cluttering
-    eventThread = new thread(pumpEvents, this);
+    eventThread = new thread(pumpEvents, this); // multi threaded solution for event cluttering
 } // end of start pumping
 void GameEngine::handleEvent(){
     char c = '_';
@@ -38,39 +37,46 @@ void GameEngine::handleEvent(){
         }
 
         state.charInput = c;
-
+        // handle input key and perform respective actions
         switch (c) {
             case 'c':
                 showControls();
+                eventQueue = queue<XEvent>(); // clear the event queue
                 break;
             case 'k':
-                lassoPtr->unpause();
+                lassoPtr->unpause(); //throws the lasso
                 break;
             case 'm':
-                lassoPtr->yank();
+                lassoPtr->yank(); // pulls the lasso back
                 break;
             case 'l':
+                // catch the coins
                 if (!lassoPtr->isLassoLoped() && !lassoPtr->isPaused()) {
                     lassoPtr->loopit();
-                    coinManager->checkForLasso(*lassoPtr);
-                    bombManager->checkForLasso(*lassoPtr);
+                    coinManager->checkForLasso(*lassoPtr); // pull checking for all coins
+                    bombManager->checkForLasso(*lassoPtr); // pull checking for all bombs
 
-                    wait(STEP_TIME * 5);
+                    wait(STEP_TIME * 5); // delay for user feedback
                 }
                 break;
             case 'a':
+                // adjusts lasso projection angle
                 if (lassoPtr->isPaused()) { lassoPtr->addAngle(-RELEASE_ANGLE_STEP_DEG); }
                 break;
             case 'd':
+                // adjusts lasso projection angle
                 if (lassoPtr->isPaused()) { lassoPtr->addAngle(+RELEASE_ANGLE_STEP_DEG); }
                 break;
             case 's':
+                // adjusts lasso projection speed
                 if (lassoPtr->isPaused()) { lassoPtr->addSpeed(-RELEASE_SPEED_STEP); }
                 break;
             case 'w':
+                // adjusts lasso projection speed
                 if (lassoPtr->isPaused()) { lassoPtr->addSpeed(+RELEASE_SPEED_STEP); }
                 break;
             case 'q':
+                // quit the game
                 isRunning = false;
                 quitKey = true;
             default:
@@ -78,7 +84,7 @@ void GameEngine::handleEvent(){
         }
     }
 } // end of handleEvent
-
+// cleans up all the pointers and engine init.
 void GameEngine::cleanup() {
     if(engineCleaned){
         return;

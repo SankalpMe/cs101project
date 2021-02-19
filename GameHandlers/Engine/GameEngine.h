@@ -96,18 +96,25 @@ public:
     void loop(){
         while (true){
 
-            beginFrame();
+            // break from loop if game is not running
             if(!isRunning){
                 break;
             }
-            handleEvent();
-            handleGameEvent();
-            handleStepUpdates();
-            wait((float)step.time);
+
+
+            // endFrame and beginFrame allow to speed up rendering as all the changes made are propogated once.
+            beginFrame(); // pause renderer
+
+            handleEvent(); // event Update
+            handleGameEvent(); // game Event Updates handled.
+            handleStepUpdates(); // step function of many objects called.
+
+            wait((float)step.time); // fps mechanisim
             currentTime += step.time;
 
 
-            endFrame();
+            endFrame(); // resume rendering
+
         }
 
     } // end of : loop()
@@ -124,55 +131,57 @@ public:
         }
 
         if(state.health.heartLeft < 0) {
-            cout << "Died" << endl;
+            cerr << "Died" << endl;
             isRunning = false;
         }
     } // end of : handleGameEvent()
     void handleStepUpdates() {
 
-        lassoPtr->nextStep(step.time);
+        lassoPtr->nextStep(step.time); //update lasso
 
-        coinManager->stepCoins(step.time,currentTime);
+        coinManager->stepCoins(step.time,currentTime); //update coins
 
-        bool caughtMagnet = magnetGiver->step(lassoPtr,&state);
+        bool caughtMagnet = magnetGiver->step(lassoPtr,&state); //magnet catcher
         if(caughtMagnet){
-            magnetGiver->disable();
-            magLastTime = currentTime;
+            magnetGiver->disable(); // disable magnet spawning
+            magLastTime = currentTime; // timing delay for next spawning
         };
 
         if(magnetGiver->disabled){
             if( (currentTime-magLastTime) > MAGNET_GAP ){
+                // find a random location
                 double x = 0 + rand() % WINDOW_X;
                 double y = 0 + rand() % PLAY_Y_HEIGHT;
-                magnetGiver->enable({x,y});
+                magnetGiver->enable({x,y}); // enable spawning
             }
         }
 
-        bombManager->stepBombs(step.time,currentTime);
+        bombManager->stepBombs(step.time,currentTime); // update bombs
         if(!lassoPtr->isPaused()){
             if(state.isMagnetized && state.magnetStepRemaining > 0){
-                magnet->attract(lassoPtr,step.time);
+                magnet->attract(lassoPtr,step.time); // perform magnetic field
             }
         }
 
-        plr.step();
+        plr.step(); // ui step
 
+        // magnetic effect countdown
         if(state.magnetStepRemaining > 0){
             state.magnetStepRemaining--;
         }else{
             state.isMagnetized = false;
         }
 
-
+        // gameLevel timer disabled when set to -10
         if(state.stepRemaining != -10){
             if(state.stepRemaining < 0){
                 isRunning = false;
-                cleanup();
+                cleanup(); // exit from level
             }
             state.stepRemaining--;
         }
 
-
+        // exit when target is achieved,  -1 is set when no target.
         if(targetCoins != -1){
             if(targetCoins <= state.score.GoldCoin){
                 cerr << "Target Complete" << endl;
@@ -182,8 +191,8 @@ public:
         }
     }  // end of : handleStepUpdates()
 
-    void handleEvent();
-    void startPumping();
+    void handleEvent(); //handle the event in game
+    void startPumping(); //start event loop and pump those events
 
 };
 
