@@ -9,21 +9,25 @@
 
 class Level1: public GameLevel {
     Text t;
+
     void sceneSettings(CoinManager *cmg,BombManager *bmg){
 
         cmg->allowCoinRespawn = true;
         cmg->addCoin({300,PLAY_Y_HEIGHT},{0,-100});
 
-        bmg->deadlyMode = true;
+        // bmg->deadlyMode = true;
 
-        bmg->addBomb({0,WINDOW_Y},{100,100});
-        bmg->addBomb({0,WINDOW_Y},{100,100});
+       // bmg->addBomb({0,WINDOW_Y},{100,100});
+       // bmg->addBomb({0,WINDOW_Y},{100,100});
+
+
     }
     void _init(){
         beginnerPrompt();
         coinTarget = 3;
         levelTime = -10;
         enableMagnets = false;
+        maxHearts = 3;
         levelInstructions();
     }
     void levelInstructions(){

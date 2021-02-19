@@ -85,6 +85,66 @@ void GameEngine::handleEvent(){
     }
 } // end of handleEvent
 // cleans up all the pointers and engine init.
+
+// calls many important step functions in the game.
+void GameEngine::handleStepUpdates()  {
+
+    lassoPtr->nextStep(step.time); //update lasso
+
+    coinManager->stepCoins(step.time,currentTime); //update coins
+
+    bool caughtMagnet = magnetGiver->step(lassoPtr,&state); //magnet catcher
+    if(caughtMagnet){
+        magnetGiver->disable(); // disable magnet spawning
+        magLastTime = currentTime; // timing delay for next spawning
+    };
+
+    if(magnetGiver->disabled){
+        if( (currentTime-magLastTime) > MAGNET_GAP ){
+            // find a random location
+            double x = 0 + rand() % WINDOW_X;
+            double y = 0 + rand() % PLAY_Y_HEIGHT;
+            magnetGiver->enable({x,y}); // enable spawning
+        }
+    }
+
+    bombManager->stepBombs(step.time,currentTime); // update bombs
+    if(!lassoPtr->isPaused()){
+        if(state.isMagnetized && state.magnetStepRemaining > 0){
+            magnet->attract(lassoPtr,step.time); // perform magnetic field
+        }
+    }
+
+    plr.step(); // ui step
+
+    // magnetic effect countdown
+    if(state.magnetStepRemaining > 0){
+        state.magnetStepRemaining--;
+    }else{
+        state.isMagnetized = false;
+    }
+
+    // gameLevel timer disabled when set to -10
+    if(state.stepRemaining != -10){
+        if(state.stepRemaining < 0){
+            isRunning = false;
+            cleanup(); // exit from level
+        }
+        state.stepRemaining--;
+    }
+
+    // exit when target is achieved,  -1 is set when no target.
+    if(targetCoins != -1){
+        if(targetCoins <= state.score.GoldCoin){
+            cerr << "Target Complete" << endl;
+            isRunning = false;
+            cleanup();
+        }
+    }
+
+    state.health.maxHearts = maxHearts;
+
+}  // end of : handleStepUpdates()
 void GameEngine::cleanup() {
     if(engineCleaned){
         return;
@@ -102,3 +162,4 @@ void GameEngine::cleanup() {
     endFrame();
     engineCleaned = true;
 } // end of cleanUp()
+

@@ -50,7 +50,7 @@ public:
         heartsLeft = maxHearts;
     }
     //Code For Rendering The Hearts
-    void render(int _heartsLeft);
+    void render(int _heartsLeft,int _maxHearts);
     //changes maxHearts.
     void setMaxHearts(int _maxHearts){
         maxHearts = _maxHearts;

@@ -5,7 +5,7 @@
 #include "PrelimLevelRender.h"
 
 void PrelimLevelRender::step(){
-    heartUI.render(state->health.heartLeft);
+    heartUI.render(state->health.heartLeft,state->health.maxHearts);
 
     coinUI.setCoins(state->score.GoldCoin);
 

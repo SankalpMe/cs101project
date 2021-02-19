@@ -4,8 +4,13 @@
 
 #include "HeartUI.h"
 
-void HeartUI::render(int _heartsLeft){
+void HeartUI::render(int _heartsLeft,int _maxHearts){
     heartsLeft = _heartsLeft;
+
+    if(_maxHearts != maxHearts){
+        setMaxHearts(_maxHearts);
+    }
+
     int i ;
     for( i = 0 ; i < heartsLeft;i++){
         hearts[i].isFilled = true;

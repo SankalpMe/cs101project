@@ -39,6 +39,8 @@ protected:
     int coinTarget;
     int levelTime;
     bool enableMagnets;
+    int maxHearts;
+
     Text ctext;
     Text qtext;
 public:
@@ -53,7 +55,7 @@ public:
         engine = new GameEngine();
         levelTime = -10;
         enableMagnets = false;
-
+        maxHearts = 3;
         engine->bindManagers(obmgs.coinManager,obmgs.bombManager);
         engine->init();
         sceneSettings(obmgs.coinManager,obmgs.bombManager);
@@ -78,6 +80,7 @@ public:
         engine->targetCoins = coinTarget;
         engine->state.stepRemaining = levelTime;
         engine->spawnMagnets = enableMagnets;
+        engine->maxHearts = maxHearts;
     }
     bool restart() {
 
