@@ -11,7 +11,7 @@ void GameLevel::init() {
     levelTime = -10;
     enableMagnets = false;
     maxHearts = 3;
-
+    userQuit = false;
     engine = new GameEngine();
 
     engine->bindManagers(obmgs.coinManager, obmgs.bombManager);
@@ -34,10 +34,7 @@ bool GameLevel::handleCompletion() {
     bool levelCheck =  checkAchievements();
 
     if (!levelCheck) {
-        levelCompleted = false;
-        showAlert("FAILED TO COMPLETE LEVEL - STARTING LEVEL AGAIN!");
-        restart();
-        return true;
+        return false;
     }else{
         levelCompleted = true;
         showAlert("LEVEL COMPLETED");

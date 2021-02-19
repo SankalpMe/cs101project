@@ -47,6 +47,7 @@ protected:
     Text qtext;
 public:
     bool levelCompleted;
+    bool userQuit;
 
     GameLevel() : obmgs() {
 

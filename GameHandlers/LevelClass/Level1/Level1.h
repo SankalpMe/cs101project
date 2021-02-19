@@ -11,17 +11,14 @@ class Level1 : public GameLevel {
     Text t;
 
     void sceneSettings(CoinManager *cmg, BombManager *bmg) {
-
         cmg->allowCoinRespawn = true;
         cmg->addCoin({300, PLAY_Y_HEIGHT}, {0, -100});
-
-
     }
 
     void _init() {
         beginnerPrompt();
         coinTarget = 3;
-        levelTime = 300;
+        levelTime = 30;
         enableMagnets = false;
         maxHearts = 3;
         levelInstructions();
