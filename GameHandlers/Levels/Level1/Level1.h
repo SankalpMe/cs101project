@@ -5,7 +5,7 @@
 #ifndef LASSOPROJECT_LEVEL1_H
 #define LASSOPROJECT_LEVEL1_H
 
-#include "GameHandlers/Levels/GameLevel.h"
+#include "GameHandlers/LevelClass/GameLevel.h"
 
 class Level1 : public GameLevel {
     Text t;
@@ -18,9 +18,7 @@ class Level1 : public GameLevel {
     void _init() {
         beginnerPrompt();
         coinTarget = 3;
-        levelTime = 30;
-        enableMagnets = false;
-        maxHearts = 3;
+
         levelInstructions();
     }
 

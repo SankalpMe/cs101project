@@ -50,7 +50,10 @@ public:
     bool userQuit;
 
     GameLevel() : obmgs() {
-
+        levelTime = -10;
+        enableMagnets = false;
+        maxHearts = 3;
+        coinTarget = -1;
     }
 
     void init();

@@ -5,7 +5,7 @@
 #ifndef LASSOPROJECT_LEVEL2_H
 #define LASSOPROJECT_LEVEL2_H
 
-#include "GameHandlers/Levels/GameLevel.h"
+#include "GameHandlers/LevelClass/GameLevel.h"
 
 class Level2 : public GameLevel {
     Text t;

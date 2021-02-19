@@ -7,22 +7,25 @@
 
 
 // LEVEL INCLUDES
-#include "GameHandlers/LevelClass/Level1/Level1.h"
-#include "GameHandlers/LevelClass/Level2/Level2.h"
+#include "GameHandlers/Levels/Level1/Level1.h"
+#include "GameHandlers/Levels/Level2/Level2.h"
+
 // END : LEVEL INCLUDES
-enum LevelStatus{
+enum LevelStatus {
     COMPLETED,
     QUITED,
     FAILED
 };
+
 class LevelManager {
 public:
     int levelCount;
 
-    LevelManager(){
+    LevelManager() {
         levelCount = 2;
     }
-    GameLevel* getLevel(int level){
+
+    GameLevel *getLevel(int level) {
         switch (level) {
             case 1:
                 return new Level1();
@@ -36,26 +39,30 @@ public:
 
     }
 
-    LevelStatus runLevel(int level){
+    LevelStatus runLevel(int level) {
         GameLevel *gl = getLevel(level);
 
         bool result = gl->run();
 
-        if(result){
+        bool userQuit = gl->userQuit;
+
+        delete gl; //delete current level instance.
+
+        if (result) {
             cerr << "Completed Level : " << level << endl;
             return COMPLETED;
-        }else {
-            if(gl->userQuit) {
+        } else {
+            if (userQuit) {
                 cerr << "User Quited Level." << endl;
                 return QUITED;
-            }else{
+            } else {
                 cerr << "Failed To Complete Level" << endl;
                 return FAILED;
             }
 
         }
 
-        delete gl;
+
     }
 };
 
