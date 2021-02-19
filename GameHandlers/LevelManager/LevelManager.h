@@ -20,7 +20,7 @@ enum LevelStatus {
 class LevelManager {
 public:
     int levelCount;
-
+    int currentLevel=1;
     LevelManager() {
         levelCount = 2;
     }
@@ -29,14 +29,13 @@ public:
         switch (level) {
             case 1:
                 return new Level1();
-                break;
             case 2:
                 return new Level2();
             default:
-                cerr << "Level Not Found." << endl;
+                cerr << "Level Not Found" << endl;
+                exit(1);
                 return nullptr;
         }
-
     }
 
     LevelStatus runLevel(int level) {
@@ -46,8 +45,8 @@ public:
 
         bool userQuit = gl->userQuit;
 
-        delete gl; //delete current level instance.
 
+        delete gl;
         if (result) {
             cerr << "Completed Level : " << level << endl;
             return COMPLETED;
@@ -63,6 +62,34 @@ public:
         }
 
 
+    }
+
+    void run(){
+        while (currentLevel <= levelCount){
+
+            LevelStatus stat = runLevel(currentLevel);
+
+            switch (stat) {
+                case QUITED:{
+                    cerr << "Publishing Your HighScore" << endl;
+                    break;
+                }
+                case COMPLETED:{
+                    cerr << "Completed Level Continuing To Next Level" << endl;
+                    break;
+                }
+                case FAILED: {
+                    bool resp = showConfirmAlert("DO YOU WANT TO RETRY LEVEL?\nrejecting will quit and submit your score.\n");
+                    if(resp){
+                        continue;
+                    }else{
+                        //publishScore
+                        exit(1);
+                    }
+                }
+            }
+            currentLevel++;
+        }
     }
 };
 

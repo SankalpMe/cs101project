@@ -16,7 +16,7 @@ void showStartMessage(string msg);
 void showAlert(string msg);
 
 void showSmartAlert(string msg);
-
+bool showConfirmAlert(string msg);
 void showControls();
 
 #endif //LASSOPROJECT_UIUTIL_H

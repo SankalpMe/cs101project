@@ -37,6 +37,7 @@ void GameEngine::handleEvent() {
         }
 
         state.charInput = c;
+        bool ans;
         // handle input key and perform respective actions
         switch (c) {
             case 'c':
@@ -77,14 +78,19 @@ void GameEngine::handleEvent() {
                 break;
             case 'q':
                 // quit the game
-                isRunning = false;
-                quitKey = true;
+                ans = showConfirmAlert("Do You Want To Quit Level?"); // confirm from user
+                resetEventQueue();
+                if (ans) {
+                    isRunning = false;
+                    quitKey = true;
+                }
+                break;
             default:
                 break;
         }
     }
 } // end of handleEvent
-// cleans up all the pointers and engine init.
+
 
 // calls many important step functions in the game.
 void GameEngine::handleStepUpdates() {
@@ -145,6 +151,8 @@ void GameEngine::handleStepUpdates() {
     state.health.maxHearts = maxHearts;
 
 }  // end of : handleStepUpdates()
+
+// cleans up all the pointers and engine init.
 void GameEngine::cleanup() {
     // cleanup / reset all allocated engine objects...
     if (engineCleaned) {

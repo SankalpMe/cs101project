@@ -108,3 +108,44 @@ void showControls() {
             "CONTROLS\n [W] : INCREASE LASSO PROJECTION SPEED \n[S] : DECREASE LASSO PROJECTION SPEED\n[A] / [D] : TILT THE PROJECTION ANGLE\n[K] : THROW THE LASSO\n[L]: LOOP THE LASSO (OR CATCH COIN WHEN IN RANGE)\n[M]: YANK / PULL BACK THE LASSO. ");
 
 }
+
+bool showConfirmAlert(string msg){
+    endFrame();
+    Rectangle box;
+    box.reset(WINDOW_X / 2, WINDOW_Y / 2, WINDOW_X, WINDOW_Y);
+    box.setFill(true);
+    box.setColor(COLOR("yellow"));
+    box.show();
+    msg += "\n\n[Y] : TO CONFIRM\n[N]: TO REJECT\n";
+    int start = 0;
+    vector<Text> rows;
+    int rowi = 0;
+    for (int i = 0; i < msg.length(); i++) {
+        if (msg[i] == '\n') {
+            Text t;
+            t.reset(WINDOW_X / 2, WINDOW_Y / 2 + rowi * textHeight(), msg.substr(start, i - start));
+            rows.push_back(t);
+            rowi++;
+            start = i + 1;
+        }
+    }
+    while (true){
+        XEvent e;
+        bool pendingEv = checkEvent(e);
+        if(pendingEv){
+            if(e.type == KeyPress){
+                char c = charFromEvent(e);
+                c = tolower(c);
+
+                if(c == 'y'){
+                    return true;
+                }
+
+                if(c == 'n'){
+                    return false;
+                }
+            }
+        }
+
+    }
+}

@@ -112,7 +112,7 @@ public:
     void beginnerPrompt();
 
 
-    ~GameLevel() {
+    virtual ~GameLevel() {
         delete engine;
     }
 };

@@ -38,7 +38,7 @@ int main() {
     initRoot();
     //runIntro();
     LevelManager lmgr;
-    lmgr.runLevel(1);
+    lmgr.run();
 
 
     return 0;
