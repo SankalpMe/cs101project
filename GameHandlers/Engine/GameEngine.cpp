@@ -5,13 +5,13 @@
 #include "GameEngine.h"
 
 //code to improve event cluttering
-void pumpEvents(GameEngine *engine){
+void pumpEvents(GameEngine *engine) {
     XInitThreads();
-    while (engine->isRunning){
+    while (engine->isRunning) {
         XEvent e;
         bool pendingEv = checkEvent(e);
 
-        if(pendingEv){
+        if (pendingEv) {
             engine->eventQueue.push(e);
         }
         sleep(0.4);
@@ -20,11 +20,11 @@ void pumpEvents(GameEngine *engine){
 void GameEngine::startPumping() {
     eventThread = new thread(pumpEvents, this); // multi threaded solution for event cluttering
 } // end of start pumping
-void GameEngine::handleEvent(){
+void GameEngine::handleEvent() {
     char c = '_';
     state.charInput = c;
     // helps save from cluttering events.
-    while (!eventQueue.empty()){
+    while (!eventQueue.empty()) {
         c = ' ';
 
 
@@ -87,46 +87,46 @@ void GameEngine::handleEvent(){
 // cleans up all the pointers and engine init.
 
 // calls many important step functions in the game.
-void GameEngine::handleStepUpdates()  {
+void GameEngine::handleStepUpdates() {
 
     lassoPtr->nextStep(step.time); //update lasso
 
-    coinManager->stepCoins(step.time,currentTime); //update coins
+    coinManager->stepCoins(step.time, currentTime); //update coins
 
-    bool caughtMagnet = magnetGiver->step(lassoPtr,&state); //magnet catcher
-    if(caughtMagnet){
+    bool caughtMagnet = magnetGiver->step(lassoPtr, &state); //magnet catcher
+    if (caughtMagnet) {
         magnetGiver->disable(); // disable magnet spawning
         magLastTime = currentTime; // timing delay for next spawning
     };
 
-    if(magnetGiver->disabled){
-        if( (currentTime-magLastTime) > MAGNET_GAP ){
+    if (magnetGiver->disabled) {
+        if ((currentTime - magLastTime) > MAGNET_GAP) {
             // find a random location
             double x = 0 + rand() % WINDOW_X;
             double y = 0 + rand() % PLAY_Y_HEIGHT;
-            magnetGiver->enable({x,y}); // enable spawning
+            magnetGiver->enable({x, y}); // enable spawning
         }
     }
 
-    bombManager->stepBombs(step.time,currentTime); // update bombs
-    if(!lassoPtr->isPaused()){
-        if(state.isMagnetized && state.magnetStepRemaining > 0){
-            magnet->attract(lassoPtr,step.time); // perform magnetic field
+    bombManager->stepBombs(step.time, currentTime); // update bombs
+    if (!lassoPtr->isPaused()) {
+        if (state.isMagnetized && state.magnetStepRemaining > 0) {
+            magnet->attract(lassoPtr, step.time); // perform magnetic field
         }
     }
 
     plr.step(); // ui step
 
     // magnetic effect countdown
-    if(state.magnetStepRemaining > 0){
+    if (state.magnetStepRemaining > 0) {
         state.magnetStepRemaining--;
-    }else{
+    } else {
         state.isMagnetized = false;
     }
 
     // gameLevel timer disabled when set to -10
-    if(state.stepRemaining != -10){
-        if(state.stepRemaining < 0){
+    if (state.stepRemaining != -10) {
+        if (state.stepRemaining < 0) {
             isRunning = false;
             cleanup(); // exit from level
         }
@@ -134,8 +134,8 @@ void GameEngine::handleStepUpdates()  {
     }
 
     // exit when target is achieved,  -1 is set when no target.
-    if(targetCoins != -1){
-        if(targetCoins <= state.score.GoldCoin){
+    if (targetCoins != -1) {
+        if (targetCoins <= state.score.GoldCoin) {
             cerr << "Target Complete" << endl;
             isRunning = false;
             cleanup();
@@ -147,7 +147,7 @@ void GameEngine::handleStepUpdates()  {
 }  // end of : handleStepUpdates()
 void GameEngine::cleanup() {
     // cleanup / reset all allocated engine objects...
-    if(engineCleaned){
+    if (engineCleaned) {
         return;
     }
     isRunning = false;

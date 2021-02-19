@@ -12,32 +12,33 @@ class KeyUI {
     Rectangle bdrop; // bg rect for key ui
     Text t; // text for rendering
     char key;
-    int prevShow ;
+    int prevShow;
 public:
     KeyUI() {
         bdrop.setFill(true);
         bdrop.setColor(COLOR("black"));
         t.setColor(COLOR("white"));
-        bdrop.reset(WINDOW_X-60,30,30,30);
-        t.reset(WINDOW_X-60,30," ");
+        bdrop.reset(WINDOW_X - 60, 30, 30, 30);
+        t.reset(WINDOW_X - 60, 30, " ");
         prevShow = 0;
     }
-    void setKey(char _key){
+
+    void setKey(char _key) {
         key = _key;
 
     }
 
-    void step(){
+    void step() {
         string disp = "";
-        disp+= key;
-        if(key != '_' && key != ' '){
+        disp += key;
+        if (key != '_' && key != ' ') {
             t.show();
             bdrop.show();
             t.setMessage(disp);
             prevShow = 10;
-        }else{
+        } else {
             prevShow--;
-            if(prevShow <= 0){
+            if (prevShow <= 0) {
                 prevShow = 0;
                 t.hide();
                 bdrop.hide();

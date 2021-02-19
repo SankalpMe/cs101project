@@ -6,6 +6,7 @@
 #define LASSOPROJECT_COINUI_H
 
 #include <simplecpp>
+
 class CoinUI {
 
     Rectangle bdrop; // coin ui bg rect
@@ -14,10 +15,11 @@ class CoinUI {
     int coins; // ui state for coin count
 public:
     CoinUI();
+
     void step();
 
     // sync ui and state coins
-    void setCoins(int _coins){
+    void setCoins(int _coins) {
         coins = _coins;
     } // end : setCoin(...)
 };

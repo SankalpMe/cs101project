@@ -5,6 +5,7 @@
 
 #include <simplecpp>
 #include "Misc/GameConstants.h"
+
 struct Vector2D {
     double x;
     double y;

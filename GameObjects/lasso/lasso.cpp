@@ -68,7 +68,6 @@ void Lasso::yank() {
         }
 
 
-
         cout << "It's a BOMB AND BOOM" << endl;
         bombs.clear();
     }

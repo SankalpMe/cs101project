@@ -7,28 +7,30 @@
 
 #include "GameObjects/bomb/bomb.h"
 #include <vector>
+
 class GameState {
 public:
     char charInput;
-    struct Score{
-       int GoldCoin;
-       int INFCoin;
+    struct Score {
+        int GoldCoin;
+        int INFCoin;
     } score;
 
-    struct Health{
+    struct Health {
         int heartLeft;
         int maxHearts;
     } health;
     bool isMagnetized;
     int magnetStepRemaining;
     int stepRemaining;
-    struct BombingInfo{
-       int bombNo;
+    struct BombingInfo {
+        int bombNo;
     } bombingInfo;
-    GameState(){
-        score = {0,0};
-        charInput='_';
-        health = {3,3};
+
+    GameState() {
+        score = {0, 0};
+        charInput = '_';
+        health = {3, 3};
         bombingInfo = {0};
         isMagnetized = false;
         magnetStepRemaining = 0;

@@ -10,9 +10,6 @@ include_directories(/usr/include/X11)
 include_directories(/home/sankalp/simplecpp/include)
 
 
-
-
-
 link_directories(/usr/X11R6/lib)
 
 link_directories(/home/sankalp/simplecpp/lib)

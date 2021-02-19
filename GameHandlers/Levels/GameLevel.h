@@ -11,26 +11,28 @@
 #include "Manager/CoinManager.h"
 
 
-
 struct ObjectManagers {
     CoinManager *coinManager;
     BombManager *bombManager;
 
-    ObjectManagers(){
+    ObjectManagers() {
         coinManager = new CoinManager();
         bombManager = new BombManager();
     }
-    void reset(){
+
+    void reset() {
         delete coinManager;
         delete bombManager;
         coinManager = new CoinManager();
         bombManager = new BombManager();
     }
-    ~ObjectManagers(){
+
+    ~ObjectManagers() {
         delete coinManager;
         delete bombManager;
     }
 };
+
 class GameLevel {
 
 protected:
@@ -45,10 +47,12 @@ protected:
     Text qtext;
 public:
     bool levelCompleted;
-    GameLevel(): obmgs(){
+
+    GameLevel() : obmgs() {
 
     }
-    void init(){
+
+    void init() {
 
         levelCompleted = false;
         coinTarget = 1;
@@ -56,32 +60,34 @@ public:
         levelTime = -10;
         enableMagnets = false;
         maxHearts = 3;
-        engine->bindManagers(obmgs.coinManager,obmgs.bombManager);
+        engine->bindManagers(obmgs.coinManager, obmgs.bombManager);
         engine->init();
-        sceneSettings(obmgs.coinManager,obmgs.bombManager);
-
-
+        sceneSettings(obmgs.coinManager, obmgs.bombManager);
 
 
         _init();
         postinit();
     }
-    void addRandomCoins(){
-        double xpos = PLAY_X_START +  rand() % (WINDOW_X - 100 - PLAY_X_START );
 
-        double  xvel = -50.0 + rand() % 100;
-        double  yvel = -70.0 - rand() % 80;
-        obmgs.coinManager->addCoin({xpos,PLAY_Y_HEIGHT},{xvel,yvel});
+    void addRandomCoins() {
+        double xpos = PLAY_X_START + rand() % (WINDOW_X - 100 - PLAY_X_START);
+
+        double xvel = -50.0 + rand() % 100;
+        double yvel = -70.0 - rand() % 80;
+        obmgs.coinManager->addCoin({xpos, PLAY_Y_HEIGHT}, {xvel, yvel});
     }
-    virtual void _init(){
+
+    virtual void _init() {
 
     }
-    void postinit(){
+
+    void postinit() {
         engine->targetCoins = coinTarget;
         engine->state.stepRemaining = levelTime;
         engine->spawnMagnets = enableMagnets;
         engine->maxHearts = maxHearts;
     }
+
     bool restart() {
 
         delete engine;
@@ -89,50 +95,53 @@ public:
 
         return run();
     }
-    virtual void sceneSettings(CoinManager *cmg,BombManager *bmg){
+
+    virtual void sceneSettings(CoinManager *cmg, BombManager *bmg) {
 
         cmg->allowCoinRespawn = true;
 
-        cmg->addCoin({10,PLAY_Y_HEIGHT},{0,-100});
-        bmg->addBomb({70,PLAY_Y_HEIGHT},{0,-140});
+        cmg->addCoin({10, PLAY_Y_HEIGHT}, {0, -100});
+        bmg->addBomb({70, PLAY_Y_HEIGHT}, {0, -140});
 
     }
-    bool run(){
+
+    bool run() {
         init();
         engine->loop();
         return handleCompletion();
     }
 
-    virtual bool handleCompletion(){
-       int gc =  engine->state.score.GoldCoin;
-       if(engine->quitKey){
+    virtual bool handleCompletion() {
+        int gc = engine->state.score.GoldCoin;
+        if (engine->quitKey) {
             showSmartAlert("LEVEL QUIT \n- SUBMITTING FINAL SCORE -");
             return false;
 
-       }
-       if(gc < coinTarget){
-           showAlert("FAILED TO COMPLETE LEVEL - STARTING LEVEL AGAIN!");
-           restart();
-           return true;
-       }
-       levelCompleted = true;
-       showAlert("LEVEL COMPLETED");
-       return true;
+        }
+        if (gc < coinTarget) {
+            showAlert("FAILED TO COMPLETE LEVEL - STARTING LEVEL AGAIN!");
+            restart();
+            return true;
+        }
+        levelCompleted = true;
+        showAlert("LEVEL COMPLETED");
+        return true;
     }
-    void cleanup(){
+
+    void cleanup() {
         delete engine;
         engine = nullptr;
     }
-    void beginnerPrompt(){
-        ctext.reset(WINDOW_X/2,30,"PRESS [C] IF YOU FORGOT THE CONTROLS");
-        qtext.reset(WINDOW_X/2,35+textHeight(),"PRESS [Q] TO QUIT - ONCE YOU QUIT YOUR PROGRESS WILL RESET.");
+
+    void beginnerPrompt() {
+        ctext.reset(WINDOW_X / 2, 30, "PRESS [C] IF YOU FORGOT THE CONTROLS");
+        qtext.reset(WINDOW_X / 2, 35 + textHeight(), "PRESS [Q] TO QUIT - ONCE YOU QUIT YOUR PROGRESS WILL RESET.");
     }
-    ~GameLevel(){
+
+    ~GameLevel() {
         delete engine;
     }
 };
-
-
 
 
 #endif //LASSOPROJECT_GAMELEVEL_H

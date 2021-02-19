@@ -12,10 +12,10 @@
 #include "UI/Coin/CoinUI.h"
 #include "UI/Key/KeyUI.h"
 #include "UI/TimeLeft/TimeUI.h"
+
 class PrelimLevelRender {
     Rectangle ybar;
     Rectangle xbar;
-
 
 
     GameState *state;
@@ -26,24 +26,25 @@ class PrelimLevelRender {
     string MagString;
     TimeUI timeUI;
 public:
-    PrelimLevelRender(): heartUI(), coinUI(), keyUI(),timeUI() {
+    PrelimLevelRender() : heartUI(), coinUI(), keyUI(), timeUI() {
 
     }
-    void init(){
+
+    void init() {
         //ybar.reset(0, PLAY_Y_HEIGHT, WINDOW_X, PLAY_Y_HEIGHT);
-        xbar.reset(WINDOW_X/2,(PLAY_Y_HEIGHT+WINDOW_Y)/2,WINDOW_X,WINDOW_Y-PLAY_Y_HEIGHT);
+        xbar.reset(WINDOW_X / 2, (PLAY_Y_HEIGHT + WINDOW_Y) / 2, WINDOW_X, WINDOW_Y - PLAY_Y_HEIGHT);
         xbar.setFill(true);
         xbar.setColor(COLOR("brown"));
 
         MagText.hide();
         MagString = "Magtime: 0";
-        MagText.reset(20+(textWidth(MagString))/2,50+10,MagString);
+        MagText.reset(20 + (textWidth(MagString)) / 2, 50 + 10, MagString);
         MagText.setColor(COLOR("red"));
 
     } // end : init()
 
     //bind game state
-    void bindState(GameState *_state){
+    void bindState(GameState *_state) {
         state = _state;
         heartUI.setMaxHearts(state->health.maxHearts);
     } //end : bindState(GameState *_state)

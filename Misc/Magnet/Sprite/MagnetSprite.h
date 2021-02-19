@@ -8,24 +8,26 @@
 #include "GameObjects/MO/MovingObject.h"
 
 
-class MagnetSprite: public MovingObject {
+class MagnetSprite : public MovingObject {
     Text t;
 public:
-    void init(){
-        t.reset(0,0,"M");
+    void init() {
+        t.reset(0, 0, "M");
         t.setColor(COLOR("red"));
         addPart(&t);
 
         unpause();
     }
 
-    MagnetSprite(Vector2D position = {100,100}): MovingObject(position,{0,0},{0,0}) {
+    MagnetSprite(Vector2D position = {100, 100}) : MovingObject(position, {0, 0}, {0, 0}) {
 
     }
-    void hide(){
+
+    void hide() {
         t.hide();
     }
-    void show(){
+
+    void show() {
         t.show();
     }
 };

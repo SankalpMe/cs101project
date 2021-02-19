@@ -12,7 +12,7 @@ void MovingObject::nextStep(double t) {
         velocity = parent->getVelocity();
         acceleration = parent->getAcceleration();
 
-        for (auto & part : parts) {
+        for (auto &part : parts) {
             Vector2D target = position + part.offset;
             part.sprite->moveTo(target.x, target.y);
         }
@@ -22,7 +22,7 @@ void MovingObject::nextStep(double t) {
     if (paused) { return; }
 
     position = position + velocity * t;
-    for (auto & part : parts) {
+    for (auto &part : parts) {
         Vector2D target = position + part.offset;
         part.sprite->moveTo(target.x, target.y);
     }
@@ -34,7 +34,7 @@ void MovingObject::reset(const Vector2D &_position, const Vector2D &_velocity, c
                          bool isPaused) {
     init(_position, _velocity, _acceleration, isPaused);
 
-    for (auto & part : parts) {
+    for (auto &part : parts) {
         Vector2D target = position + part.offset;
         part.sprite->moveTo(target.x, target.y);
     }

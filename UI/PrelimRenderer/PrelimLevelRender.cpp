@@ -4,8 +4,8 @@
 
 #include "PrelimLevelRender.h"
 
-void PrelimLevelRender::step(){
-    heartUI.render(state->health.heartLeft,state->health.maxHearts);
+void PrelimLevelRender::step() {
+    heartUI.render(state->health.heartLeft, state->health.maxHearts);
 
     coinUI.setCoins(state->score.GoldCoin);
 
@@ -13,13 +13,13 @@ void PrelimLevelRender::step(){
 
     keyUI.setKey(state->charInput);
     keyUI.step();
-    if(state->isMagnetized){
+    if (state->isMagnetized) {
 
         MagString = "MagTime: ";
-        MagString += to_string(state->magnetStepRemaining/10);
-        MagText.reset(20+(textWidth(MagString))/2,50+30,MagString);
+        MagString += to_string(state->magnetStepRemaining / 10);
+        MagText.reset(20 + (textWidth(MagString)) / 2, 50 + 30, MagString);
         MagText.show();
-    }else{
+    } else {
         MagText.hide();
     }
 

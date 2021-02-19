@@ -99,6 +99,7 @@ public:
         startPumping();
 
     }// end of : init()
+
     void loop() {
 
         while (true) {
@@ -125,6 +126,7 @@ public:
         }
         cleanup();
     } // end of : loop()
+
     //handle game events bombing etc...
     void handleGameEvent() {
 

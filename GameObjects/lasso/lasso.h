@@ -31,8 +31,6 @@ class Lasso : public MovingObject {
     bool lasso_looped;
 
 
-
-
     void init();
 
 public:
@@ -42,12 +40,13 @@ public:
     vector<Bomb *> bombs;
     bool is_boomed;
 
-    Lasso(double speed=INIT_RELEASE_SPEED, double angle_deg=INIT_RELEASE_ANGLE_DEG, Vector2D _acceleration={0,LASSO_G}, bool isPaused=true) : MovingObject({0, 0}, {0, 0}, {0, 0},
-                                                                                                isPaused) {
+    Lasso(double speed = INIT_RELEASE_SPEED, double angle_deg = INIT_RELEASE_ANGLE_DEG,
+          Vector2D _acceleration = {0, LASSO_G}, bool isPaused = true) : MovingObject({0, 0}, {0, 0}, {0, 0},
+                                                                                      isPaused) {
         release_speed = speed;
         release_angle_deg = angle_deg;
         releaseVelocity = fromPolar(speed, angle_deg * PI / 180.0);
-        startPosition = { (PLAY_X_START + LASSO_X_OFFSET) , (PLAY_Y_HEIGHT - LASSO_Y_HEIGHT) };
+        startPosition = {(PLAY_X_START + LASSO_X_OFFSET), (PLAY_Y_HEIGHT - LASSO_Y_HEIGHT)};
 
 
         is_boomed = false;
@@ -57,7 +56,7 @@ public:
     }
 
     //binds game state to lasso
-    void bindState(GameState *_state){
+    void bindState(GameState *_state) {
         state = _state;
     }
 
@@ -74,6 +73,7 @@ public:
     void nextStep(double t);
 
     void check_for_coin(Coin *coin);
+
     void check_for_bomb(Bomb *bomb);
 
     bool isLassoLoped();

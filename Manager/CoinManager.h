@@ -23,7 +23,8 @@ class CoinManager {
 public:
     vector<CoinInfo> coins; //for magnet class.
     bool allowCoinRespawn;
-    CoinManager(bool respawnPerm=true) {
+
+    CoinManager(bool respawnPerm = true) {
         allowCoinRespawn = respawnPerm;
     }
 
@@ -50,12 +51,12 @@ public:
     //Handle game event steps for all bombs.
 
     void stepCoins(float timeStep, double currentTime) {
-        if(!allowCoinRespawn){
+        if (!allowCoinRespawn) {
             vector<CoinInfo> newcoins;
-            for(auto &coin: coins){
-                if(!coin.coin->destroyed){
+            for (auto &coin: coins) {
+                if (!coin.coin->destroyed) {
                     newcoins.push_back(coin);
-                }else{
+                } else {
                     delete coin.coin;
                 }
 

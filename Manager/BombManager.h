@@ -26,7 +26,7 @@ public:
     }
 
     //adds bomb to the game
-    void addBomb(Vector2D position, Vector2D velocity = {0, -10},double startTime=0) {
+    void addBomb(Vector2D position, Vector2D velocity = {0, -10}, double startTime = 0) {
         Bomb *bomb = new Bomb(position, velocity, {0, COIN_G}); // similar physics as COIN
         bomb->init(); // initialize  bomb ( Rendering and Constants ).
         bombs.push_back({bomb, startTime});
@@ -54,10 +54,10 @@ public:
         // to remove all destroyed / exploaded bombs from the scene
         vector<BombInfo> newbombs;
         int bombsLost = 0;
-        for(auto &bomb: bombs){
-            if(!bomb.bomb->destroyed){
+        for (auto &bomb: bombs) {
+            if (!bomb.bomb->destroyed) {
                 newbombs.push_back(bomb);
-            }else{
+            } else {
                 delete bomb.bomb;
                 bombsLost++;
             }
@@ -88,10 +88,11 @@ public:
 
         // respawn bombs if deadly mode:
 
-        if(deadlyMode){
-            for(int i = 0 ; i < bombsLost;i++){
+        if (deadlyMode) {
+            for (int i = 0; i < bombsLost; i++) {
                 // spawns a new bomb at different location
-                addBomb({0.0+rand() % WINDOW_X, PLAY_Y_HEIGHT},{0.0 + rand() % 50,-50.0- (rand()%100)}, currentTime);
+                addBomb({0.0 + rand() % WINDOW_X, PLAY_Y_HEIGHT}, {0.0 + rand() % 50, -50.0 - (rand() % 100)},
+                        currentTime);
             }
         }
 

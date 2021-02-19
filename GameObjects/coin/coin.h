@@ -17,6 +17,7 @@ public:
     Vector2D startVelocity;
     Vector2D acceleration;
     bool destroyed;
+
     Coin(const Vector2D &_position, const Vector2D &_velocity = {0, 0}, const Vector2D &_acceleration = {0, 0},
          bool isPaused = true) : MovingObject(_position, _velocity, _acceleration, isPaused) {
         startPosition = _position;
@@ -36,10 +37,12 @@ public:
     virtual void buildObject();
 
     void reset();
-    virtual void hide(){
+
+    virtual void hide() {
         coin_circle.hide();
     }
-    virtual void show(){
+
+    virtual void show() {
         coin_circle.show();
     }
 }; // End class Coin
