@@ -32,7 +32,7 @@ public:
     queue<XEvent> eventQueue;
     bool engineCleaned;
     bool spawnMagnets;
-
+    bool died;
     MagnetGiver *magnetGiver;
     bool quitKey;
     int targetCoins;
@@ -69,6 +69,7 @@ public:
         targetCoins = -1;
         magLastTime = 0;
         maxHearts = 3;
+        died = false;
     }
 
     void bindManagers(CoinManager *coinManager1,BombManager *bombManager1){
@@ -124,19 +125,28 @@ public:
     } // end of : loop()
     //handle game events bombing etc...
     void handleGameEvent() {
+
+        // Performs the bombing aftereffect
         if(state.bombingInfo.bombNo > 0){
+
             state.health.heartLeft -= state.bombingInfo.bombNo;
             state.bombingInfo.bombNo = 0;
+
+            // visual explosion effect
             if(state.bombingInfo.bombNo > 1)
-                showBombBoom("The Bombs Went Boom!");
+                showBombBoom("The Bombs Went Boom!"); // mind the grammar
             else
                 showBombBoom("The Bomb Went Boom!");
 
+            resetEventQueue();
+
         }
 
+        //kill player after health < 0
         if(state.health.heartLeft < 0) {
-            cerr << "Died" << endl;
+            cerr << "Player Died." << endl;
             isRunning = false;
+            died = true;
         }
 
 
