@@ -7,7 +7,7 @@
 void GameLevel::init() {
 
     levelCompleted = false;
-    coinTarget = 1;
+    coinTarget = -1;
     levelTime = -10;
     enableMagnets = false;
     maxHearts = 3;

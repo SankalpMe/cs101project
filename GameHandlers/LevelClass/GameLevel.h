@@ -103,7 +103,7 @@ public:
         showSmartAlert("LEVEL QUIT \n- SUBMITTING FINAL SCORE -");
     }
     virtual  bool checkAchievements() {
-        return coinTarget <= engine->state.score.GoldCoin && !engine->died;
+        return ( coinTarget == -1 || coinTarget <= engine->state.score.GoldCoin ) && !engine->died;
     };
     void cleanup() {
         delete engine;

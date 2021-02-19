@@ -11,6 +11,7 @@
 #include "GameHandlers/Levels/Level2/Level2.h"
 #include "GameHandlers/Levels/Level3/Level3.h"
 #include "GameHandlers/Levels/Level4/Level4.h"
+#include "GameHandlers/Levels/Level5/Level5.h"
 
 // END : LEVEL INCLUDES
 enum LevelStatus {
@@ -24,7 +25,7 @@ public:
     int levelCount;
     int currentLevel=1;
     LevelManager() {
-        levelCount = 4;
+        levelCount = 5;
     }
 
     GameLevel *getLevel(int level) {
@@ -37,6 +38,8 @@ public:
                 return new Level3();
             case 4:
                 return new Level4();
+            case 5:
+                return new Level5();
             default:
                 cerr << "Level Not Found" << endl;
                 exit(1);
@@ -71,7 +74,7 @@ public:
     }
 
     void run(){
-        currentLevel = 4;
+        currentLevel = 5;
         while (currentLevel <= levelCount){
 
             LevelStatus stat = runLevel(currentLevel);

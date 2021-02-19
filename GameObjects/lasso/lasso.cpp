@@ -108,7 +108,7 @@ void Lasso::nextStep(double stepTime) {
 
 void Lasso::check_for_coin(Coin *coinPtr) {
     double distance = (getPosition() - coinPtr->getPosition()).magnitude();
-    if (distance <= LASSO_RADIUS) {
+    if (distance <= LASSO_RADIUS + COIN_SIZE) {
         coins.push_back(coinPtr);
         coinPtr->getAttachedTo(this);
     }
@@ -116,7 +116,7 @@ void Lasso::check_for_coin(Coin *coinPtr) {
 
 void Lasso::check_for_bomb(Bomb *bombPtr) {
     double distance = (getPosition() - bombPtr->getPosition()).magnitude();
-    if (distance <= LASSO_RADIUS) {
+    if (distance <= LASSO_RADIUS + 10) {
 
         bombPtr->getAttachedTo(this);
         bombs.push_back(bombPtr);
