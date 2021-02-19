@@ -13,12 +13,12 @@ void GameLevel::init() {
     maxHearts = 3;
     userQuit = false;
     engine = new GameEngine();
-
+    _init();
     engine->bindManagers(obmgs.coinManager, obmgs.bombManager);
     engine->init();
     sceneSettings(obmgs.coinManager, obmgs.bombManager);
 
-    _init();
+
     postinit();
 }
 

@@ -98,6 +98,7 @@ public:
         plr.init();
         startPumping();
 
+        this->state.health.heartLeft = maxHearts;
     }// end of : init()
 
     void loop() {
@@ -147,7 +148,7 @@ public:
         }
 
         //kill player after health < 0
-        if (state.health.heartLeft < 0) {
+        if (state.health.heartLeft <= 0) {
             cerr << "Player Died." << endl;
             isRunning = false;
             died = true;

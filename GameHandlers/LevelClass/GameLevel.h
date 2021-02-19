@@ -70,6 +70,7 @@ public:
         engine->state.stepRemaining = levelTime;
         engine->spawnMagnets = enableMagnets;
         engine->maxHearts = maxHearts;
+        engine->state.health.heartLeft = maxHearts;
     }
 
     bool restart() {
@@ -102,7 +103,7 @@ public:
         showSmartAlert("LEVEL QUIT \n- SUBMITTING FINAL SCORE -");
     }
     virtual  bool checkAchievements() {
-        return coinTarget <= engine->state.score.GoldCoin;
+        return coinTarget <= engine->state.score.GoldCoin && !engine->died;
     };
     void cleanup() {
         delete engine;
