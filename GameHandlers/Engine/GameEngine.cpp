@@ -41,7 +41,7 @@ void GameEngine::handleEvent(){
         switch (c) {
             case 'c':
                 showControls();
-                eventQueue = queue<XEvent>(); // clear the event queue
+                resetEventQueue(); // clear the event queue
                 break;
             case 'k':
                 lassoPtr->unpause(); //throws the lasso
@@ -146,6 +146,7 @@ void GameEngine::handleStepUpdates()  {
 
 }  // end of : handleStepUpdates()
 void GameEngine::cleanup() {
+    // cleanup / reset all allocated engine objects...
     if(engineCleaned){
         return;
     }

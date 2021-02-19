@@ -15,10 +15,6 @@ class Level1: public GameLevel {
         cmg->allowCoinRespawn = true;
         cmg->addCoin({300,PLAY_Y_HEIGHT},{0,-100});
 
-        // bmg->deadlyMode = true;
-
-       // bmg->addBomb({0,WINDOW_Y},{100,100});
-       // bmg->addBomb({0,WINDOW_Y},{100,100});
 
 
     }

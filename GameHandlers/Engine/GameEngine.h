@@ -141,7 +141,9 @@ public:
 
 
     }
-
+    void resetEventQueue(){
+        eventQueue = queue<XEvent>();
+    }
     void handleStepUpdates() ;
 
     void handleEvent(); //handle the event in game
