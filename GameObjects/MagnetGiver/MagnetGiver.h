@@ -20,38 +20,15 @@ public:
     MagnetSprite *magnetSprite;
     bool disabled;
 
-    MagnetGiver() {
-        magnetSprite = new MagnetSprite({300, 300});
-        magnetSprite->init();
-        magnetSprite->nextStep(0);
-        disabled = false;
-    }
+    MagnetGiver();
 
-    void setPosition(Vector2D pos) {
-        magnetSprite->setPosition(pos);
-    }
+    void setPosition(Vector2D pos); // setPosition of magnetGiver
 
-    bool step(Lasso *lasso, GameState *state) {
-        magnetSprite->nextStep(0);
-        if (!disabled && (lasso->getPosition() - magnetSprite->getPosition()).magnitude() <= LASSO_RADIUS) {
-            state->isMagnetized = true;
-            state->magnetStepRemaining = MAGNET_DURATION * 10;
-            return true;
-        } else {
-            return false;
-        }
-    }
+    bool step(Lasso *lasso, GameState *state); // step / update magnetGiver
 
-    void disable() {
-        disabled = true;
-        magnetSprite->hide();
-    }
+    void disable(); // disable magnet Giver
 
-    void enable(Vector2D position = {300, 300}) {
-        magnetSprite->setPosition(position);
-        disabled = false;
-        magnetSprite->show();
-    }
+    void enable(Vector2D position = {300, 300}); // enables magnet giver + does setup.
 
 }; // End class Coin
 
