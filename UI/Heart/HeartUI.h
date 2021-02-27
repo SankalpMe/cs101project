@@ -9,13 +9,13 @@
 #include "Misc/GameConstants.h"
 #include "Misc/Vector2D/Vector2D.h"
 
-
+// Each individual heart icon
 class HeartICON : public Polygon {
 public:
-    double len;
-    double sq2l;
-    bool isFilled;
-    Vector2D offset;
+    double len; // heartDraw size len specification
+    double sq2l; // calculation simplification 1.414*l
+    bool isFilled; // state of heart being filled / empty ( alive / dead )
+    Vector2D offset; // offset for rendering
 
     HeartICON(Vector2D _offset = {0, 0}, double _len = 3) {
         len = 3;
@@ -24,39 +24,16 @@ public:
         sq2l = sqrt(2) * len;
     }
 
-    void render() {
-        sq2l = sqrt(2) * len;
-        double pts_body[6][2] = {{0,         0},
-                                 {-sq2l,     -sq2l},
-                                 {-2 * sq2l, 0},
-                                 {0,         2 * sq2l},
-                                 {2 * sq2l,  0},
-                                 {sq2l,      -sq2l}};
-        setFill(isFilled);
-        if (isFilled)
-            setColor(COLOR("red"), false);
-        else
-            setColor(COLOR("black"), false);
-
-        reset(offset.x, offset.y, pts_body, 6);
-    }
+    void render(); // renders the heart icon to the screen
 };
 
 class HeartUI {
-    Rectangle backDrop;
-    vector<HeartICON> hearts;
+    Rectangle backDrop; // backdrop for the hearts
+    vector<HeartICON> hearts; // group of all heart icons
     int maxHearts;
     int heartsLeft;
 public:
-    HeartUI() {
-        maxHearts = 0;
-        backDrop.reset(20, 20, 200, 100);
-        backDrop.setFill(true);
-
-        backDrop.setColor(COLOR("yellow"));
-        hearts.resize(maxHearts);
-        heartsLeft = maxHearts;
-    }
+    HeartUI();
 
     //Code For Rendering The Hearts
     void render(int _heartsLeft, int _maxHearts);

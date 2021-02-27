@@ -7,6 +7,7 @@
 
 #include <simplecpp>
 
+// class renders the no. of coins collected
 class CoinUI {
 
     Rectangle bdrop; // coin ui bg rect

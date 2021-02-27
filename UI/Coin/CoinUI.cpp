@@ -4,6 +4,9 @@
 
 #include "CoinUI.h"
 
+//simplecpp graphics code
+
+
 CoinUI::CoinUI() {
     coins = 0;
 
