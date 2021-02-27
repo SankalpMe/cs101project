@@ -1,5 +1,20 @@
+/**
+ * MovingObject Class aka MO class
+ * Very important class rather the core of the game
+ * Improved and various functionality reimplemented from scratch.
+ * Uses Vector2D support class instead of a_x , a_y convention
+ * makes the code a lot cleaner and easier to write and implement
+ * this class was almost a complete rewrite
+ * implemented an OFFSET functionality for individual sprites
+ * implemented true parenting support rather than cloning velocity , acceleration  true realtime transform parenting happens.
+ * above is implemented through a parent mo ptr.
+ */
+
 #ifndef _MOVINGOBJECT_INCLUDED_
 #define _MOVINGOBJECT_INCLUDED_
+
+
+
 
 #include <simplecpp>
 #include <vector>
@@ -10,22 +25,25 @@
 
 using namespace simplecpp;
 
+// handles individual sprites
 struct MovingSprite {
     Sprite *sprite;
     Vector2D offset;
 };
 
+
 class MovingObject : public Sprite {
-    vector<MovingSprite> parts;
-    Vector2D velocity;
+    vector<MovingSprite> parts; // individual moving parts
+    Vector2D velocity; // velocity
     Vector2D acceleration;
     Vector2D position;
     Vector2D parentOffset;
     MovingObject *parent;
 
 
-    bool paused;
+    bool paused; // modifies the step cycle of object setting false freezes object.
 
+    // initializes MO important parameters.
     void init(Vector2D _position, Vector2D _velocity, Vector2D _acceleration, bool isPaused = true) {
         position = _position;
         velocity = _velocity;
@@ -46,6 +64,7 @@ public:
         Vector2D velocity = fromPolar(speed, angle_rad);
         init(position, velocity, acceleration, isPaused);
     }
+    // Acceleration,Velocity,Position Helper Functions Defined Below
 
     // Velocity Helper Functions
     Vector2D getVelocity() {
@@ -60,7 +79,7 @@ public:
 
     void setYVelocity(double y) { velocity.y = y; }
 
-    // Acceleration Helper Functions
+    // Acceleration Functions
     Vector2D getAcceleration() {
         return acceleration;
     }
@@ -82,24 +101,30 @@ public:
 
     void setPosition(const Vector2D &_position) { position = _position; }
 
-    void
-    reset(const Vector2D &_position, const Vector2D &_velocity, const Vector2D &_acceleration, bool isPaused = true);
+    // end of p,v,a helper functions.
 
+
+    // reset the MO
+    void reset(const Vector2D &_position, const Vector2D &_velocity, const Vector2D &_acceleration, bool isPaused = true);
+
+    // pause / unpause helper functions
     void pause() { paused = true; }
 
     void unpause() { paused = false; }
 
     bool isPaused() { return paused; }
 
+
+    // add sprite to MO with offset relative to center of MO.
     void addPart(Sprite *p, Vector2D offset = {0, 0}) {
         parts.push_back({p, offset});
     }
 
-    void nextStep(double t);
+    void nextStep(double t); // step cycle for MO
 
-    void getAttachedTo(MovingObject *m, Vector2D offset = {0, 0});
+    void getAttachedTo(MovingObject *m, Vector2D offset = {0, 0}); // parenting for MO with offset support
 
-    void getDetached() { parent = nullptr; }
+    void getDetached() { parent = nullptr; } // detaches from parent MO.
 };
 
 #endif
