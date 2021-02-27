@@ -165,7 +165,7 @@ void GameEngine::cleanup() {
     magnet = nullptr;
     lassoPtr = nullptr;
 
-    eventThread->join();
+    eventThread->join();  // wait for eventThread to end
 
     delete eventThread;
     endFrame();

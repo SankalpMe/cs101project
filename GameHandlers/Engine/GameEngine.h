@@ -48,7 +48,7 @@ public:
 
     double currentTime;
     double magLastTime = 0;
-
+    // resets all state objects / parameters of the game
     GameEngine() : state() {
         quitKey = false;
         height = WINDOW_Y;
@@ -72,6 +72,7 @@ public:
         died = false;
     }
 
+    // tie the bomb and coin managers to the game
     void bindManagers(CoinManager *coinManager1, BombManager *bombManager1) {
         coinManager = coinManager1;
         bombManager = bombManager1;
@@ -82,6 +83,7 @@ public:
         cleanup();
     }
 
+    // cleans up the engine state and makes it ready for termination
     void cleanup();
 
     //init all engine objects
@@ -94,9 +96,9 @@ public:
         magnetGiver = new MagnetGiver();
 
         magnetGiver->disable();
-        plr.bindState(&state);
-        plr.init();
-        startPumping();
+        plr.bindState(&state); // bind the game state to ui
+        plr.init(); // UI INIT
+        startPumping(); // start the eventLoop
 
         this->state.health.heartLeft = maxHearts;
     }// end of : init()
@@ -161,7 +163,7 @@ public:
         eventQueue = queue<XEvent>();
     }
 
-    void handleStepUpdates();
+    void handleStepUpdates(); // important step events are handled in this function
 
     void handleEvent(); //handle the event in game
     void startPumping(); //start event loop and pump those events
@@ -169,6 +171,6 @@ public:
 };
 
 
-void pumpEvents(GameEngine *engine);
+void pumpEvents(GameEngine *engine); // pumps the system events ( keypress , mouse click ) to the game controller.
 
 #endif //LASSOPROJECT_GAMEENGINE_H

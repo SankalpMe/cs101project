@@ -48,6 +48,7 @@ bool GameLevel::handleCompletion() {
         return true;
     }
 
+
 }
 
 //add random coins to game

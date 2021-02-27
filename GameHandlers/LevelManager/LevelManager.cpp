@@ -23,10 +23,16 @@ GameLevel   *LevelManager::getLevel(int level) {
 }
 
 
-LevelStatus LevelManager::runLevel(int level) {
+LevelStatus LevelManager::runLevel(int level,double *score) {
     GameLevel *gl = getLevel(level); //fetch the level
 
     bool result = gl->run();
+
+    double pointScored = gl->grade();
+
+    if(score != nullptr){
+        *score = pointScored;
+    }
 
     bool userQuit = gl->userQuit;
 
@@ -53,17 +59,19 @@ LevelStatus LevelManager::runLevel(int level) {
 
 
 void LevelManager::run() {
-    currentLevel = 1;
+    currentLevel = 5;
     while (currentLevel <= levelCount){
+        double levelScore;
+        LevelStatus stat = runLevel(currentLevel,&levelScore); //fetch the level score.
 
-        LevelStatus stat = runLevel(currentLevel);
+        cerr << "Scored: " << levelScore << endl;
 
         switch (stat) {
             case QUITED:{
                 cerr << "Publishing Your HighScore" << endl;
                 break;
             }
-            case COMPLETED:{
+            case COMPLETED: {
                 cerr << "Completed Level Continuing To Next Level" << endl;
                 break;
             }

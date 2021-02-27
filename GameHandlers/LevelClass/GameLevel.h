@@ -42,7 +42,7 @@ protected:
     int levelTime; // time limit for a level, -10 : no time limit
     bool enableMagnets;// to enable magnet Spawn
     int maxHearts; // no. of hearts per level.
-
+    double levelScore; //score assigned to a level
     // For displaying some ingame instructions
     Text ctext;
     Text qtext;
@@ -55,6 +55,7 @@ public:
         enableMagnets = false;
         maxHearts = 3;
         coinTarget = -1;
+        levelScore = 100;
     }
 
     void init(); // init sequence sets some paramaeters.
@@ -114,6 +115,10 @@ public:
     // check the player achievement
     virtual  bool checkAchievements() {
         return ( coinTarget == -1 || coinTarget <= engine->state.score.GoldCoin ) && !engine->died;
+    };
+
+    virtual double grade(){
+        return 100.0*(engine->state.health.heartLeft)/engine->state.health.maxHearts + checkAchievements()*levelScore + (levelTime != -10)*( ((double )engine->state.stepRemaining )/levelTime)*50.0 ;
     };
 
     //clear up the code
