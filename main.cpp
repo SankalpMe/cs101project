@@ -4,7 +4,9 @@
 
 #include "GameHandlers/LevelManager/LevelManager.h"
 
-#include <time.h>
+#include "time.h"
+
+#include "GameHandlers/HighScore/HighScoreData.h"
 
 using namespace simplecpp;
 
@@ -38,9 +40,19 @@ void runIntro() {
 #include "GameHandlers/HighScore/ScoreSubmit.h"
 
 int main() {
+    HighScoreData hd;
+    hd.entries.push_back({"sankalp",4});
+    hd.entries.push_back({"pasankalcap",4});
+    hd.entries.push_back({"sacsnkalxsp",400});
 
+    hd.saveEntries();
 
+    HighScoreData gt;
 
+    gt.loadEntries();
+    for(auto i : gt.entries){
+        cout << i.name << ":" << i.score << endl;
+    }
     initRoot();
     runIntro();
 
