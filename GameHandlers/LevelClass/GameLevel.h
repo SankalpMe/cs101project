@@ -10,10 +10,10 @@
 #include "Manager/BombManager.h"
 #include "Manager/CoinManager.h"
 
-
+// manages all the spawners in  the gamelevel
 struct ObjectManagers {
-    CoinManager *coinManager;
-    BombManager *bombManager;
+    CoinManager *coinManager; //manages coin spawning
+    BombManager *bombManager; //manages bomb spawning
 
     ObjectManagers() {
         coinManager = new CoinManager();
@@ -36,18 +36,19 @@ struct ObjectManagers {
 class GameLevel {
 
 protected:
-    GameEngine *engine;
+    GameEngine *engine; // the main core of the game
     ObjectManagers obmgs;
-    int coinTarget;
-    int levelTime;
-    bool enableMagnets;
-    int maxHearts;
+    int coinTarget; // no of coins to collect in a given level , -1 : no coin target.
+    int levelTime; // time limit for a level, -10 : no time limit
+    bool enableMagnets;// to enable magnet Spawn
+    int maxHearts; // no. of hearts per level.
 
+    // For displaying some ingame instructions
     Text ctext;
     Text qtext;
 public:
-    bool levelCompleted;
-    bool userQuit;
+    bool levelCompleted; // status for level completion
+    bool userQuit; // checks if user quit the level.
 
     GameLevel() : obmgs() {
         levelTime = -10;
@@ -56,15 +57,17 @@ public:
         coinTarget = -1;
     }
 
-    void init();
+    void init(); // init sequence sets some paramaeters.
 
-    void addRandomCoins(int coins=1);
-    void addRandomBombs(int bombs=1);
+    void addRandomCoins(int coins=1); // helper to add random coins
+    void addRandomBombs(int bombs=1); // helper to add random bombs
 
+    // function to be implemented by inherited levels.
     virtual void _init() {
 
     }
 
+    // post initialization routine
     void postinit() {
         engine->targetCoins = coinTarget;
         engine->state.stepRemaining = levelTime;
@@ -73,6 +76,7 @@ public:
         engine->state.health.heartLeft = maxHearts;
     }
 
+    // restart the level
     bool restart() {
 
         delete engine;
@@ -81,6 +85,8 @@ public:
         return run();
     }
 
+
+    // also to be called by inherited class
     virtual void sceneSettings(CoinManager *cmg, BombManager *bmg) {
 
         cmg->allowCoinRespawn = true;
@@ -90,27 +96,33 @@ public:
 
     }
 
+    // start the given level
     bool run() {
         init();
         engine->loop();
         return handleCompletion();
     }
 
+    // to be implement by game level to handle completion
     virtual bool handleCompletion();
 
     // handle state after level quit call
     virtual void levelQuit(){
         showSmartAlert("LEVEL QUIT \n- SUBMITTING FINAL SCORE -");
     }
+
+    // check the player achievement
     virtual  bool checkAchievements() {
         return ( coinTarget == -1 || coinTarget <= engine->state.score.GoldCoin ) && !engine->died;
     };
+
+    //clear up the code
     void cleanup() {
         delete engine;
         engine = nullptr;
     }
 
-    void beginnerPrompt();
+    void beginnerPrompt(); // some control prompt for beginner
 
 
     virtual ~GameLevel() {

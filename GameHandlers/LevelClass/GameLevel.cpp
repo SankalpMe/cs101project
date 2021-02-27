@@ -6,6 +6,7 @@
 
 void GameLevel::init() {
 
+    // configuring basic settings.
     levelCompleted = false;
     coinTarget = -1;
     levelTime = -10;
@@ -14,17 +15,22 @@ void GameLevel::init() {
     userQuit = false;
     engine = new GameEngine();
     _init();
+
+    //binding the managers to the engine
     engine->bindManagers(obmgs.coinManager, obmgs.bombManager);
-    engine->init();
-    sceneSettings(obmgs.coinManager, obmgs.bombManager);
+
+    engine->init(); // engine init sequence
+    sceneSettings(obmgs.coinManager, obmgs.bombManager); // setting up the scene
 
 
-    postinit();
+    postinit(); // continuing to post init
 }
 
 // handle completion event of level.
 bool GameLevel::handleCompletion() {
     int gc = engine->state.score.GoldCoin;
+
+    // level quit
     if (engine->quitKey) {
         userQuit = true;
         levelQuit();
@@ -32,7 +38,7 @@ bool GameLevel::handleCompletion() {
     }
 
 
-    bool levelCheck =  checkAchievements();
+    bool levelCheck =  checkAchievements(); // check level completion
 
     if (!levelCheck) {
         return false;
