@@ -41,12 +41,6 @@ void runIntro() {
 
 int main() {
     initRoot();
-    scoreBoard.showScoreBoard();
-    publishScore(40);
-    publishScore(600);
-    publishScore(20);
-    scoreBoard.showScoreBoard();
-
 
     LevelManager lmgr;
     lmgr.run();
