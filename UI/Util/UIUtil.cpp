@@ -68,21 +68,7 @@ void showStartMessage(string msg) {
 }
 
 void showAlert(string msg) {
-    endFrame();
-    Rectangle box;
-    box.reset(WINDOW_X / 2, WINDOW_Y / 2, WINDOW_X, WINDOW_Y);
-    box.setFill(true);
-    box.setColor(COLOR("yellow"));
-
-    Text t;
-    t.reset(WINDOW_X / 2, WINDOW_Y / 2, msg);
-
-    Text clco(WINDOW_X / 2, WINDOW_Y / 2 + 30, "CLICK TO CONTINUE");
-    t.setColor(COLOR("black"));
-    box.show();
-    t.show();
-
-    getClick();
+    showSmartAlert(msg); // similar functionality
 }
 
 void showSmartAlert(string msg) {

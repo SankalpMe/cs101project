@@ -42,10 +42,9 @@ int main() {
 
 
     initRoot();
-    //runIntro();
+    runIntro();
 
-    ScoreSubmit sb;
-    sb.read();
+
 
     LevelManager lmgr;
     lmgr.run();
