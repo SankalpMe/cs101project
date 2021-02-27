@@ -11,13 +11,7 @@
 class MagnetSprite : public MovingObject {
     Text t;
 public:
-    void init() {
-        t.reset(0, 0, "M");
-        t.setColor(COLOR("red"));
-        addPart(&t);
-
-        unpause();
-    }
+    void init();
 
     MagnetSprite(Vector2D position = {100, 100}) : MovingObject(position, {0, 0}, {0, 0}) {
 
