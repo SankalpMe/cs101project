@@ -7,36 +7,25 @@
 
 class Coin : public MovingObject {
 
-
-    // Moving parts
-
-
-public:
+protected:
     Circle coin_circle;
     Vector2D startPosition;
     Vector2D startVelocity;
     Vector2D acceleration;
+public:
     bool destroyed;
 
     Coin(const Vector2D &_position, const Vector2D &_velocity = {0, 0}, const Vector2D &_acceleration = {0, 0},
-         bool isPaused = true) : MovingObject(_position, _velocity, _acceleration, isPaused) {
-        startPosition = _position;
-        startVelocity = _velocity;
-        acceleration = _acceleration;
-        if (isPaused) {
-            pause();
-        } else {
-            unpause();
-        }
-        destroyed = false;
-        Coin::init();
-    }
+         bool isPaused = true);
 
-    virtual void init();
+    virtual void init(); // init coin and MO ( MovingObject )
 
-    virtual void buildObject();
+    virtual void buildObject(); // creates coin sprite
 
-    void reset();
+    void reset(); // reset coin
+
+
+    // functions below toggle visibility of coins
 
     virtual void hide() {
         coin_circle.hide();

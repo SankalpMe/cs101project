@@ -3,6 +3,8 @@
 //
 
 #include "LevelManager.h"
+
+// getLevel(int) : fetches the level ptr for the required level
 GameLevel   *LevelManager::getLevel(int level) {
     switch (level) {
         case 1:
@@ -18,11 +20,11 @@ GameLevel   *LevelManager::getLevel(int level) {
         default:
             cerr << "Level Not Found" << endl;
             exit(1);
-            return nullptr;
     }
 }
 
 
+// function to run and evaluate the given level
 LevelStatus LevelManager::runLevel(int level,double *score) {
     GameLevel *gl = getLevel(level); //fetch the level
 
@@ -57,7 +59,7 @@ LevelStatus LevelManager::runLevel(int level,double *score) {
 
 }
 
-
+// run () : begin the main level run manager which sequentially runs each level
 void LevelManager::run() {
     currentLevel = 5;
     while (currentLevel <= levelCount){
@@ -80,11 +82,11 @@ void LevelManager::run() {
                 if(resp){
                     continue;
                 }else{
-                    //publishScore
+                    //---publishScore---
                     exit(1);
                 }
             }
         }
-        currentLevel++;
+        currentLevel++; // proceed to next level
     }
 }

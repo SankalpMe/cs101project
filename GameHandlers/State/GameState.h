@@ -10,32 +10,24 @@
 
 class GameState {
 public:
-    char charInput;
+    char charInput; // recent char input
+
     struct Score {
-        int GoldCoin;
-        int INFCoin;
+        int GoldCoin; // count of gold coins
     } score;
 
     struct Health {
-        int heartLeft;
-        int maxHearts;
+        int heartLeft; // lives left
+        int maxHearts; // total no. of lives
     } health;
-    bool isMagnetized;
-    int magnetStepRemaining;
-    int stepRemaining;
+    bool isMagnetized; // is lasso a  magnet
+    int magnetStepRemaining; // time remaining for magnetic effect
+    int stepRemaining; // time left for the given level
     struct BombingInfo {
-        int bombNo;
+        int bombNo; // no of bombs the player got boomed with
     } bombingInfo;
 
-    GameState() {
-        score = {0, 0};
-        charInput = '_';
-        health = {3, 3};
-        bombingInfo = {0};
-        isMagnetized = false;
-        magnetStepRemaining = 0;
-        stepRemaining = 0;
-    }
+    GameState();
 };
 
 

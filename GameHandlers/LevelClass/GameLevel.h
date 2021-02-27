@@ -87,7 +87,7 @@ public:
     }
 
 
-    // also to be called by inherited class
+    // modify scene settings : spawning of coins and bombs
     virtual void sceneSettings(CoinManager *cmg, BombManager *bmg) {
 
         cmg->allowCoinRespawn = true;
@@ -97,11 +97,11 @@ public:
 
     }
 
-    // start the given level
+    // run () : to run / start the given level
     bool run() {
         init();
-        engine->loop();
-        return handleCompletion();
+        engine->loop(); // start the engine loop
+        return handleCompletion(); // handle completion of game ( termination and score calculation)
     }
 
     // to be implement by game level to handle completion
@@ -117,17 +117,20 @@ public:
         return ( coinTarget == -1 || coinTarget <= engine->state.score.GoldCoin ) && !engine->died;
     };
 
+
+    // grade() : calculates the score earned by the player
     virtual double grade(){
         return 100.0*(engine->state.health.heartLeft)/engine->state.health.maxHearts + checkAchievements()*levelScore + (levelTime != -10)*( ((double )engine->state.stepRemaining )/levelTime)*50.0 ;
     };
 
     //clear up the code
     void cleanup() {
-        delete engine;
+        if(engine)
+            delete engine;
         engine = nullptr;
     }
 
-    void beginnerPrompt(); // some control prompt for beginner
+    void beginnerPrompt(); // shows control instruction for beginners.
 
 
     virtual ~GameLevel() {

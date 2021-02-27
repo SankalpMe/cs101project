@@ -43,6 +43,7 @@
 #define LASSO_RADIUS 50
 //50
 #define COIN_SIZE 5
+#define BOMB_SIZE 10
 
 #define MAGNET_GAP 100
 #define MAGNET_DURATION 50
