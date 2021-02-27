@@ -29,9 +29,9 @@ public:
 class ScoreSubmit{
     ScoreUI *ui;
 public:
-    string read(){
+    string read(double  score=0){
         ui = new ScoreUI;
-        string name = ui->read();
+        string name = ui->read(score);
         delete ui;
 
         return name;

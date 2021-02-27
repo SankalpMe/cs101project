@@ -6,7 +6,7 @@
 
 #include "time.h"
 
-#include "GameHandlers/HighScore/HighScoreData.h"
+#include "GameHandlers/HighScore/ScoreBoard.h"
 
 using namespace simplecpp;
 
@@ -41,7 +41,12 @@ void runIntro() {
 
 int main() {
     initRoot();
-    //runIntro();
+    scoreBoard.showScoreBoard();
+    publishScore(40);
+    publishScore(600);
+    publishScore(20);
+    scoreBoard.showScoreBoard();
+
 
     LevelManager lmgr;
     lmgr.run();

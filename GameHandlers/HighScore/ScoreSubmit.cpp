@@ -56,7 +56,7 @@ string ScoreUI::read(double _score){
                         name+=toupper(c);
                 }else{
                     if(c == 13){
-                        cerr << "Recieved Name:" << name;
+
                         return name;
                     }else
                     if(c == 8){

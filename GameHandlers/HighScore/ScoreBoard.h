@@ -4,7 +4,9 @@
 
 #ifndef LASSOPROJECT_SCOREBOARD_H
 #define LASSOPROJECT_SCOREBOARD_H
+
 #include "GameHandlers/HighScore/HighScoreData.h"
+#include "GameHandlers/HighScore/ScoreSubmit.h"
 
 class ScoreBoardUI{
     void init(){
@@ -12,9 +14,10 @@ class ScoreBoardUI{
     }
 };
 class ScoreBoard {
-    HighScoreData hsd;
     ScoreBoardUI *ui;
+    HighScoreData hsd;
 public:
+
     ScoreBoard(){
         ui = nullptr;
     }
@@ -24,9 +27,14 @@ public:
 
     void showScoreBoard(){
         ui = new ScoreBoardUI();
-        wait(40);
+        hsd.loadEntries();
+        for(auto i : hsd.getList()){
+            cerr << i.name << ", " << i.score << endl;
+        }
+
         delete ui;
     }
+    void runPublisher(double score);
 };
 static  ScoreBoard scoreBoard;
 void publishScore(double score);
