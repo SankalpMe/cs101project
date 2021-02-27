@@ -38,45 +38,33 @@ public:
 
     vector<Coin *> coins;
     vector<Bomb *> bombs;
-    bool is_boomed;
+
 
     Lasso(double speed = INIT_RELEASE_SPEED, double angle_deg = INIT_RELEASE_ANGLE_DEG,
-          Vector2D _acceleration = {0, LASSO_G}, bool isPaused = true) : MovingObject({0, 0}, {0, 0}, {0, 0},
-                                                                                      isPaused) {
-        release_speed = speed;
-        release_angle_deg = angle_deg;
-        releaseVelocity = fromPolar(speed, angle_deg * PI / 180.0);
-        startPosition = {(PLAY_X_START + LASSO_X_OFFSET), (PLAY_Y_HEIGHT - LASSO_Y_HEIGHT)};
-
-
-        is_boomed = false;
-        lasso_looped = false;
-        acceleration = _acceleration;
-        Lasso::init();
-    }
+          Vector2D _acceleration = {0, LASSO_G}, bool isPaused = true);
 
     //binds game state to lasso
     void bindState(GameState *_state) {
         state = _state;
     }
 
-    void draw_lasso_band();
+    void draw_lasso_band(); // render the lasso_band
 
-    void yank();
+    void yank(); // handles the pullback of lasso
 
-    void loopit();
+    void loopit(); // handles lasso looping
 
-    void addAngle(double angle_deg);
+    void addAngle(double angle_deg); // handles the projection angles
 
-    void addSpeed(double speed);
+    void addSpeed(double speed); // handles the project speed
 
-    void nextStep(double t);
+    void nextStep(double t); // perform next step update
 
-    void check_for_coin(Coin *coin);
+    void check_for_coin(Coin *coin); // checks out a given coin ptr and catches it if in range
 
-    void check_for_bomb(Bomb *bomb);
+    void check_for_bomb(Bomb *bomb);// checks out a given bomb ptr and catches it if in range
 
-    bool isLassoLoped();
+    bool isLassoLoped(); // return if lasso is looped
 
 
 }; // End class Lasso
