@@ -14,6 +14,7 @@ void initRoot() {
     initCanvas("Loop 'n Loops", WINDOW_X, WINDOW_Y); //this line cant be avoided.
 }
 
+// run the introduction to the game.
 void runIntro() {
 
     showSmartAlert("LOOP N' LOOPS\nA SimpleCPP Game Developed\nby\nSANKALP BHAMARE");
@@ -34,9 +35,18 @@ void runIntro() {
 
 }
 
+#include "GameHandlers/HighScore/ScoreSubmit.h"
+
 int main() {
+
+
+
     initRoot();
     //runIntro();
+
+    ScoreSubmit sb;
+    sb.read();
+
     LevelManager lmgr;
     lmgr.run();
 

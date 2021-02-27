@@ -17,14 +17,20 @@ void showBombBoom(string msg) {
 
     int i = 0;
 
+
+    // boom animation effect
     repeat(26) {
         i++;
+
+        //flickering violent colours
         if (i % 2) {
             box.setColor(COLOR("yellow"));
         } else {
             box.setColor(COLOR("red"));
 
         }
+
+        // boom transition effect
         box.scale(1.2);
         box.rotate(0.1);
         wait(STEP_TIME * 0.1);
@@ -80,7 +86,8 @@ void showAlert(string msg) {
 }
 
 void showSmartAlert(string msg) {
-    endFrame();
+
+    endFrame(); // to enable canvas repaint
     Rectangle box;
     box.reset(WINDOW_X / 2, WINDOW_Y / 2, WINDOW_X, WINDOW_Y);
     box.setFill(true);
@@ -90,6 +97,8 @@ void showSmartAlert(string msg) {
     int start = 0;
     vector<Text> rows;
     int rowi = 0;
+
+    // display multiline message on screen
     for (int i = 0; i < msg.length(); i++) {
         if (msg[i] == '\n') {
             Text t;
@@ -100,7 +109,17 @@ void showSmartAlert(string msg) {
         }
     }
 
-    getClick();
+
+    // mouse / key hold - wait for user response.
+    while (true){
+        XEvent e;
+        bool pendingEv = checkEvent(e);
+        if(pendingEv){
+            if(e.type == KeyPress || e.type == ButtonPress) {
+                return;
+            }
+        }
+    }
 }
 
 void showControls() {
@@ -110,16 +129,18 @@ void showControls() {
 }
 
 bool showConfirmAlert(string msg){
-    endFrame();
+    endFrame(); // to enable canvas repaint
     Rectangle box;
     box.reset(WINDOW_X / 2, WINDOW_Y / 2, WINDOW_X, WINDOW_Y);
     box.setFill(true);
     box.setColor(COLOR("yellow"));
     box.show();
-    msg += "\n\n[Y] : TO CONFIRM\n[N]: TO REJECT\n";
+    msg += "\n\n[Y] : TO CONFIRM\n[N]: TO REJECT\n"; // user action row
     int start = 0;
     vector<Text> rows;
     int rowi = 0;
+
+    // display multiline message on screen
     for (int i = 0; i < msg.length(); i++) {
         if (msg[i] == '\n') {
             Text t;

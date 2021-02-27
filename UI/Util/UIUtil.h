@@ -9,14 +9,14 @@
 #include <simplecpp>
 #include "Misc/GameConstants.h"
 
-void showBombBoom(string msg);
+void showBombBoom(string msg); // to show boom effect
 
-void showStartMessage(string msg);
+void showStartMessage(string msg); // shows start message
 
-void showAlert(string msg);
+void showAlert(string msg); // alert user about something
 
-void showSmartAlert(string msg);
-bool showConfirmAlert(string msg);
-void showControls();
+void showSmartAlert(string msg); // multirow alert
+bool showConfirmAlert(string msg); // confirmation dialog box
+void showControls(); // show in game controls.
 
 #endif //LASSOPROJECT_UIUTIL_H

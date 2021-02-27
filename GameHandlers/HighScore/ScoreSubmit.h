@@ -7,27 +7,34 @@
 #include <simplecpp>
 #include "Misc/GameConstants.h"
 
-class ScoreSubmit {
+// simple ui to take user name input for score submission
+class ScoreUI {
     Rectangle bg;
-    Text title[3];
+    Text title[4];
+    Rectangle fg;
     Text input;
     Text placeholder;
-    Rectangle fg;
-    void init(){
-        bg.reset(WINDOW_X/2,WINDOW_Y/2,WINDOW_X,WINDOW_Y);
-        bg.setFill(true);
-        bg.setColor(COLOR("yellow"));
+    double  score;
+    string name;
+    bool capOn;
+    void init(); // inits all the ui elements
+public:
 
-        title[0].reset(WINDOW_X/2,WINDOW_Y/2- textHeight()*3-10,"- SUBMIT YOUR SCORE -");
-        title[1].reset(WINDOW_X/2,WINDOW_Y/2- textHeight()*2-10,"- 80 -");
 
-        input.reset(WINDOW_X/2,WINDOW_Y/2,"");
-        placeholder.reset(WINDOW_X/2,WINDOW_Y/2,"Enter Your Name");
-        placeholder.setColor('gray');
-        fg.reset(WINDOW_X/2,WINDOW_Y/2,textHeight(),100);
-        fg.setFill(true);
-        fg.setColor(COLOR("white"));
+    string read(double score=0); // runs the input ui
+};
 
+
+// the class to process ui creation and input .
+class ScoreSubmit{
+    ScoreUI *ui;
+public:
+    string read(){
+        ui = new ScoreUI;
+        string name = ui->read();
+        delete ui;
+
+        return name;
     }
 };
 
