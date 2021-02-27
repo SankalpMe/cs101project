@@ -1,4 +1,4 @@
-#Loop n' Loops
+# Loop n' Loops
 A CS101 project developed by Sankalp Bhamare, utilizing the simplecpp library.
 
 The project features many OOPS concepts and C++ functionality, it also uses basic threading. ( essential for most game developemnet ).
