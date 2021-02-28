@@ -19,4 +19,5 @@ void showSmartAlert(string msg); // multirow alert
 bool showConfirmAlert(string msg); // confirmation dialog box
 void showControls(); // show in game controls.
 
+bool waitForKeyAndMouse(); // returns true if any key / mouse event caught
 #endif //LASSOPROJECT_UIUTIL_H

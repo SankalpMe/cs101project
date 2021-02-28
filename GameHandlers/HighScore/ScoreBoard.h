@@ -11,6 +11,7 @@
 #include <iomanip>
 #include "UI/Util/UIUtil.h"
 
+// the scoreboard ui rendering is handled by this class
 class ScoreBoardUI{
     vector<Text> scoreText;
     vector<ScoreEntry> entries;
@@ -18,6 +19,7 @@ class ScoreBoardUI{
     Text title;
     Text clck;
 public:
+    // binds the entries to the class
     void init(const vector<ScoreEntry> &_entries){
         entries = _entries;
     }
@@ -26,9 +28,10 @@ public:
 
     void render(); // render with bobbling animation
 };
+
 class ScoreBoard {
-    ScoreBoardUI *ui;
-    HighScoreData hsd;
+    ScoreBoardUI *ui; // ui handling is done in this class
+    HighScoreData hsd; // the scoreboard entries are stored in this file
 public:
 
     ScoreBoard(){
@@ -38,17 +41,10 @@ public:
         hsd.loadEntries(); // load entries from files
     }
 
-    void showScoreBoard(){
-        hsd.loadEntries();
-        ui = new ScoreBoardUI();
-        ui->init(hsd.getList());
-        ui->render();
-
-        delete ui;
-    }
-    void runPublisher(double score);
+    void showScoreBoard(); // displays the scoreboard to the screen
+    void runPublisher(double score); // publishes the given score to the score board
 };
-static  ScoreBoard scoreBoard;
-void publishScore(double score);
+static  ScoreBoard scoreBoard; // static scoreBoard object available throughout the project for score handling
+void publishScore(double score); // simple function to publish the score , just a wrapper around scoreBoard::publishScore
 
 #endif //LASSOPROJECT_SCOREBOARD_H

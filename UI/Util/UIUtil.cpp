@@ -4,6 +4,17 @@
 
 #include "UIUtil.h"
 
+
+bool waitForKeyAndMouse(){
+    XEvent e;
+    bool event = checkEvent(e);
+    if(event){
+        if(e.type == KeyPress || e.type == ButtonPress){
+            return true;
+        }
+    }
+    return false;
+}
 //simple functions to show alerts
 void showBombBoom(string msg) {
     endFrame();
@@ -81,7 +92,7 @@ void showSmartAlert(string msg) {
     box.show();
     msg += "\n\nClick To Continue\n";
     int start = 0;
-    vector<Text> rows;
+    vector<Text> rows; // rows of text to render
     int rowi = 0;
 
     // display multiline message on screen
@@ -97,14 +108,8 @@ void showSmartAlert(string msg) {
 
 
     // mouse / key hold - wait for user response.
-    while (true){
-        XEvent e;
-        bool pendingEv = checkEvent(e);
-        if(pendingEv){
-            if(e.type == KeyPress || e.type == ButtonPress) {
-                return;
-            }
-        }
+    while (!waitForKeyAndMouse()){
+
     }
 }
 
@@ -136,6 +141,8 @@ bool showConfirmAlert(string msg){
             start = i + 1;
         }
     }
+
+    //handle y/n input
     while (true){
         XEvent e;
         bool pendingEv = checkEvent(e);
