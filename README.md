@@ -2,7 +2,7 @@
 
 A CS101 project developed by Sankalp Bhamare, utilizing the simplecpp library.
 
-The project features many OOPS concepts and C++ functionality, it also uses basic **multi threading**. ( essential for smooth performance ).
+The project features many OOPS concepts and C++ functionality.
 
 To get started read the instruction on how to compile.
 ## Whats the game about ?
@@ -221,6 +221,6 @@ This project has cmake support , but you would need to open cmake file and make 
 
 Binary built on ubuntu 18.02 is available here.
 
-[binary_LoopNLoopsUbuntu18.02](https://github.com/SankalpMe/cs101project/raw/master/binary_LoopNLoopsUbuntu18.02)
+[binary_LoopNLoopsUbuntu18.02](https://drive.google.com/file/d/1EJ9IaHZU3FiY5GhND1Q9oegMKPybJYJE/view?usp=sharing)
 
 > Compatible with 18.02 and Up.
