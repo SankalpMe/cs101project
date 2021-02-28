@@ -16,6 +16,7 @@
 #include "GameHandlers/Levels/Level7/Level7.h"
 #include "GameHandlers/Levels/Level8/Level8.h"
 #include "GameHandlers/Levels/Level9/Level9.h"
+#include "GameHandlers/Levels/Level10/Level10.h"
 // END : LEVEL INCLUDES
 
 
@@ -31,8 +32,8 @@ public:
     int currentLevel; // the current level.
     double totalScore; // totalScore
     LevelManager() {
-        levelCount = 9;
-        currentLevel = 1;
+        levelCount = 10;
+        currentLevel = 0;
         totalScore = 0;
 
     }
