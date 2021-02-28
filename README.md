@@ -58,13 +58,13 @@ Note inorder to make the game little tough you can only **loop** the **lasso onc
 > **Suggestion**: Before glancing through the code first try playing the game, things might become more easy to comprehend after playing the game.
 
 ## How to begin
+Macos and windows users would require to compile and build there own executables.
 
+For Ubuntu users a prebuilt binary is attached they can download and run it
 
-> For Ubuntu users a prebuilt binary is attached they can download and run it
->
-> *Note* : You may need to give execution permission      
-> use`chmod +x execName` and then `./execName`
-
+> **Note** : You may need to give execution permission      
+ use`chmod +x execName` and then `./execName` , where execName is the path to the executable.
+## Structure
 First let us get an insight on the structure of the project:
 ```
 ├── GameHandlers
@@ -213,6 +213,11 @@ This project has cmake support , but you would need to open cmake file and make 
    dependent.
 2. X11 libraries must be properly linked check the path specified in the cmake file and your system files to make sure
    it matches.
+   
+3. Macos should have similar compilation process to ubuntu. 
+   
+Incase of issue contact:
+bhamare.sankalp@gmail.com -Sankalp Bhamre.
 
 > Project has been tested on Ubuntu 20.02 and 18.02.
 > Macos and Windows OS users are adviced to use Method 1 for compilation of code as it is more easy.
