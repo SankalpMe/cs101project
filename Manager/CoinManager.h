@@ -25,6 +25,7 @@ public:
     bool allowCoinRespawn;
     bool insaneMode;
     double speedFactor;
+
     CoinManager(bool respawnPerm = true) {
         allowCoinRespawn = respawnPerm;
         insaneMode = false;
@@ -32,10 +33,10 @@ public:
     }
 
     //Add Coin To Game
-    void addCoin(Vector2D position, Vector2D velocity = {0, -10}) ;
+    void addCoin(Vector2D position, Vector2D velocity = {0, -10});
 
 
-    void addRandomCoin(int ncoins=1); //adds random coin to game
+    void addRandomCoin(int ncoins = 1); //adds random coin to game
     void pauseAllCoin() {
         for (auto &coin: coins) {
             coin.coin->pause();

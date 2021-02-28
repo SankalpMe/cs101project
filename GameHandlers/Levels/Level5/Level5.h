@@ -36,6 +36,4 @@ class Level5 : public GameLevel {
 };
 
 
-
-
 #endif //LASSOPROJECT_LEVEL5_H

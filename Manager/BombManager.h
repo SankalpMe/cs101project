@@ -26,7 +26,7 @@ public:
     }
 
     //adds a bomb to the game
-    void addBomb(Vector2D position, Vector2D velocity = {0, -10}, double startTime = 0) ;
+    void addBomb(Vector2D position, Vector2D velocity = {0, -10}, double startTime = 0);
 
     // pauses all bombs in game
     void pauseAllBombs() {

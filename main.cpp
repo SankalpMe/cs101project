@@ -43,22 +43,20 @@ int main() {
     initRoot();
 
 
-
     runIntro();
 
 
     scoreBoard.init();
-    while (true){
-        if(showStartScreen()){
+    while (true) {
+        if (showStartScreen()) {
             break;
-        }else{
+        } else {
             scoreBoard.showScoreBoard();
         }
     }
 
     LevelManager lmgr;
     lmgr.run();
-
 
 
     return 0;

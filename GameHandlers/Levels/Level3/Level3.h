@@ -35,5 +35,4 @@ class Level3 : public GameLevel {
 };
 
 
-
 #endif //LASSOPROJECT_LEVEL3_H

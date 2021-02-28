@@ -3,7 +3,7 @@
 
 
 Coin::Coin(const Vector2D &_position, const Vector2D &_velocity, const Vector2D &_acceleration,
-     bool isPaused) : MovingObject(_position, _velocity, _acceleration, isPaused) {
+           bool isPaused) : MovingObject(_position, _velocity, _acceleration, isPaused) {
 
     // setup all dynamics of coin (x,v,d)
     startPosition = _position;

@@ -25,14 +25,15 @@ public:
     void show() {
         t.show();
     }
-    void step(){
+
+    void step() {
         i++;
         nextStep(0);
 
-        if(i % 2){
+        if (i % 2) {
             t.setMessage(" M");
             t.setColor(COLOR("red"));
-        }else{
+        } else {
             t.setColor(COLOR("black"));
             t.setMessage("M ");
         }

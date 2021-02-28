@@ -2,8 +2,8 @@
 
 
 Lasso::Lasso(double speed, double angle_deg,
-      Vector2D _acceleration, bool isPaused) : MovingObject({0, 0}, {0, 0}, {0, 0},
-                                                                                  isPaused) {
+             Vector2D _acceleration, bool isPaused) : MovingObject({0, 0}, {0, 0}, {0, 0},
+                                                                   isPaused) {
     release_speed = speed;
     release_angle_deg = angle_deg;
     releaseVelocity = fromPolar(speed, angle_deg * PI / 180.0);

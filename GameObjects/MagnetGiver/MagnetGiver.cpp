@@ -20,7 +20,7 @@ bool MagnetGiver::step(Lasso *lasso, GameState *state) {
     //handle step update of magnet giver
     magnetSprite->step();
 
-    if(disabled){
+    if (disabled) {
         magnetSprite->hide();
     }
 

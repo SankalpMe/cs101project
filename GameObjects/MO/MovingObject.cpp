@@ -4,9 +4,6 @@
 #include "MovingObject.h"
 
 
-
-
-
 void MovingObject::nextStep(double t) {
 
     // check if parented

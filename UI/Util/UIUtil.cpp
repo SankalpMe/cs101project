@@ -5,16 +5,17 @@
 #include "UIUtil.h"
 
 
-bool waitForKeyAndMouse(){
+bool waitForKeyAndMouse() {
     XEvent e;
     bool event = checkEvent(e);
-    if(event){
-        if(e.type == KeyPress || e.type == ButtonPress){
+    if (event) {
+        if (e.type == KeyPress || e.type == ButtonPress) {
             return true;
         }
     }
     return false;
 }
+
 //simple functions to show alerts
 void showBombBoom(string msg) {
     endFrame();
@@ -104,14 +105,14 @@ void showSmartAlert(string msg) {
             rowi++;
             start = i + 1;
 
-            if(i == msg.length()-1)
+            if (i == msg.length() - 1)
                 wait(1);
         }
     }
 
 
     // mouse / key hold - wait for user response.
-    while (!waitForKeyAndMouse()){
+    while (!waitForKeyAndMouse()) {
 
     }
 }
@@ -122,7 +123,7 @@ void showControls() {
 
 }
 
-bool showConfirmAlert(string msg){
+bool showConfirmAlert(string msg) {
     endFrame(); // to enable canvas repaint
     Rectangle box;
     box.reset(WINDOW_X / 2, WINDOW_Y / 2, WINDOW_X, WINDOW_Y);
@@ -150,19 +151,19 @@ bool showConfirmAlert(string msg){
     wait(1);
 
     //handle y/n input
-    while (true){
+    while (true) {
         XEvent e;
         bool pendingEv = checkEvent(e);
-        if(pendingEv){
-            if(e.type == KeyPress){
+        if (pendingEv) {
+            if (e.type == KeyPress) {
                 char c = charFromEvent(e);
                 c = tolower(c);
 
-                if(c == 'y'){
+                if (c == 'y') {
                     return true;
                 }
 
-                if(c == 'n'){
+                if (c == 'n') {
                     return false;
                 }
             }
@@ -171,7 +172,7 @@ bool showConfirmAlert(string msg){
     }
 }
 
-bool showStartScreen(){
+bool showStartScreen() {
     endFrame(); // to enable canvas repaint
     Rectangle box;
     box.reset(WINDOW_X / 2, WINDOW_Y / 2, WINDOW_X, WINDOW_Y);
@@ -199,19 +200,19 @@ bool showStartScreen(){
     wait(1);
 
     //handle y/n input
-    while (true){
+    while (true) {
         XEvent e;
         bool pendingEv = checkEvent(e);
-        if(pendingEv){
-            if(e.type == KeyPress){
+        if (pendingEv) {
+            if (e.type == KeyPress) {
                 char c = charFromEvent(e);
                 c = tolower(c);
 
-                if(c == 'p'){
+                if (c == 'p') {
                     return true;
                 }
 
-                if(c == 'h'){
+                if (c == 'h') {
 
                     return false;
                 }

@@ -109,8 +109,8 @@ void GameEngine::handleStepUpdates() {
     if (magnetGiver->disabled && spawnMagnets) {
         if ((currentTime - magLastTime) > MAGNET_GAP || magLastTime == 0) {
             // find a random location
-            double x = 30 + rand() % (WINDOW_X-60);
-            double y = 40 + rand() % (PLAY_Y_HEIGHT-40);
+            double x = 30 + rand() % (WINDOW_X - 60);
+            double y = 40 + rand() % (PLAY_Y_HEIGHT - 40);
             magnetGiver->enable({x, y}); // enable spawning
         }
     }

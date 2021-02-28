@@ -17,7 +17,6 @@ class Level7 : public GameLevel {
         cmg->insaneMode = true;
 
 
-
         addRandomCoins(4);
 
 

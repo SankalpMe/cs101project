@@ -4,6 +4,7 @@
 
 #ifndef LASSOPROJECT_LEVEL4_H
 #define LASSOPROJECT_LEVEL4_H
+
 #include "GameHandlers/LevelClass/GameLevel.h"
 
 class Level4 : public GameLevel {
@@ -30,6 +31,7 @@ class Level4 : public GameLevel {
         showSmartAlert(
                 "I HOPE YOU REMEMBER THE CONTROLS NOW\nIF YOU FORGET YOU KNOW WHAT TO DO\nNOTE: [C] KEY IN GAME DOES THE JOB");
     }
+
     bool checkAchievements() {
         return engine->died;
     };

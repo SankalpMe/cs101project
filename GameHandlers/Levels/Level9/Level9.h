@@ -12,7 +12,7 @@ class Level9 : public GameLevel {
 
     void sceneSettings(CoinManager *cmg, BombManager *bmg) {
         cmg->allowCoinRespawn = false;
-        cmg->insaneMode  = false;
+        cmg->insaneMode = false;
         addRandomCoins(12);
     }
 
@@ -34,4 +34,5 @@ class Level9 : public GameLevel {
     }
 
 };
+
 #endif //LASSOPROJECT_LEVEL9_H

@@ -38,11 +38,11 @@ public:
     }
 
     //getLevel(int) : fetches the required level ptr.
-    GameLevel *getLevel(int level) ;
+    GameLevel *getLevel(int level);
 
 
     // runLevel(int) : handles init and running of a given level.
-    LevelStatus runLevel(int level,double *score= nullptr);
+    LevelStatus runLevel(int level, double *score = nullptr);
 
     void run(); // running the entire gamelevel system starting from level 1- > n
 };

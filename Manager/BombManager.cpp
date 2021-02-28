@@ -11,7 +11,7 @@ BombManager::~BombManager() {
     }
 }
 
-void BombManager::addBomb(Vector2D position, Vector2D velocity , double startTime) {
+void BombManager::addBomb(Vector2D position, Vector2D velocity, double startTime) {
     Bomb *bomb = new Bomb(position, velocity, {0, COIN_G}); // similar physics as COIN
     bomb->init(); // initialize  bomb ( Rendering and Constants ).
     bombs.push_back({bomb, startTime});

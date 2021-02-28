@@ -41,11 +41,11 @@ bool GameLevel::handleCompletion() {
     }
 
 
-    bool levelCheck =  checkAchievements(); // check level completion
+    bool levelCheck = checkAchievements(); // check level completion
 
     if (!levelCheck) {
         return false;
-    }else{
+    } else {
         levelCompleted = true;
         showAlert("LEVEL COMPLETED");
         return true;
@@ -60,8 +60,8 @@ void GameLevel::addRandomCoins(int coins) {
 }
 
 //add  bomb in random config
-void GameLevel::addRandomBombs(int bombs){
-    repeat(bombs){
+void GameLevel::addRandomBombs(int bombs) {
+    repeat(bombs) {
         obmgs.bombManager->addBomb({0, WINDOW_Y}, {0, 100});
     }
 }

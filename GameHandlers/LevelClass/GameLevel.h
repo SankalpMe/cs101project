@@ -64,8 +64,8 @@ public:
 
     void init(); // init sequence sets some paramaeters.
 
-    void addRandomCoins(int coins=1); // helper to add random coins
-    void addRandomBombs(int bombs=1); // helper to add random bombs
+    void addRandomCoins(int coins = 1); // helper to add random coins
+    void addRandomBombs(int bombs = 1); // helper to add random bombs
 
     // function to be implemented by inherited levels.
     virtual void _init() {
@@ -110,28 +110,30 @@ public:
     virtual bool handleCompletion();
 
     // handle state after level quit call
-    virtual void levelQuit(){
+    virtual void levelQuit() {
         showSmartAlert("LEVEL QUIT \n- SUBMITTING FINAL SCORE -");
     }
 
     // check the player achievement
-    virtual  bool checkAchievements() {
-        return ( coinTarget == -1 || coinTarget <= engine->state.score.GoldCoin ) && !engine->died;
+    virtual bool checkAchievements() {
+        return (coinTarget == -1 || coinTarget <= engine->state.score.GoldCoin) && !engine->died;
     };
 
 
     // grade() : calculates the score earned by the player
-    virtual double grade(){
+    virtual double grade() {
 
-        double gscore = 100.0*(engine->state.health.heartLeft)/engine->state.health.maxHearts + checkAchievements()*levelScore + (levelTime != -10)*( ((double )engine->state.stepRemaining )/levelTime)*50.0 ;
+        double gscore = 100.0 * (engine->state.health.heartLeft) / engine->state.health.maxHearts +
+                        checkAchievements() * levelScore +
+                        (levelTime != -10) * (((double) engine->state.stepRemaining) / levelTime) * 50.0;
         cout << gscore << endl;
-        gscore = ( (int) (gscore*100) ) / 100.0; // round score to 2 decimals
+        gscore = ((int) (gscore * 100)) / 100.0; // round score to 2 decimals
         return gscore;
     };
 
     //clear up the code
     void cleanup() {
-        if(engine)
+        if (engine)
             delete engine;
         engine = nullptr;
     }

@@ -13,7 +13,8 @@ class TimeUI {
     Text ttext;
 public:
     TimeUI();
-    void step(int trem) ; // update the time ui
+
+    void step(int trem); // update the time ui
 };
 
 

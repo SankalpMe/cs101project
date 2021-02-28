@@ -4,8 +4,9 @@
 
 #include "LevelManager.h"
 #include "GameHandlers/HighScore/ScoreBoard.h"
+
 // getLevel(int) : fetches the level ptr for the required level
-GameLevel   *LevelManager::getLevel(int level) {
+GameLevel *LevelManager::getLevel(int level) {
     switch (level) {
         case 1:
             return new Level1();
@@ -33,14 +34,14 @@ GameLevel   *LevelManager::getLevel(int level) {
 
 
 // function to run and evaluate the given level
-LevelStatus LevelManager::runLevel(int level,double *score) {
+LevelStatus LevelManager::runLevel(int level, double *score) {
     GameLevel *gl = getLevel(level); //fetch the level
 
     bool result = gl->run();
 
     double pointScored = gl->grade();
 
-    if(score != nullptr){
+    if (score != nullptr) {
         *score = pointScored;
     }
 
@@ -70,15 +71,15 @@ LevelStatus LevelManager::runLevel(int level,double *score) {
 // run () : begin the main level run manager which sequentially runs each level
 void LevelManager::run() {
 
-    while (currentLevel <= levelCount){
+    while (currentLevel <= levelCount) {
         double levelScore;
-        LevelStatus stat = runLevel(currentLevel,&levelScore); //fetch the level score.
+        LevelStatus stat = runLevel(currentLevel, &levelScore); //fetch the level score.
 
         cerr << "Scored: " << levelScore << endl;
         totalScore += levelScore;
 
         switch (stat) {
-            case QUITED:{
+            case QUITED: {
                 cerr << "...Publishing Your HighScore..." << endl;
                 publishScore(totalScore);
                 exit(0);
@@ -89,10 +90,11 @@ void LevelManager::run() {
                 break;
             }
             case FAILED: {
-                bool resp = showConfirmAlert("DO YOU WANT TO RETRY LEVEL?\nrejecting will quit and submit your score.\n");
-                if(resp){
+                bool resp = showConfirmAlert(
+                        "DO YOU WANT TO RETRY LEVEL?\nrejecting will quit and submit your score.\n");
+                if (resp) {
                     continue;
-                }else{
+                } else {
                     publishScore(totalScore);
                     exit(0);
                 }

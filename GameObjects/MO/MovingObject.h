@@ -14,8 +14,6 @@
 #define _MOVINGOBJECT_INCLUDED_
 
 
-
-
 #include <simplecpp>
 #include <vector>
 #include <composite.h>
@@ -105,7 +103,8 @@ public:
 
 
     // reset the MO
-    void reset(const Vector2D &_position, const Vector2D &_velocity, const Vector2D &_acceleration, bool isPaused = true);
+    void
+    reset(const Vector2D &_position, const Vector2D &_velocity, const Vector2D &_acceleration, bool isPaused = true);
 
     // pause / unpause helper functions
     void pause() { paused = true; }

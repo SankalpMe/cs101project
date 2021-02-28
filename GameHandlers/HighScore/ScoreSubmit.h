@@ -4,6 +4,7 @@
 
 #ifndef LASSOPROJECT_SCORESUBMIT_H
 #define LASSOPROJECT_SCORESUBMIT_H
+
 #include <simplecpp>
 #include "Misc/GameConstants.h"
 
@@ -14,22 +15,23 @@ class ScoreUI {
     Rectangle fg;
     Text input;
     Text placeholder;
-    double  score;
+    double score;
     string name;
     bool capOn;
+
     void init(); // inits all the ui elements
 public:
 
 
-    string read(double score=0); // runs the input ui
+    string read(double score = 0); // runs the input ui
 };
 
 
 // the class to process ui creation and input .
-class ScoreSubmit{
+class ScoreSubmit {
     ScoreUI *ui;
 public:
-    string read(double  score=0){
+    string read(double score = 0) {
         ui = new ScoreUI;
         string name = ui->read(score);
         delete ui;

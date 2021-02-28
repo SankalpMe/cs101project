@@ -39,4 +39,5 @@ class Level8 : public GameLevel {
     }
 
 };
+
 #endif //LASSOPROJECT_LEVEL8_H

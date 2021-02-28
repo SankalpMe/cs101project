@@ -12,6 +12,7 @@
 #include "UI/Coin/CoinUI.h"
 #include "UI/Key/KeyUI.h"
 #include "UI/TimeLeft/TimeUI.h"
+
 // the complete UI Of the game this is class is responsible for all ui elements we see in this game.
 class PrelimLevelRender {
     Rectangle ybar;
@@ -30,7 +31,7 @@ public:
 
     }
 
-    void init() ; // initializes all ui subcomponents
+    void init(); // initializes all ui subcomponents
 
     //bind game state
     void bindState(GameState *_state) {

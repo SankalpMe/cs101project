@@ -48,6 +48,7 @@ public:
 
     double currentTime;
     double magLastTime = 0;
+
     // resets all state objects / parameters of the game
     GameEngine() : state() {
         quitKey = false;
