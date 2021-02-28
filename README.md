@@ -4,6 +4,10 @@ A CS101 project developed by Sankalp Bhamare, utilizing the simplecpp library.
 The project features many OOPS concepts and C++ functionality, it also uses basic threading. ( essential for most game developemnet ).
 
 To get started read the instruction on how to compile.
+
+## How to begin
+First let us get an insight on the structure of the project:
+
 ## Compile
 
 To compile the source code use the command specified below.
@@ -35,6 +39,6 @@ This project has cmake support , but you would need to open cmake file and make 
 
 Binary built on ubuntu 18.02 is available here.
 
- [binary_LoopNLoopsUbuntu18.02](www.google.com)
- 
+[binary_LoopNLoopsUbuntu18.02](www.google.com)
+
 > Compatible with 18.02 and Up.

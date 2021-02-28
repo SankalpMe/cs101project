@@ -34,8 +34,7 @@ void CoinManager::stepCoins(float timeStep, double currentTime) {
         }
 
         coins = newcoins;
-    } else
-    if (insaneMode) {
+    } else if(insaneMode) {
         // delete all lost coins
         vector<CoinInfo> newcoins;
         for (auto &coin: coins) {
@@ -47,7 +46,6 @@ void CoinManager::stepCoins(float timeStep, double currentTime) {
             }
 
         }
-
         coins = newcoins;
     }
 
@@ -61,6 +59,7 @@ void CoinManager::stepCoins(float timeStep, double currentTime) {
             coin.coin->reset();
             coin.coin->pause();
             coin.endTime = currentTime;
+            if(!allowCoinRespawn) coin.coin->destroyed = true;
         }
 
         // delay coin spawn time by a small gap
@@ -73,7 +72,7 @@ void CoinManager::stepCoins(float timeStep, double currentTime) {
     }
 
     // spawn all killed coins:
-
+    if(insaneMode)
     for(int i = 0 ; i < killedCoins;i++){
         addRandomCoin();
     }

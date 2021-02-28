@@ -10,7 +10,7 @@
 #include "Misc/GameConstants.h"
 
 void showBombBoom(string msg); // to show boom effect
-
+bool showStartScreen();
 void showStartMessage(string msg); // shows start message
 
 void showAlert(string msg); // alert user about something

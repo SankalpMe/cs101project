@@ -35,7 +35,7 @@ class Level7 : public GameLevel {
 
     void levelInstructions() {
         showSmartAlert(
-                "LEVEL 7\nHey Hey\nNew Feature Coming\nIn The Game Wait For Sometime\nYou Would See A Magnet Spawn\nTry Collecting The Magnet\n\nNOTE: TO COLLECT THE MAGNET LASSO SHOULD JUST PASS NEAR THE\nNO NEED TO LOOP THE LASSO");
+                "LEVEL 7\nHey Hey\nNew Feature Coming\nIn The Game Wait For Sometime\nYou Would See A Magnet Spawn\nTry Collecting The Magnet\nafter that collect 5 coins\n\nNOTE: TO COLLECT THE MAGNET LASSO SHOULD JUST PASS NEAR THE\nNO NEED TO LOOP THE LASSO");
         showSmartAlert(
                 "Hey Do Try To Collect The Magnet\nLater On It's Gonna Be\nUsefull");
     }

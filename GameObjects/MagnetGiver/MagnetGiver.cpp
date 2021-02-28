@@ -16,8 +16,14 @@ void MagnetGiver::setPosition(Vector2D pos) {
 }
 
 bool MagnetGiver::step(Lasso *lasso, GameState *state) {
+
     //handle step update of magnet giver
     magnetSprite->step();
+
+    if(disabled){
+        magnetSprite->hide();
+    }
+
     // handle if magnet gets caught
     if (!disabled && (lasso->getPosition() - magnetSprite->getPosition()).magnitude() <= LASSO_RADIUS) {
         //magnet automatically gets stuck to the lasso no need to loop

@@ -42,8 +42,19 @@ void runIntro() {
 int main() {
     initRoot();
 
-    scoreBoard.init();
 
+
+    runIntro();
+
+
+    scoreBoard.init();
+    while (true){
+        if(showStartScreen()){
+            break;
+        }else{
+            scoreBoard.showScoreBoard();
+        }
+    }
 
     LevelManager lmgr;
     lmgr.run();

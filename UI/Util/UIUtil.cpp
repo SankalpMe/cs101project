@@ -170,3 +170,53 @@ bool showConfirmAlert(string msg){
 
     }
 }
+
+bool showStartScreen(){
+    endFrame(); // to enable canvas repaint
+    Rectangle box;
+    box.reset(WINDOW_X / 2, WINDOW_Y / 2, WINDOW_X, WINDOW_Y);
+    box.setFill(true);
+    box.setColor(COLOR("yellow"));
+    box.show();
+    string msg = "Loop n' Loops\n\n--MAIN MENU--\n\nPRESS";
+
+    msg += "\n\n[P] : TO START THE GAME\n[H]: TO SHOW SCOREBOARD\n"; // user action row
+    int start = 0;
+    vector<Text> rows;
+    int rowi = 0;
+
+    // display multiline message on screen
+    for (int i = 0; i < msg.length(); i++) {
+        if (msg[i] == '\n') {
+            Text t;
+            t.reset(WINDOW_X / 2, WINDOW_Y / 2 + rowi * textHeight(), msg.substr(start, i - start));
+            rows.push_back(t);
+            rowi++;
+            start = i + 1;
+        }
+    }
+
+    wait(1);
+
+    //handle y/n input
+    while (true){
+        XEvent e;
+        bool pendingEv = checkEvent(e);
+        if(pendingEv){
+            if(e.type == KeyPress){
+                char c = charFromEvent(e);
+                c = tolower(c);
+
+                if(c == 'p'){
+                    return true;
+                }
+
+                if(c == 'h'){
+
+                    return false;
+                }
+            }
+        }
+
+    }
+}

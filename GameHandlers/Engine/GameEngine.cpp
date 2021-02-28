@@ -106,7 +106,7 @@ void GameEngine::handleStepUpdates() {
     };
 
     //enable magnet if time gap is completed
-    if (magnetGiver->disabled) {
+    if (magnetGiver->disabled && spawnMagnets) {
         if ((currentTime - magLastTime) > MAGNET_GAP || magLastTime == 0) {
             // find a random location
             double x = 30 + rand() % (WINDOW_X-60);

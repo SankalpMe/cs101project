@@ -21,6 +21,10 @@ GameLevel   *LevelManager::getLevel(int level) {
             return new Level6();
         case 7:
             return new Level7();
+        case 8:
+            return new Level8();
+        case 9:
+            return new Level9();
         default:
             cerr << "Level Not Found" << endl;
             exit(1);
