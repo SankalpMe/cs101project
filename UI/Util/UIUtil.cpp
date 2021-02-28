@@ -147,7 +147,7 @@ bool showConfirmAlert(string msg){
         }
     }
 
-    wait(2);
+    wait(1);
 
     //handle y/n input
     while (true){

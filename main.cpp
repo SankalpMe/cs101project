@@ -43,7 +43,6 @@ int main() {
     initRoot();
 
     scoreBoard.init();
-    scoreBoard.showScoreBoard();
 
 
     LevelManager lmgr;
