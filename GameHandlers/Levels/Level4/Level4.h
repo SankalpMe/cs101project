@@ -20,7 +20,7 @@ class Level4 : public GameLevel {
         beginnerPrompt();
 
         maxHearts = 1;
-
+        levelScore = 100;
         levelInstructions();
     }
 

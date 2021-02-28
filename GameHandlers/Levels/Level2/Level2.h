@@ -24,13 +24,14 @@ class Level2 : public GameLevel {
         beginnerPrompt();
         coinTarget = 5;
         levelTime = -10;
+        levelScore = 200;
         enableMagnets = false;
         levelInstructions();
     }
 
     void levelInstructions() {
         showSmartAlert(
-                "LEVEL 2\nStill A Very Simple Level\nCoins Do Move In Parabola  but are still slow\nNow Collect The Coin 5 Times To Pass\nNo Time Limit");
+                "LEVEL 2\nStill A Very Simple Level\nCoins Now Move In Parabola  but are still slow\nNow Collect The Coin 5 Times To Pass\nNo Time Limit");
         showSmartAlert(
                 "PS. RECAP:\n THROW THE LASSO [K] IN THE APPROPIATE DIRECTION.\nONCE NEAR A COIN PRESS [L]\nNOW PULL THE LASSO BACK [M].\n\nTO MAKE THE GAME DIFFICULT\nYOU CAN [L] LOOP THE LASSO ONLY ONCE IN EACH THROW\nHENCE YOU MUST TIME THE LOOPING.");
     }

@@ -20,7 +20,7 @@ class Level5 : public GameLevel {
 
     void _init() {
         beginnerPrompt();
-
+        levelScore = 500;
         maxHearts = 3;
         coinTarget = 12;
         levelInstructions();
@@ -28,7 +28,7 @@ class Level5 : public GameLevel {
 
     void levelInstructions() {
         showSmartAlert(
-                "LEVEL 4\nBeware Of The Bombs\nNow You Have To Collect Coins But Also Be Aware Of The Bombs.\nObjective: Collect 12 Coins\nBe careful you have only 3 hearts\n\nNOTE: BOMB CAUSE HEALTH DAMAGE YOU WILL SEE A HEALTH BAR ABOVE");
+                "LEVEL 5\nBeware Of The Bombs\nNow You Have To Collect Coins But Also Be Aware Of The Bombs.\nObjective: Collect 12 Coins\nBe careful you have only 3 hearts\n\nNOTE: BOMB CAUSE HEALTH DAMAGE YOU WILL SEE A HEALTH BAR ABOVE");
         showSmartAlert(
                 "Please Mind The Bombs\nNo Timer In This Level.");
     }

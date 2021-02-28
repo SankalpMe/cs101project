@@ -44,6 +44,8 @@ protected:
     bool enableMagnets;// to enable magnet Spawn
     int maxHearts; // no. of hearts per level.
     double levelScore; //score assigned to a level
+
+    double coinSpeedFactor; // affects the coin speed
     // For displaying some ingame instructions
     Text ctext;
     Text qtext;
@@ -52,6 +54,7 @@ public:
     bool userQuit; // checks if user quit the level.
 
     GameLevel() : obmgs() {
+        coinSpeedFactor = 1;
         levelTime = -10;
         enableMagnets = false;
         maxHearts = 3;
@@ -77,6 +80,7 @@ public:
         engine->spawnMagnets = enableMagnets;
         engine->maxHearts = maxHearts;
         engine->state.health.heartLeft = maxHearts;
+        obmgs.coinManager->speedFactor = coinSpeedFactor;
     }
 
     // restart the level
@@ -96,6 +100,7 @@ public:
 
     // run () : to run / start the given level
     bool run() {
+        beginFrame();
         init();
         engine->loop(); // start the engine loop
         return handleCompletion(); // handle completion of game ( termination and score calculation)

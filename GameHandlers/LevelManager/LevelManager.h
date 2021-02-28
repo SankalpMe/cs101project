@@ -12,6 +12,7 @@
 #include "GameHandlers/Levels/Level3/Level3.h"
 #include "GameHandlers/Levels/Level4/Level4.h"
 #include "GameHandlers/Levels/Level5/Level5.h"
+#include "GameHandlers/Levels/Level6/Level6.h"
 // END : LEVEL INCLUDES
 
 
@@ -24,10 +25,13 @@ enum LevelStatus {
 class LevelManager {
 public:
     int levelCount; // holds count of total levels
-    int currentLevel=1; // the current level.
-    double totalScore = 0; // totalScore
+    int currentLevel; // the current level.
+    double totalScore; // totalScore
     LevelManager() {
-        levelCount = 5;
+        levelCount = 6;
+        currentLevel = 6;
+        totalScore = 0;
+
     }
 
     //getLevel(int) : fetches the required level ptr.

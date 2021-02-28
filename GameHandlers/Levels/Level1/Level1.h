@@ -16,6 +16,7 @@ class Level1 : public GameLevel {
     }
 
     void _init() {
+        levelScore = 100;
         beginnerPrompt();
         coinTarget = 3;
 

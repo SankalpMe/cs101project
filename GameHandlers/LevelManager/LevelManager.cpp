@@ -17,6 +17,8 @@ GameLevel   *LevelManager::getLevel(int level) {
             return new Level4();
         case 5:
             return new Level5();
+        case 6:
+            return new Level6();
         default:
             cerr << "Level Not Found" << endl;
             exit(1);
@@ -61,7 +63,7 @@ LevelStatus LevelManager::runLevel(int level,double *score) {
 
 // run () : begin the main level run manager which sequentially runs each level
 void LevelManager::run() {
-    currentLevel = 4;
+
     while (currentLevel <= levelCount){
         double levelScore;
         LevelStatus stat = runLevel(currentLevel,&levelScore); //fetch the level score.

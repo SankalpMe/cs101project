@@ -20,6 +20,7 @@ class Level3 : public GameLevel {
         beginnerPrompt();
         coinTarget = 6;
         levelTime = 300;
+        levelScore = 300;
         enableMagnets = false;
         levelInstructions();
     }

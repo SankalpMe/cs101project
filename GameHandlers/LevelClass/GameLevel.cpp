@@ -16,7 +16,8 @@ void GameLevel::init() {
     engine = new GameEngine();
 
     _init(); // call _init overrided function
-
+    beginFrame();
+    obmgs.coinManager->speedFactor = coinSpeedFactor;
     //binding the managers to the engine
     engine->bindManagers(obmgs.coinManager, obmgs.bombManager);
 
@@ -25,6 +26,7 @@ void GameLevel::init() {
 
 
     postinit(); // continuing to post init
+    beginFrame();
 }
 
 // handle completion event of level.
@@ -54,14 +56,7 @@ bool GameLevel::handleCompletion() {
 
 //add random coins to game
 void GameLevel::addRandomCoins(int coins) {
-    repeat(coins){
-        double xpos = PLAY_X_START + rand() % (WINDOW_X - 100 - PLAY_X_START);
-
-        double xvel = -50.0 + rand() % 100;
-        double yvel = -70.0 - rand() % 80;
-        obmgs.coinManager->addCoin({xpos, PLAY_Y_HEIGHT}, {xvel, yvel});
-    }
-
+    obmgs.coinManager->addRandomCoin(coins);
 }
 
 //add  bomb in random config

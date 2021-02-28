@@ -23,14 +23,19 @@ class CoinManager {
 public:
     vector<CoinInfo> coins; //for magnet class.
     bool allowCoinRespawn;
-
+    bool insaneMode;
+    double speedFactor;
     CoinManager(bool respawnPerm = true) {
         allowCoinRespawn = respawnPerm;
+        insaneMode = false;
+        speedFactor = 1.0;
     }
 
     //Add Coin To Game
     void addCoin(Vector2D position, Vector2D velocity = {0, -10}) ;
 
+
+    void addRandomCoin(int ncoins=1); //adds random coin to game
     void pauseAllCoin() {
         for (auto &coin: coins) {
             coin.coin->pause();
