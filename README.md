@@ -62,8 +62,8 @@ Note inorder to make the game little tough you can only **loop** the **lasso onc
 
 > For Ubuntu users a prebuilt binary is attached they can download and run it
 >
-> *Note* : use`chmod +x execName` and then `./execName`
-> 
+> *Note* : You may need to give execution permission      
+> use`chmod +x execName` and then `./execName`
 
 First let us get an insight on the structure of the project:
 ```
