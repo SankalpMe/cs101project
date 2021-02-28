@@ -215,6 +215,6 @@ This project has cmake support , but you would need to open cmake file and make 
 
 Binary built on ubuntu 18.02 is available here.
 
-[binary_LoopNLoopsUbuntu18.02](www.google.com)
+[binary_LoopNLoopsUbuntu18.02](https://github.com/SankalpMe/cs101project/raw/master/binary_LoopNLoopsUbuntu18.02)
 
 > Compatible with 18.02 and Up.
