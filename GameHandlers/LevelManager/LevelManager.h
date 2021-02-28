@@ -25,7 +25,7 @@ class LevelManager {
 public:
     int levelCount; // holds count of total levels
     int currentLevel=1; // the current level.
-    float totalScore = 0; // totalScore
+    double totalScore = 0; // totalScore
     LevelManager() {
         levelCount = 5;
     }

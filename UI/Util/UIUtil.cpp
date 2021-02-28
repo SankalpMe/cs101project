@@ -106,7 +106,7 @@ void showSmartAlert(string msg) {
         }
     }
 
-
+    wait(1);
     // mouse / key hold - wait for user response.
     while (!waitForKeyAndMouse()){
 
@@ -141,7 +141,7 @@ bool showConfirmAlert(string msg){
             start = i + 1;
         }
     }
-
+    wait(1);
     //handle y/n input
     while (true){
         XEvent e;

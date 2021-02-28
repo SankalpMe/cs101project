@@ -3,7 +3,7 @@
 //
 
 #include "LevelManager.h"
-
+#include "GameHandlers/HighScore/ScoreBoard.h"
 // getLevel(int) : fetches the level ptr for the required level
 GameLevel   *LevelManager::getLevel(int level) {
     switch (level) {
@@ -61,16 +61,19 @@ LevelStatus LevelManager::runLevel(int level,double *score) {
 
 // run () : begin the main level run manager which sequentially runs each level
 void LevelManager::run() {
-    currentLevel = 5;
+    currentLevel = 1;
     while (currentLevel <= levelCount){
         double levelScore;
         LevelStatus stat = runLevel(currentLevel,&levelScore); //fetch the level score.
 
         cerr << "Scored: " << levelScore << endl;
+        totalScore += levelScore;
 
         switch (stat) {
             case QUITED:{
-                cerr << "Publishing Your HighScore" << endl;
+                cerr << "...Publishing Your HighScore..." << endl;
+                publishScore(totalScore);
+                exit(0);
                 break;
             }
             case COMPLETED: {
@@ -82,11 +85,15 @@ void LevelManager::run() {
                 if(resp){
                     continue;
                 }else{
-                    //---publishScore---
-                    exit(1);
+                    publishScore(totalScore);
+                    exit(0);
                 }
             }
         }
         currentLevel++; // proceed to next level
     }
+
+    publishScore(totalScore);
+
+
 }

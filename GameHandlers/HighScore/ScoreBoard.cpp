@@ -12,6 +12,7 @@ void ScoreBoard::runPublisher(double score) {
 }
 void publishScore(double score){
     scoreBoard.runPublisher(score);
+    scoreBoard.showScoreBoard();
 }
 
 
@@ -71,4 +72,5 @@ void ScoreBoard::showScoreBoard(){
     ui->render(); // display the ui
 
     delete ui; // cleanup / remove the ui
+
 }
