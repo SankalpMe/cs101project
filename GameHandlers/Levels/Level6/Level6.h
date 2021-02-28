@@ -13,9 +13,11 @@ class Level6 : public GameLevel {
     void sceneSettings(CoinManager *cmg, BombManager *bmg) {
 
         cmg->allowCoinRespawn = true;
+        cmg->insaneMode = true;
         bmg->deadlyMode = true;
-        addRandomBombs(20);
+        addRandomBombs(15);
         addRandomCoins(5);
+
 
     }
 
