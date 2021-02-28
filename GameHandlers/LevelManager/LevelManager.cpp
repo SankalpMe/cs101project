@@ -61,7 +61,7 @@ LevelStatus LevelManager::runLevel(int level,double *score) {
 
 // run () : begin the main level run manager which sequentially runs each level
 void LevelManager::run() {
-    currentLevel = 1;
+    currentLevel = 4;
     while (currentLevel <= levelCount){
         double levelScore;
         LevelStatus stat = runLevel(currentLevel,&levelScore); //fetch the level score.

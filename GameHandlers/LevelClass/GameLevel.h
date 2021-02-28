@@ -20,6 +20,7 @@ struct ObjectManagers {
         bombManager = new BombManager();
     }
 
+    //resets all the managers
     void reset() {
         delete coinManager;
         delete bombManager;
@@ -70,6 +71,7 @@ public:
 
     // post initialization routine
     void postinit() {
+        // configures base parameters from super parameters
         engine->targetCoins = coinTarget;
         engine->state.stepRemaining = levelTime;
         engine->spawnMagnets = enableMagnets;
@@ -89,11 +91,6 @@ public:
 
     // modify scene settings : spawning of coins and bombs
     virtual void sceneSettings(CoinManager *cmg, BombManager *bmg) {
-
-        cmg->allowCoinRespawn = true;
-
-        cmg->addCoin({10, PLAY_Y_HEIGHT}, {0, -100});
-        bmg->addBomb({70, PLAY_Y_HEIGHT}, {0, -140});
 
     }
 
@@ -120,7 +117,11 @@ public:
 
     // grade() : calculates the score earned by the player
     virtual double grade(){
-        return 100.0*(engine->state.health.heartLeft)/engine->state.health.maxHearts + checkAchievements()*levelScore + (levelTime != -10)*( ((double )engine->state.stepRemaining )/levelTime)*50.0 ;
+
+        double gscore = 100.0*(engine->state.health.heartLeft)/engine->state.health.maxHearts + checkAchievements()*levelScore + (levelTime != -10)*( ((double )engine->state.stepRemaining )/levelTime)*50.0 ;
+        cout << gscore << endl;
+        gscore = ( (int) (gscore*100) ) / 100.0; // round score to 2 decimals
+        return gscore;
     };
 
     //clear up the code

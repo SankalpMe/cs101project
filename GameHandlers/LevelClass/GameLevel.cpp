@@ -14,7 +14,8 @@ void GameLevel::init() {
     maxHearts = 3;
     userQuit = false;
     engine = new GameEngine();
-    _init();
+
+    _init(); // call _init overrided function
 
     //binding the managers to the engine
     engine->bindManagers(obmgs.coinManager, obmgs.bombManager);
