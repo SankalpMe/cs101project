@@ -7,11 +7,24 @@
 
 #include "GameHandlers/HighScore/HighScoreData.h"
 #include "GameHandlers/HighScore/ScoreSubmit.h"
+#include <sstream>
+#include <iomanip>
+#include "UI/Util/UIUtil.h"
 
 class ScoreBoardUI{
-    void init(){
-
+    vector<Text> scoreText;
+    vector<ScoreEntry> entries;
+    Rectangle bg;
+    Text title;
+    Text clck;
+public:
+    void init(const vector<ScoreEntry> &_entries){
+        entries = _entries;
     }
+
+    void _render(double yoffset = 90); // internal rendering with yoffset for bobbling
+
+    void render(); // render with bobbling animation
 };
 class ScoreBoard {
     ScoreBoardUI *ui;
@@ -26,11 +39,10 @@ public:
     }
 
     void showScoreBoard(){
-        ui = new ScoreBoardUI();
         hsd.loadEntries();
-        for(auto i : hsd.getList()){
-            cerr << i.name << ", " << i.score << endl;
-        }
+        ui = new ScoreBoardUI();
+        ui->init(hsd.getList());
+        ui->render();
 
         delete ui;
     }

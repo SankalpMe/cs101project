@@ -37,13 +37,18 @@ void runIntro() {
 
 }
 
-#include "GameHandlers/HighScore/ScoreSubmit.h"
+#include "GameHandlers/HighScore/ScoreBoard.h"
 
 int main() {
     initRoot();
 
+    scoreBoard.init();
+    scoreBoard.showScoreBoard();
+
+
     LevelManager lmgr;
     lmgr.run();
+
 
 
     return 0;
