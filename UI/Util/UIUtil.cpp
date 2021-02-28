@@ -103,10 +103,13 @@ void showSmartAlert(string msg) {
             rows.push_back(t);
             rowi++;
             start = i + 1;
+
+            if(i == msg.length()-1)
+                wait(1);
         }
     }
 
-    wait(1);
+
     // mouse / key hold - wait for user response.
     while (!waitForKeyAndMouse()){
 
@@ -139,9 +142,13 @@ bool showConfirmAlert(string msg){
             rows.push_back(t);
             rowi++;
             start = i + 1;
+
+
         }
     }
-    wait(1);
+
+    wait(2);
+
     //handle y/n input
     while (true){
         XEvent e;
