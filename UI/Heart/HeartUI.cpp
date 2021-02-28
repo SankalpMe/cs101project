@@ -43,16 +43,16 @@ void HeartUI::render(int _heartsLeft, int _maxHearts) {
         setMaxHearts(_maxHearts);
     }
 
-    int i;
+    size_t i;
 
     // display hearts according to no. of lives left + there position
-    for (i = 0; i < heartsLeft; i++) {
+    for (i = 0; i < (size_t) heartsLeft; i++) {
         hearts[i].isFilled = true;
         hearts[i].offset.x = 20 + 2 * hearts[i].sq2l + 5 + i * (hearts[i].sq2l * 4 + 5);
         hearts[i].offset.y = 20 + 5 + hearts[i].sq2l;
         hearts[i].render();
     }
-    for (i; i < maxHearts; i++) {
+    for (; i < (size_t) maxHearts; i++) {
         hearts[i].isFilled = false;
         hearts[i].offset.x = 20 + 2 * hearts[i].sq2l + 5 + i * (hearts[i].sq2l * 4 + 5);
         hearts[i].offset.y = 20 + 5 + hearts[i].sq2l;

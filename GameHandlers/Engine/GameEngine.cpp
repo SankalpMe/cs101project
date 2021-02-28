@@ -163,6 +163,8 @@ void GameEngine::cleanup() {
     delete lassoPtr;
 
     delete magnet;
+    delete magnetGiver;
+    magnetGiver = nullptr;
     magnet = nullptr;
     lassoPtr = nullptr;
 

@@ -31,7 +31,7 @@ void GameLevel::init() {
 
 // handle completion event of level.
 bool GameLevel::handleCompletion() {
-    int gc = engine->state.score.GoldCoin;
+
 
     // level quit
     if (engine->quitKey) {

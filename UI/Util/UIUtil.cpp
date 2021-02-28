@@ -66,7 +66,7 @@ void showStartMessage(string msg) {
     t.reset(WINDOW_X / 2, WINDOW_Y / 2, msg);
     t.setColor(COLOR("black"));
 
-    int i = 0;
+
     wait(1);
     repeat(100) {
         t.move(0, -WINDOW_Y / 100);
@@ -97,7 +97,7 @@ void showSmartAlert(string msg) {
     int rowi = 0;
 
     // display multiline message on screen
-    for (int i = 0; i < msg.length(); i++) {
+    for (size_t i = 0; i < msg.length(); i++) {
         if (msg[i] == '\n') {
             Text t;
             t.reset(WINDOW_X / 2, WINDOW_Y / 2 + rowi * textHeight(), msg.substr(start, i - start));
@@ -136,7 +136,7 @@ bool showConfirmAlert(string msg) {
     int rowi = 0;
 
     // display multiline message on screen
-    for (int i = 0; i < msg.length(); i++) {
+    for (size_t i = 0; i < msg.length(); i++) {
         if (msg[i] == '\n') {
             Text t;
             t.reset(WINDOW_X / 2, WINDOW_Y / 2 + rowi * textHeight(), msg.substr(start, i - start));
@@ -187,7 +187,7 @@ bool showStartScreen() {
     int rowi = 0;
 
     // display multiline message on screen
-    for (int i = 0; i < msg.length(); i++) {
+    for (size_t i = 0; i < msg.length(); i++) {
         if (msg[i] == '\n') {
             Text t;
             t.reset(WINDOW_X / 2, WINDOW_Y / 2 + rowi * textHeight(), msg.substr(start, i - start));

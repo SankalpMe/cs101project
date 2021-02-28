@@ -27,7 +27,7 @@ void ScoreBoardUI::_render(double yoffset) {
     title.setColor(COLOR("red"));
     scoreText = vector<Text>(); // render text for each entry
 
-    for (int i = 0; i < entries.size(); i++) {
+    for (size_t i = 0; i < entries.size(); i++) {
         stringstream ss;
 
         ss << to_string(i + 1) + ". " + entries[i].name + " - ";
