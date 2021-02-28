@@ -33,7 +33,7 @@ public:
     double totalScore; // totalScore
     LevelManager() {
         levelCount = 10;
-        currentLevel = 0;
+        currentLevel = 1;
         totalScore = 0;
 
     }
