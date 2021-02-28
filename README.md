@@ -194,7 +194,10 @@ s++ *.cpp */*.cpp */*/*.cpp */*/*/*.cpp -I. -pthread
 > This command may not be that nice as it involes using '*' in listing all cpp files.
 
 
-In the project there is also a run script attached which invokes the above without using wildcards.
+In the project there is also a runLinux script attached which invokes the above without using wildcards.
+
+> For windows the script similar to the above can be used but it may require linking of other libraries like x11 x11r8 etc..
+
 
 ## CMake
 
