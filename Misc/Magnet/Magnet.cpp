@@ -6,6 +6,7 @@
 
 
 void Magnet::attract(Lasso *lasso, double step_time) {
+
     vector<CoinInfo> &coins = coinManager->coins;
 
     //dcircle.reset(lasso->getXPosition(),lasso->getYPosition(),magDist);

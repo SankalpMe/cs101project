@@ -105,11 +105,12 @@ void GameEngine::handleStepUpdates() {
         magLastTime = currentTime; // timing delay for next spawning
     };
 
+    //enable magnet if time gap is completed
     if (magnetGiver->disabled) {
-        if ((currentTime - magLastTime) > MAGNET_GAP) {
+        if ((currentTime - magLastTime) > MAGNET_GAP || magLastTime == 0) {
             // find a random location
-            double x = 0 + rand() % WINDOW_X;
-            double y = 0 + rand() % PLAY_Y_HEIGHT;
+            double x = 30 + rand() % (WINDOW_X-60);
+            double y = 40 + rand() % (PLAY_Y_HEIGHT-40);
             magnetGiver->enable({x, y}); // enable spawning
         }
     }

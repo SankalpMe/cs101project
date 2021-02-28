@@ -10,6 +10,7 @@
 
 class MagnetSprite : public MovingObject {
     Text t;
+    int i = 0;
 public:
     void init();
 
@@ -23,6 +24,18 @@ public:
 
     void show() {
         t.show();
+    }
+    void step(){
+        i++;
+        nextStep(0);
+
+        if(i % 2){
+            t.setMessage(" M");
+            t.setColor(COLOR("red"));
+        }else{
+            t.setColor(COLOR("black"));
+            t.setMessage("M ");
+        }
     }
 };
 
